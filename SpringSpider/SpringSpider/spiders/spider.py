@@ -17,9 +17,10 @@ class Myspider(scrapy.Spider):
     # allowed_domains = ['drupal.org']
     # bash_url = 'https://www.drupal.org'  # 拼接需要继续访问的url
     handle_httpstatus_list = [403, 404, 429, 500]  # 保证可以处理错误的返回链接
-    url1 = "http://brewformulas.org/?format=json&page=#{1}"  # 目前只有一页
+    url1 = "https://jira.spring.io/browse/XD-3743?jql=issuetype%20%3D%20Bug%20AND%20status%20in%20(Resolved%2C%20Closed%2C%20Done)"  # 从该页开始爬取
     # url1 = "https://rubygems.org/api/v1/owners/1/gems.json"
-    url2 = "http://brewformulas.org/"
+    project_url = "https://jira.spring.io/secure/Dashboard.jspa"  # 总项目首页
+    url2 = "https://jira.spring.io"  # 主页情况
     # print("start spider")
 
     def start_requests(self):
@@ -40,10 +41,10 @@ class Myspider(scrapy.Spider):
         #     time.sleep(1)
         #     print "爬取至" + str(self.count)
         #     self.count += 1
-        yield Request(self.url1, self.parse)  # 出现MissValue时有可能是网址没有加上http
+        yield Request(self.project_url, self.parse)  # 出现MissValue时有可能是网址没有加上http
         print "end"
 
-    def parse(self, response): #处理api首页
+    def parse(self, response): #处理项目首页
         # print(response.text)
         # if response.status in self.handle_httpstatus_list:
         #     if response.status == 404:
@@ -56,6 +57,7 @@ class Myspider(scrapy.Spider):
         #         yield Request(response.url, self.parse)
         #         return
         i = HomebrewItem()
+        "/html/body/div[2]/div/div/ul/li/ul/li[1]/h5/a"
         if len(json.loads(response.body_as_unicode())) == 0:
             print response.url + "has no info"
             return
