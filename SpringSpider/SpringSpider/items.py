@@ -30,4 +30,5 @@ class SpringspiderItem1(scrapy.Item):
     Assignee = scrapy.Field()
     issue_links = scrapy.Field()  # array
     resolution = scrapy.Field()
+    Pull_Request_URL = scrapy.Field()
     pass
