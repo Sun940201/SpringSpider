@@ -134,7 +134,8 @@ class Myspider(scrapy.Spider):
             if len(flag) != 0:
                 return
             i = SpringspiderItem1()
-            status = response.xpath("//*[@id='status-val']/span/text()").extract()[0]
+            status = '' if len(response.xpath("//*[@id='status-val']/span/text()")) == 0 else \
+                response.xpath("//*[@id='status-val']/span/text()").extract()[0]
             i["status"] = status
 
             priority = response.xpath("//*[@id='priority-val']")
@@ -185,30 +186,36 @@ class Myspider(scrapy.Spider):
                 "//*[@id='create-date']/time/@datetime").extract()[0]
             i["created_time"] = created_time
 
-            bug_info = response.xpath("//*[@id='summary-val']/text()").extract()[0]
+            bug_info = '' if len(response.xpath("//*[@id='summary-val']/text()")) == 0 else \
+                response.xpath("//*[@id='summary-val']/text()").extract()[0]
             i["bug_info"] = bug_info
             bug_desc = '' if len(response.xpath("//*[@id='description-val']/div/p")) == 0 else \
-            response.xpath("//*[@id='description-val']/div/p").xpath('string(.)').extract()[0].replace('\n', "")
+                response.xpath("//*[@id='description-val']/div/p").xpath('string(.)').extract()[0].replace('\n', "")
             i["bug_desc"] = bug_desc
             bug_url = response.url
             i["bug_url"] = bug_url
             reporter = '' if len(response.xpath("//*[@id='issue_summary_reporter_grussell']")) == 0 else \
-                response.xpath("//*[@id='issue_summary_reporter_grussell']").xpath('string(.)').extract()[0].replace('\n',
-                                                                                                                     "")
+                response.xpath("//*[@id='issue_summary_reporter_grussell']").xpath('string(.)').extract()[0].replace(
+                    '\n',
+                    "")
             i["reporter"] = reporter
-            Assignee = '' if len(response.xpath("//*[@id='issue_summary_assignee_abilan']")) == 0 else \
-                response.xpath("//*[@id='issue_summary_assignee_abilan']").xpath('string(.)').extract()[0].replace('\n', "")
-            i["Assignee"] = Assignee
-            resolution = response.xpath("//*[@id='resolution-val']").xpath('string(.)').extract()[0].replace('\n', "")
+            assignee = '' if len(response.xpath("//*[@id='issue_summary_assignee_abilan']")) == 0 else \
+                response.xpath("//*[@id='issue_summary_assignee_abilan']").xpath('string(.)').extract()[0].replace('\n',
+                                                                                                                   "")
+            i["Assignee"] = assignee
+            resolution = '' if len(response.xpath("//*[@id='resolution-val']")) == 0 else \
+                response.xpath("//*[@id='resolution-val']").xpath('string(.)').extract()[0].replace('\n', "")
             i["resolution"] = resolution
-            vote = response.xpath("//*[@id='vote-data']/text()").extract()[0]
+            vote = '' if len(response.xpath("//*[@id='vote-data']/text()")) == 0 else \
+                response.xpath("//*[@id='vote-data']/text()").extract()[0]
             i["vote"] = vote
-            watchers = response.xpath("//*[@id='watcher-data']/text()").extract()[0]
+            watchers = '' if len(response.xpath("//*[@id='watcher-data']/text()")) == 0 else \
+                response.xpath("//*[@id='watcher-data']/text()").extract()[0]
             i["watchers"] = watchers
             bug_id = response.meta["bug_id"]
             i["bug_id"] = bug_id
-            request_url = 'None' if len(response.xpath("//*[@id='customfield_10684-val']/a/@href").extract()) == 0 else \
-                response.xpath("//*[@id='customfield_10684-val']/a/@href").extract()[0]
+            request_url = 'None' if len(response.xpath("//*[@id='customfield_10684-val']/a/@href").extract()) == 0 \
+                else response.xpath("//*[@id='customfield_10684-val']/a/@href").extract()[0]
             i["Pull_Request_URL"] = request_url
 
             return i
@@ -216,9 +223,9 @@ class Myspider(scrapy.Spider):
             print Exception, ":", e
             msg = traceback.format_exc()
             print '处理出错', msg
-            # with open('tags_bugs.txt', 'a') as f:
-            #     f.write(urlInUse + '\n')
-            #     f.write(msg + '\n')
+            with open('url_bugs.txt', 'a') as f:
+                f.write(response.url + '\n')
+                f.write(msg + '\n')
 
     def parseGit(self, response):  # 处理单个issues首页
         # data = response.xpath("//*[@id='diff-0']/div[2]/div/table/tr[4]/td[3]")
