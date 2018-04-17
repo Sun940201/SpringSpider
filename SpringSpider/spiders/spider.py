@@ -55,7 +55,7 @@ class Myspider(scrapy.Spider):
         # 获取网页资源（获取到的是网页所有数据）
 
         for project in project_list:
-            project_simple_name = project.text  # 已经是element了，不能再使用xpath方法，与selector得到的xpath不同
+            project_simple_name = project.text  # 与selector得到的xpath相同，可以继续使用xpath获取后续元素
             project_simple_name = re.sub('[()]', "", project_simple_name)
             project_url = self.url2 + "/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=project+%3D+" + project_simple_name
             # browser_temp = webdriver.PhantomJS("/home/sx/python/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")
@@ -228,7 +228,67 @@ class Myspider(scrapy.Spider):
                 f.write(msg + '\n')
 
     def parseGit(self, response):  # 处理单个issues首页
-        # data = response.xpath("//*[@id='diff-0']/div[2]/div/table/tr[4]/td[3]")
-        data = response.xpath("//*[@id='diff-0']/div[2]/div/table")
-        info = data.xpath('string(.)').extract()[0]  # 提取同一标签内的所有字符串
-        print info
+        # browser = webdriver.Chrome()  # 可以模拟浏览器的各种响应，获取最终动态加载的数据。
+        # # 其page_source属性即为最终响应结果，注意:此时浏览器中右键查看网页源码，不一定能够得到最终加载的数据
+        # # browser = webdriver.PhantomJS("/home/sx/python/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")  # phantomjs
+        # # 对于部分网页如github的点击操作，无法完成，导致无法获取最终响应
+        # url = "https://github.com/spring-projects/spring-xd/pull/1895/files"
+        # browser.get(url)  # 得到返回的页面
+        # time.sleep(3)  # 等待页面完全加载
+        # #browser.find_element_by_xpath("//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").click()
+        # browser.find_element_by_xpath('//*[@class="js-expandable-line"][@data-position="0"]/td').click()
+        # #js = 'document.getElementsByClassName("btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s")[0].click();'
+        # #browser.execute_script(js)
+        # time.sleep(3)  # 等待页面完全加载
+        # print browser.page_source
+        # data = browser.find_element_by_xpath("//*[@id='diff-0']/div[2]/div/table")
+        # #info = data.xpath('string(.)').extract()[0]  # 提取同一标签内的所有字符串
+        # print data
+        # print 'end1'
+
+        # data = response.xpath("//*[@id='diff-0']/div[2]/div/table")
+        # info = data.xpath('string(.)').extract()[0]  # 提取同一标签内的所有字符串
+        # print info
+
+        option = webdriver.ChromeOptions()
+
+        option.add_argument('headless')  # 隐藏浏览器，加快载入速度
+
+        # 打开chrome浏览器
+
+        # driver = webdriver.Chrome(chrome_options=option)
+        #
+        # driver.get("https://www.baidu.com")
+        #
+        # print driver.page_source
+        browser = webdriver.Chrome(chrome_options=option)  # 可以模拟浏览器的各种响应，获取最终动态加载的数据。
+        # 其page_source属性即为最终响应结果，注意:此时浏览器中右键查看网页源码，不一定能够得到最终加载的数据
+        # browser = webdriver.PhantomJS("/home/sx/python/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")  # phantomjs
+        # 对于部分网页如github的点击操作，无法完成，导致无法获取最终响应
+        url = "https://github.com/spring-projects/spring-xd/pull/1895/files"  # 单个file
+        url = "https://github.com/spring-projects/spring-data-jdbc/pull/58/files"  # 多个file
+        browser.get(url)  # 得到返回的页面
+        time.sleep(3)  # 等待页面完全加载
+        browser.find_element_by_xpath(
+            "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").click()  # 首先点击split
+        while len(browser.find_elements_by_xpath('//*[@class="js-expandable-line"]/td')) != 0:  # 点击expandable扩展
+            # browser.find_element_by_xpath('//*[@class="js-expandable-line"][@data-position="0"]/td').click()
+            browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
+            time.sleep(1)  # 等待页面完全加载
+        # elements_pre = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[2]")
+        # elements_cur = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[4]")
+        elements_pres = browser.find_elements_by_xpath("//*[@id='files']/div/div")  # 获取div[@id='diff-x']
+        for elements in elements_pres:
+            elements_pre = elements.find_elements_by_xpath("./div[2]/div/table/tbody/tr/td[2]")
+            file_name = elements.find_element_by_xpath("./div/div[2]/a").text
+            file_name = file_name.split('/')[-1]
+            for i, element in enumerate(elements_pre[1:]):
+                # file_pre.append(element.text)
+                # print i, element.text
+                with open(file_name, 'a') as f:
+                    if i == len(elements_pre[1:]) - 1:
+                        f.write(element.text[1:])  # 去除最后一行多产生的换行
+                    else:
+                        if len(element.text) != 0:
+                            f.write(element.text[1:] + '\n')  # 当element.text=''时，element.text[1:]不会报异常，结果还是''
+        print 'ok'
