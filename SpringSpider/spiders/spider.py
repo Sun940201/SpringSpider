@@ -1,5 +1,6 @@
 # coding:utf-8
 import json
+import os
 
 import re
 import traceback
@@ -278,10 +279,16 @@ class Myspider(scrapy.Spider):
         # elements_pre = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[2]")
         # elements_cur = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[4]")
         elements_pres = browser.find_elements_by_xpath("//*[@id='files']/div/div")  # 获取div[@id='diff-x']
+        path_list = []
+        file_path = './' + re.sub('\s', "_", response.meta["project_name"]) + '/' + response.meta["bug_id"]
+        path_flag = os.path.exists(file_path)
+        if path_flag is False:
+            os.makedirs(file_path)  # 建立 ./项目名/bug_id的目录，里面存储可能存在的bug文件。linux下的结构
         for elements in elements_pres:
             elements_pre = elements.find_elements_by_xpath("./div[2]/div/table/tbody/tr/td[2]")
             file_name = elements.find_element_by_xpath("./div/div[2]/a").text
             file_name = file_name.split('/')[-1]
+            file_name = file_path + '/' + file_name
             for i, element in enumerate(elements_pre[1:]):
                 # file_pre.append(element.text)
                 # print i, element.text
@@ -291,4 +298,5 @@ class Myspider(scrapy.Spider):
                     else:
                         if len(element.text) != 0:
                             f.write(element.text[1:] + '\n')  # 当element.text=''时，element.text[1:]不会报异常，结果还是''
+            path_list.append(file_name[1:])  # 去除当前的.
         print 'ok'
