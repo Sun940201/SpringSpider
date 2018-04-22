@@ -32,3 +32,10 @@ class SpringspiderItem1(scrapy.Item):
     resolution = scrapy.Field()
     Pull_Request_URL = scrapy.Field()
     pass
+
+class SpringspiderItem2(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    file_list = scrapy.Field()  # array
+    bug_id = scrapy.Field()  # index
+    pass

@@ -51,11 +51,11 @@ class MongoUtil:
     #         print e.message
 
     @classmethod
-    def getResultForQuery(cls, dbName, collectionName, query):#结果均为类似list，但无法直接打印，需要用下标访问，如果不存在的话，不会返回None，但是不可以用[0]访问
+    def getResultForQuery(cls, dbName, collectionName, query, time):#结果均为类似list，但无法直接打印，需要用下标访问，如果不存在的话，不会返回None，但是不可以用[0]访问
         try:
             db = mongo.get_database(dbName)
             collection = db.get_collection(collectionName)
-            result = collection.find(query)#结果均为类似list，但无法直接打印并且没有长度属性，需要用下标访问，或者for循环访问
+            result = collection.find(query, no_cursor_timeout=time)#结果均为类似list，但无法直接打印并且没有长度属性，需要用下标访问，或者for循环访问
             return result
         except Exception as e:
             stds =traceback.format_exc()

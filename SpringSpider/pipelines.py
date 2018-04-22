@@ -6,7 +6,7 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 from SpringSpider.MongoUtil import MongoUtil
 
-from SpringSpider.items import SpringspiderItem1
+from SpringSpider.items import SpringspiderItem1, SpringspiderItem2
 
 mongo_db = "Bugs"
 mongo_col = "SpringBugs"
@@ -30,3 +30,6 @@ class SpringspiderPipeline(object):
                                                          "issue_links": item["issue_links"],
                                                          "resolution": item["resolution"],
                                                          "Pull_Request_URL": item["Pull_Request_URL"]})
+        if isinstance(item, SpringspiderItem2):
+            MongoUtil.updateOneDoc(mongo_db, mongo_col, {"bug_id": item["bug_id"]},
+                                   {"$set": {"file_list": item["file_list"]}})

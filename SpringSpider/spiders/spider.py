@@ -13,15 +13,16 @@ from scrapy import Request
 # 但是在中途也有部分userid不存在，如269，所以还是遍历到用户id最大值，目前经验发现max <= 13000 (120499)
 # from SpringSpider.SpringSpider.MongoUtil import MongoUtil  # 必须添加init.py才能使文件夹成为一个模块从而可以完成import
 
-from SpringSpider.items import SpringspiderItem1
+from SpringSpider.MongoUtil import MongoUtil
+from SpringSpider.items import SpringspiderItem1, SpringspiderItem2
 from selenium import webdriver
 import time
 
 
 class Myspider(scrapy.Spider):
     name = 'spring'
-    mongo_db = "Homebrew"
-    mongo_col = "Homebrew"
+    mongo_db = "Bugs"
+    mongo_col = "SpringBugs"
     # allowed_domains = ['drupal.org']
     # bash_url = 'https://www.drupal.org'  # 拼接需要继续访问的url
     handle_httpstatus_list = [302, 403, 404, 429, 500]  # 保证可以处理错误的返回链接
@@ -39,30 +40,42 @@ class Myspider(scrapy.Spider):
     def start_requests(self):
         print "start1"
 
-        url = self.project_url
-        # browser = webdriver.Firefox()
-        browser = webdriver.PhantomJS("/home/sx/python/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")
-        # browser.get("http://pythonscraping.com/pages/javascript/ajaxDemo.html")  # 测试用
-        browser.get(url)  # 得到返回的页面
-        time.sleep(2)  # 等待页面完全加载
-        browser.switch_to.frame(browser.find_element_by_xpath("//iframe[@id='gadget-12194']"))  # 切入iframe
-        project_list = browser.find_elements_by_xpath("/html/body/div[2]/div/div/ul/li/ul/li/h5/span")  # 获取项目列表
+        # test_url = "https://github.com/spring-projects/spring-data-commons/pull/281"  # test
+        # yield Request(test_url, self.parseGit, meta={"project_name": "project_name", "bug_id": "bug_id"})
+        query1 = {"$ne": "None"}
+        query = {"Pull_Request_URL": query1}
+        time = True  # 取消超时时间
+        docs = MongoUtil.getResultForQuery(self.mongo_db, self.mongo_col, query, time)
+        for doc in docs:
+            yield Request(doc["Pull_Request_URL"], self.parseGit,
+                          meta={"project_name": doc["project_name"], "bug_id": doc["bug_id"]})
+        docs.close()
 
-        # browser.switch_to.default_content()  # 切回主页面
-        # 隐式等待5秒，可以自己调节
-        # browser.implicitly_wait(5)
-        # 设置10秒页面超时返回，类似于requests.get()的timeout选项，driver.get()没有timeout选项
-        # browser.set_page_load_timeout(10)
-        # 获取网页资源（获取到的是网页所有数据）
-
-        for project in project_list:
-            project_simple_name = project.text  # 与selector得到的xpath相同，可以继续使用xpath获取后续元素
-            project_simple_name = re.sub('[()]', "", project_simple_name)
-            project_url = self.url2 + "/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=project+%3D+" + project_simple_name
-            # browser_temp = webdriver.PhantomJS("/home/sx/python/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")
-            yield Request(project_url, self.parse)
-            # browser_temp.close()
-        browser.close()
+        # 使用PhantomJS爬取spring io网址的所有issues信息
+        # url = self.project_url
+        # # browser = webdriver.Firefox()
+        # browser = webdriver.PhantomJS("/home/sx/python/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")
+        # # browser.get("http://pythonscraping.com/pages/javascript/ajaxDemo.html")  # 测试用
+        # browser.get(url)  # 得到返回的页面
+        # time.sleep(2)  # 等待页面完全加载
+        # browser.switch_to.frame(browser.find_element_by_xpath("//iframe[@id='gadget-12194']"))  # 切入iframe
+        # project_list = browser.find_elements_by_xpath("/html/body/div[2]/div/div/ul/li/ul/li/h5/span")  # 获取项目列表
+        #
+        # # browser.switch_to.default_content()  # 切回主页面
+        # # 隐式等待5秒，可以自己调节
+        # # browser.implicitly_wait(5)
+        # # 设置10秒页面超时返回，类似于requests.get()的timeout选项，driver.get()没有timeout选项
+        # # browser.set_page_load_timeout(10)
+        # # 获取网页资源（获取到的是网页所有数据）
+        #
+        # for project in project_list:
+        #     project_simple_name = project.text  # 与selector得到的xpath相同，可以继续使用xpath获取后续元素
+        #     project_simple_name = re.sub('[()]', "", project_simple_name)
+        #     project_url = self.url2 + "/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=project+%3D+" + project_simple_name
+        #     # browser_temp = webdriver.PhantomJS("/home/sx/python/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")
+        #     yield Request(project_url, self.parse)
+        #     # browser_temp.close()
+        # browser.close()
 
         # yield Request(self.redirect_url, self.parseIssues)
         # yield Request(self.git_url, self.parseGit)
@@ -263,40 +276,70 @@ class Myspider(scrapy.Spider):
         #
         # print driver.page_source
         browser = webdriver.Chrome(chrome_options=option)  # 可以模拟浏览器的各种响应，获取最终动态加载的数据。
+        # browser = webdriver.Chrome()
         # 其page_source属性即为最终响应结果，注意:此时浏览器中右键查看网页源码，不一定能够得到最终加载的数据
         # browser = webdriver.PhantomJS("/home/sx/python/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")  # phantomjs
         # 对于部分网页如github的点击操作，无法完成，导致无法获取最终响应
-        url = "https://github.com/spring-projects/spring-xd/pull/1895/files"  # 单个file
-        url = "https://github.com/spring-projects/spring-data-jdbc/pull/58/files"  # 多个file
+        # url = "https://github.com/spring-projects/spring-xd/pull/1895/files"  # 单个file
+        # url = "https://github.com/spring-projects/spring-data-jdbc/pull/58/files"  # 多个file
+        url = response.url+'/files'
         browser.get(url)  # 得到返回的页面
         time.sleep(3)  # 等待页面完全加载
-        browser.find_element_by_xpath(
-            "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").click()  # 首先点击split
-        while len(browser.find_elements_by_xpath('//*[@class="js-expandable-line"]/td')) != 0:  # 点击expandable扩展
-            # browser.find_element_by_xpath('//*[@class="js-expandable-line"][@data-position="0"]/td').click()
-            browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-            time.sleep(1)  # 等待页面完全加载
-        # elements_pre = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[2]")
-        # elements_cur = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[4]")
-        elements_pres = browser.find_elements_by_xpath("//*[@id='files']/div/div")  # 获取div[@id='diff-x']
-        path_list = []
-        file_path = './' + re.sub('\s', "_", response.meta["project_name"]) + '/' + response.meta["bug_id"]
-        path_flag = os.path.exists(file_path)
-        if path_flag is False:
-            os.makedirs(file_path)  # 建立 ./项目名/bug_id的目录，里面存储可能存在的bug文件。linux下的结构
-        for elements in elements_pres:
-            elements_pre = elements.find_elements_by_xpath("./div[2]/div/table/tbody/tr/td[2]")
-            file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-            file_name = file_name.split('/')[-1]
-            file_name = file_path + '/' + file_name
-            for i, element in enumerate(elements_pre[1:]):
-                # file_pre.append(element.text)
-                # print i, element.text
-                with open(file_name, 'a') as f:
-                    if i == len(elements_pre[1:]) - 1:
-                        f.write(element.text[1:])  # 去除最后一行多产生的换行
-                    else:
-                        if len(element.text) != 0:
-                            f.write(element.text[1:] + '\n')  # 当element.text=''时，element.text[1:]不会报异常，结果还是''
-            path_list.append(file_name[1:])  # 去除当前的.
-        print 'ok'
+        bug_line = 0
+        try:
+            item = SpringspiderItem2()
+            print 'click:', browser.find_element_by_xpath(
+                "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+            browser.find_element_by_xpath(
+                "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").click()  # 首先点击split
+            while len(browser.find_elements_by_xpath('//*[@class="js-expandable-line"]/td')) != 0:  # 点击expandable扩展
+                # browser.find_element_by_xpath('//*[@class="js-expandable-line"][@data-position="0"]/td').click()
+                browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
+                time.sleep(1)  # 等待页面完全加载
+            # elements_pre = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[2]")
+            # elements_cur = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[4]")
+            elements_pres = browser.find_elements_by_xpath("//*[@id='files']/div/div")  # 获取div[@id='diff-x']
+            file_list = []
+            file_path = './' + 'files/' + re.sub('\s', "_", response.meta["project_name"]) + '/' + response.meta[
+                "bug_id"]
+            # file_path = './' + 'files'
+            path_flag = os.path.exists(file_path)
+            if path_flag is False:
+                os.makedirs(file_path)  # 建立 ./项目名/bug_id的目录，里面存储可能存在的bug文件。linux下的结构
+            for elements in elements_pres:
+                file_dict = {}
+                elements_pre = elements.find_elements_by_xpath("./div[2]/div/table/tbody/tr/td[2]")
+                file_name = elements.find_element_by_xpath("./div/div[2]/a").text
+                file_name = file_name.split('/')[-1]
+                file_name = file_path + '/' + file_name
+                file_dict['path'] = file_name[1:]  # 去除当前的.
+                lines = []
+                for i, element in enumerate(elements_pre[1:]):
+                    text = element.text.encode('utf-8')  # 消除ascii无法编码的异常
+                    with open(file_name, 'a') as f:
+                        if i == len(elements_pre[1:]) - 1:
+                            f.write(text[1:])  # 去除最后一行多产生的换行
+                            if len(text) != 0:  # 防止最后一行是空的情况
+                                if text[0] == '-':  # 将修改的行号进行记录
+                                    lines.append(i + 1)
+                        else:
+                            if len(text) != 0:
+                                bug_line = i+1
+                                f.write(text[1:] + '\n')  # 当element.text=''时，element.text[1:]不会报异常，结果还是''
+                                if text[0] == '-':  # 将修改的行号进行记录
+                                    lines.append(i + 1)
+                file_dict['lines'] = lines
+                file_list.append(file_dict)
+            item["file_list"] = file_list
+            item["bug_id"] = response.meta["bug_id"]
+            browser.close()
+            return item
+        except Exception, e:
+            print Exception, ":", e
+            msg = traceback.format_exc()
+            print '处理出错', msg
+            print bug_line
+            with open('pull_url_bugs.txt', 'a') as f:
+                f.write(response.url + '\n')
+                f.write(msg + '\n')
+            browser.close()
