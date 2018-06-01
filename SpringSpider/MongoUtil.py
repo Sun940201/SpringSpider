@@ -14,8 +14,8 @@ import sys
 # reload(sys)
 # sys.setdefaultencoding('utf-8')
 # csv.field_size_limit(sys.maxint)  # 设置csv的读取参数
-mongo_host = "47.104.97.166"
-mongo_port = 37018
+mongo_host = "ali-bugs"
+mongo_port = "ali"
 mongo_db = "Bugs"
 mongo_col = "SpringBugs"
 mongo = pymongo.MongoClient(mongo_host, mongo_port)
