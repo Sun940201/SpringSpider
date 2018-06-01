@@ -1,0 +1,19 @@
+[[new-features]]
+= New & Noteworthy
+
+[[new-features.2-0-0]]
+== What's new in Spring Data for Apache Cassandra 2.0
+* `Update` and `Query` objects.
+* CRUD repository interface renaming: `CassandraRepository` using `MapId` is now renamed to `MapIdCassandraRepository`. `TypedIdCassandraRepository` is renamed to `CassandraRepository`.
+* Lightweight transactions via `InsertOptions` and `UpdateOptions` using the Template API.
+* Merge of Spring CQL into Spring Data Cassandra.
+* Index creation on application startup via `@Indexed`.
+
+[[new-features.1-5-0]]
+== What's new in Spring Data for Apache Cassandra 1.5
+* Assert compatibility with Cassandra 3.0 and Cassandra Java Driver 3.0.
+* Configurable `ProtocolVersion` and `QueryOptions` on `Cluster` level.
+* Support for `Optional` as query method result and argument.
+* Declarative query methods using query derivation
+* Support for User-Defined types and mapped User-Defined types using `@UserDefinedType`.
+* The following annotations have been enabled to build own, composed annotations:  `@Table`, `@UserDefinedType`, `@PrimaryKey`, `@PrimaryKeyClass`, `@PrimaryKeyColumn`, `@Column`, `@Query`, `@CassandraType`.

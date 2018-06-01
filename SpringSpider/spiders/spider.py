@@ -12,6 +12,7 @@ from scrapy import Request
 # 使用userid进行遍历，可能出现[]情况，这是正常的，表明该用户没有任何项目。但返回仍是200，可以直至遍历到返回状态404，表明userid已经遍历完
 # 但是在中途也有部分userid不存在，如269，所以还是遍历到用户id最大值，目前经验发现max <= 13000 (120499)
 # from SpringSpider.SpringSpider.MongoUtil import MongoUtil  # 必须添加init.py才能使文件夹成为一个模块从而可以完成import
+from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 
 from SpringSpider.MongoUtil import MongoUtil
 from SpringSpider.items import SpringspiderItem1, SpringspiderItem2
@@ -241,7 +242,7 @@ class Myspider(scrapy.Spider):
                 f.write(response.url + '\n')
                 f.write(msg + '\n')
 
-    def parseGit(self, response):  # 处理单个issues首页
+    def parseGit(self, response):  # 处理单个issues首页,需要增加对404的处理
         # browser = webdriver.Chrome()  # 可以模拟浏览器的各种响应，获取最终动态加载的数据。
         # # 其page_source属性即为最终响应结果，注意:此时浏览器中右键查看网页源码，不一定能够得到最终加载的数据
         # # browser = webdriver.PhantomJS("/home/sx/python/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")  # phantomjs
@@ -282,41 +283,80 @@ class Myspider(scrapy.Spider):
         # 对于部分网页如github的点击操作，无法完成，导致无法获取最终响应
         # url = "https://github.com/spring-projects/spring-xd/pull/1895/files"  # 单个file
         # url = "https://github.com/spring-projects/spring-data-jdbc/pull/58/files"  # 多个file
-        url = response.url+'/files'
+        url = response.url+'/files' if response.url.split("/")[-1] != 'files' else response.url
         browser.get(url)  # 得到返回的页面
         time.sleep(3)  # 等待页面完全加载
-        bug_line = 0
+        bug_line = 0  # debug
+        file_name = ""
         try:
             item = SpringspiderItem2()
-            print 'click:', browser.find_element_by_xpath(
+            click_text = browser.find_element_by_xpath(
                 "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
-            browser.find_element_by_xpath(
-                "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").click()  # 首先点击split
+            if click_text == "Split":
+                click_flag = self.retryFindClick(
+                    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']", browser)
+                if not click_flag:
+                    with open('pull_url_bugs.txt', 'a') as f:
+                        f.write(url + '\n')
+                    return
+            time.sleep(3)  # 需要时间等待加载完成
+            # 将滚动条移动到页面的顶部。使用chrome浏览器，模拟点击事件时，需要保证滚动条处于最顶部，不能自行移动。否则可能报元素在某某位置不可以点击
+            while len(browser.find_elements_by_xpath("//*[@class='js-diff-load-button-container']")) != 0:  # 点击load-diff，会导致浏览器滚动条变化，需要手动置顶
+                self.retryFindClick("//*[@class='js-diff-load-button-container']", browser)  # 点开后还可能存在expandable扩展情况，所以接下来还需要进行循环
+                time.sleep(0.5)
+                print len(browser.find_elements_by_xpath("//*[@class='js-diff-load-button-container']"))
+            container = browser.find_elements_by_xpath("//*[@class='js-diff-load-button-container']")
+            js = "var q=document.body.scrollTop=0"  # 将滚动条移动到页面的顶部。
+            browser.execute_script(js)
+            time.sleep(3)
             while len(browser.find_elements_by_xpath('//*[@class="js-expandable-line"]/td')) != 0:  # 点击expandable扩展
                 # browser.find_element_by_xpath('//*[@class="js-expandable-line"][@data-position="0"]/td').click()
-                browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-                time.sleep(1)  # 等待页面完全加载
+                self.retryFindClick('//*[@class="js-expandable-line"]/td', browser)
+                # browser.find_element_by_xpath('//*[@class="diff-expander js-expand"]').click()  # 模拟点击的时候不要控制浏览器否则会出错
+                time.sleep(0.5)  # 等待页面完全加载
             # elements_pre = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[2]")
             # elements_cur = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[4]")
-            elements_pres = browser.find_elements_by_xpath("//*[@id='files']/div/div")  # 获取div[@id='diff-x']
+            # containers = browser.find_elements_by_xpath("//div[@class='js-diff-load-button-container']")
+            # containers = browser.find_elements_by_xpath("//*[@class='js-diff-load-container']")
+            elements_pres = browser.find_elements_by_xpath("//*[@class='js-diff-progressive-container']/div")
+            # 目的是获取div[@id='diff-x'],反复观察github网页特点，发现需要以div[class=js-diff-progressive-container]为基准点方可，
+            # 并且此基准点div会乱插在页面中
             file_list = []
+            # file_path = './' + 'file'
             file_path = './' + 'files/' + re.sub('\s', "_", response.meta["project_name"]) + '/' + response.meta[
                 "bug_id"]
-            # file_path = './' + 'files'
             path_flag = os.path.exists(file_path)
+            # print self.retryFindClick("//*[class='js-diff-load-container']", elements)
+            # elements.find_element_by_xpath("//*[class='js-diff-load-container']").click()
+            print 'ok'
             if path_flag is False:
                 os.makedirs(file_path)  # 建立 ./项目名/bug_id的目录，里面存储可能存在的bug文件。linux下的结构
             for elements in elements_pres:
+                if elements.get_attribute("class") == 'js-diff-progressive-container':  # 嵌套情况直接跳过
+                    print '嵌套'
+                    continue
                 file_dict = {}
-                elements_pre = elements.find_elements_by_xpath("./div[2]/div/table/tbody/tr/td[2]")
-                file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-                file_name = file_name.split('/')[-1]
-                file_name = file_path + '/' + file_name
+                elements_pre = elements.find_elements_by_xpath(".//tbody/tr/td[2]")  # 为兼容load-diff的文件需要如此提取
+                file_name = elements.find_element_by_xpath("./div/div[2]/a").get_attribute("title")  # spring-data-cassandra/src/test/java/org/springframework/data/cassandra/repository/query/StringBasedCassandraQueryIntegrationUnitTests.java → spring-data-cassandra/src/test/java/org/springframework/data/cassandra/repository/query/StringBasedCassandraQueryUnitTests.java
+                file_name = file_name.split(" ")[0]  # 去除奇葩情况
+                if len(file_name.split('/')) >= 2:
+                    files_path = ""
+                    for file_pre in file_name.split('/')[:-1]:
+                        files_path += file_pre + '/'
+                    files_path = file_path + '/' + files_path
+                    isExists = os.path.exists(files_path)
+                    if not isExists:
+                        os.makedirs(files_path)  # 创建多层路径
+                    file_name = file_name.split('/')[-1]
+                    file_name = files_path + file_name
+                else:  # 只有一个文件名
+                    file_name = file_name.split('/')[-1]
+                    file_name = file_path + "/" + file_name
                 file_dict['path'] = file_name[1:]  # 去除当前的.
                 lines = []
                 for i, element in enumerate(elements_pre[1:]):
                     text = element.text.encode('utf-8')  # 消除ascii无法编码的异常
-                    with open(file_name, 'a') as f:
+                    with open(file_name, 'a') as f:  # 内容为空的文件表示其实际不存在
                         if i == len(elements_pre[1:]) - 1:
                             f.write(text[1:])  # 去除最后一行多产生的换行
                             if len(text) != 0:  # 防止最后一行是空的情况
@@ -324,7 +364,7 @@ class Myspider(scrapy.Spider):
                                     lines.append(i + 1)
                         else:
                             if len(text) != 0:
-                                bug_line = i+1
+                                bug_line = i + 1
                                 f.write(text[1:] + '\n')  # 当element.text=''时，element.text[1:]不会报异常，结果还是''
                                 if text[0] == '-':  # 将修改的行号进行记录
                                     lines.append(i + 1)
@@ -338,8 +378,80 @@ class Myspider(scrapy.Spider):
             print Exception, ":", e
             msg = traceback.format_exc()
             print '处理出错', msg
-            print bug_line
+            print bug_line, file_name
             with open('pull_url_bugs.txt', 'a') as f:
-                f.write(response.url + '\n')
+                f.write(url + '\n')
                 f.write(msg + '\n')
             browser.close()
+        # try:
+        #     item = SpringspiderItem2()
+        #     print 'click:', browser.find_element_by_xpath(
+        #         "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+        #     browser.find_element_by_xpath(
+        #         "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").click()  # 首先点击split
+        #     while len(browser.find_elements_by_xpath('//*[@class="js-expandable-line"]/td')) != 0:  # 点击expandable扩展
+        #         # browser.find_element_by_xpath('//*[@class="js-expandable-line"][@data-position="0"]/td').click()
+        #         browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
+        #         time.sleep(1)  # 等待页面完全加载
+        #     # elements_pre = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[2]")
+        #     # elements_cur = browser.find_elements_by_xpath("//*[@id='diff-0']/div[2]/div/table/tbody/tr/td[4]")
+        #     elements_pres = browser.find_elements_by_xpath("//*[@id='files']/div/div")  # 获取div[@id='diff-x']
+        #     file_list = []
+        #     file_path = './' + 'files/' + re.sub('\s', "_", response.meta["project_name"]) + '/' + response.meta[
+        #         "bug_id"]
+        #     # file_path = './' + 'files'
+        #     path_flag = os.path.exists(file_path)
+        #     if path_flag is False:
+        #         os.makedirs(file_path)  # 建立 ./项目名/bug_id的目录，里面存储可能存在的bug文件。linux下的结构
+        #     for elements in elements_pres:
+        #         file_dict = {}
+        #         elements_pre = elements.find_elements_by_xpath("./div[2]/div/table/tbody/tr/td[2]")
+        #         file_name = elements.find_element_by_xpath("./div/div[2]/a").text
+        #         file_name = file_name.split('/')[-1]
+        #         file_name = file_path + '/' + file_name
+        #         file_dict['path'] = file_name[1:]  # 去除当前的.
+        #         lines = []
+        #         for i, element in enumerate(elements_pre[1:]):
+        #             text = element.text.encode('utf-8')  # 消除ascii无法编码的异常
+        #             with open(file_name, 'a') as f:
+        #                 if i == len(elements_pre[1:]) - 1:
+        #                     f.write(text[1:])  # 去除最后一行多产生的换行
+        #                     if len(text) != 0:  # 防止最后一行是空的情况
+        #                         if text[0] == '-':  # 将修改的行号进行记录
+        #                             lines.append(i + 1)
+        #                 else:
+        #                     if len(text) != 0:
+        #                         bug_line = i+1
+        #                         f.write(text[1:] + '\n')  # 当element.text=''时，element.text[1:]不会报异常，结果还是''
+        #                         if text[0] == '-':  # 将修改的行号进行记录
+        #                             lines.append(i + 1)
+        #         file_dict['lines'] = lines
+        #         file_list.append(file_dict)
+        #     item["file_list"] = file_list
+        #     item["bug_id"] = response.meta["bug_id"]
+        #     browser.close()
+        #     return item
+        # except Exception, e:
+        #     print Exception, ":", e
+        #     msg = traceback.format_exc()
+        #     print '处理出错', msg
+        #     print bug_line
+        #     with open('pull_url_bugs.txt', 'a') as f:
+        #         f.write(response.url + '\n')
+        #         f.write(msg + '\n')
+        #     browser.close()
+
+    def retryFindClick(self, by, browser):
+        result = False
+        attempt = 0
+        while attempt <= 10:
+            try:
+                browser.find_element_by_xpath(by).click()
+                result = True
+                break
+            except StaleElementReferenceException:
+                print 'click failed'
+            except NoSuchElementException:  # 由于延迟实际上此时已经点击了此按钮
+                print "no such element"
+                break
+        return result

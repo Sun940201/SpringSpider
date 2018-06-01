@@ -1,0 +1,67 @@
+[[customizing-sdr]]
+= Customizing Spring Data REST
+
+There are many options to tailor Spring Data REST. These subsections show how.
+
+== Customizing item resource URIs
+
+By default the URI for item resources are comprised of the path segment used for the collection resource with the database identifier appended.
+That allows us to use the repository's `findOne(…)` method to lookup entity instances.
+As of Spring Data REST 2.5 this can be customized by using configuration API on `RepositoryRestConfiguration` (preferred on Java 8) or by registering an implementation of `EntityLookup` as Spring bean in your application.
+Spring Data REST will pick those up and tweak the URI generation according to their implementation.
+
+Assume a `User` with a `username` property that uniquely identifies it.
+Also, assume we have a method `Optional<User> findByUsername(String username)` on the according repository.
+
+On Java 8 we can simply register the mapping methods as method references to weak the URI creation as follows:
+
+[source, java]
+----
+@Component
+public class SpringDataRestCustomization extends RepositoryRestConfigurerAdapter {
+
+  @Override
+  public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+
+    config.withCustomEntityLookup().//
+      forRepository(UserRepository.class, User::getUsername, UserRepository::findByUsername);
+  }
+}
+----
+
+`forRepository(…)` takes the repository type as first argument a method reference mapping the repositories domain type to some target type, as well as another method reference to map that value back using the repository mentioned as first argument.
+
+If you're not running Java 8 or better, you could use the method but it would require a few quite verbose anonymous inner classes to be use.
+That's why on older Java versions you probably prefer implementing a `UserEntityLookup` looking like this:
+
+[source, java]
+----
+@Component
+public class UserEntityLookup extends EntityLookupSupport<User> {
+
+    private final UserRepository repository;
+
+    public UserEntityLookup(UserRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public Serializable getResourceIdentifier(User entity) {
+        return entity.getUsername();
+    }
+
+    @Override
+    public Object lookupEntity(Serializable id) {
+        return repository.findByUsername(id.toString());
+    }
+}
+----
+
+Note, how `getResourceIdentifier(…)` returns the username to be used by the URI creation. To load entity instances by the value returned from that method we now implement `lookupEntity(…)` using the query method available on the `UserRepository`.
+
+
+include::configuring-the-rest-url-path.adoc[leveloffset=+1]
+include::adding-sdr-to-spring-mvc-app.adoc[leveloffset=+1]
+include::overriding-sdr-response-handlers.adoc[leveloffset=+1]
+include::customizing-json-output.adoc[leveloffset=+1]
+include::custom-jackson-deserialization.adoc[leveloffset=+1]

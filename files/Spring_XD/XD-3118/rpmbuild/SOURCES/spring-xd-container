@@ -1,0 +1,137 @@
+#!/bin/sh
+#
+# Spring XD Container
+#
+# chkconfig:   - 86 14
+# description: Spring XD is a unified, distributed, and extensible system for \
+#              data ingestion, real time analytics, batch processing, and data \
+#              export.
+
+### BEGIN INIT INFO
+# Provides:
+# Required-Start:
+# Required-Stop:
+# Should-Start:
+# Should-Stop:
+# Default-Start:
+# Default-Stop:
+# Short-Description:
+# Description:
+### END INIT INFO
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+[ -e /etc/sysconfig/spring-xd ] && . /etc/sysconfig/spring-xd
+
+CONFIG=/etc/sysconfig/spring-xd
+USER="spring-xd"
+PROG="xd-container"
+EXEC="$XD_HOME/xd/bin/$PROG"
+LOCKFILE=/var/lock/subsys/$PROG
+PIDFILE=/var/run/${PROG}.pid
+
+
+if [ ! -z "$ANALYTICS" ]; then
+   CMD_LINE_OPTS="--analytics $ANALYTICS"
+fi
+if [ ! -z "$HADOOP_DISTRO" ]; then
+   CMD_LINE_OPTS="$CMD_LINE_OPTS --hadoopDistro $HADOOP_DISTRO"
+fi
+if [ ! -z "$GROUP_MEM" ]; then
+   CMD_LINE_OPTS="$CMD_LINE_OPTS --groups $GROUP_MEM"
+fi
+if [ ! -z "$CONTROL_MGMT_PORT" ]; then
+   CMD_LINE_OPTS="$CMD_LINE_OPTS --mgmtPort $CONTROL_MGMT_PORT"
+fi
+if [ ! -z "$HADOOP_USER_NAME" ]; then
+   CMD_EXEC="HADOOP_USER_NAME=$HADOOP_USER_NAME $EXEC"
+else
+   CMD_EXEC="$EXEC"
+fi
+
+
+start() {
+    [ -x $EXEC ] || exit 5
+    [ -f $CONFIG ] || exit 6
+    echo -n $"Starting $PROG: "
+    XD_PID=$(runuser $USER -c "$CMD_EXEC $CMD_LINE_OPTS >> $CONTAINER_LOGFILE 2>&1 & echo \${!}");
+    RETVAL=$?
+    case "$RETVAL" in
+        0)
+            success
+            echo
+            touch $LOCKFILE
+            echo $XD_PID > $PIDFILE
+            ;;
+        1)
+            echo
+            failure
+            ;;
+    esac
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $PROG: "
+    killproc -p $PIDFILE $PROG
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $LOCKFILE $PIDFILE
+    return $RETVAL
+}
+
+restart() {
+    stop
+    start
+}
+
+reload() {
+    restart
+}
+
+force_reload() {
+    restart
+}
+
+rh_status() {
+    # run checks to determine if the service is running or use generic status
+    status -p $PIDFILE $PROG
+}
+
+rh_status_q() {
+    rh_status >/dev/null 2>&1
+}
+
+
+case "$1" in
+    start)
+        rh_status_q && exit 0
+        $1
+        ;;
+    stop)
+        rh_status_q || exit 0
+        $1
+        ;;
+    restart)
+        $1
+        ;;
+    reload)
+        rh_status_q || exit 7
+        $1
+        ;;
+    force-reload)
+        force_reload
+        ;;
+    status)
+        rh_status
+        ;;
+    condrestart|try-restart)
+        rh_status_q || exit 0
+        restart
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart|reload|force-reload}"
+        exit 2
+esac
+exit $?

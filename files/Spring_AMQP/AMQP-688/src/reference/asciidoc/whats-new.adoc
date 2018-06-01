@@ -1,0 +1,83 @@
+[[whats-new]]
+=== What's New
+
+==== Changes in 2.0 Since 1.7
+
+===== AMQP Client library
+
+Spring AMQP now uses the new 4.0.x version of the `amqp-client` library provided by the RabbitMQ team.
+This client has auto recovery configured by default; see <<auto-recovery>>.
+
+===== New Listener Container
+
+The `DirectMessageListenerContainer` has been added alongside the existing `SimpleMessageListenerContainer`.
+See <<choose-container>> and <<containerAttributes>> for information about choosing which container to use as well as how to configure them.
+
+
+===== Log4j Appender
+
+This appender is no longer available due to the end-of-life of log4j.
+See <<logging>> for information about the available log appenders.
+
+
+===== RabbitTemplate Changes
+
+IMPORTANT: Previously, a non-transactional `RabbitTemplate` participated in an existing transaction if it ran on a transactional listener container thread.
+This was a serious bug; however, users might have relied on this behavior.
+Starting with _version 1.6.2_, you must set the `channelTransacted` boolean on the template for it to participate in the container transaction.
+
+The `RabbitTemplate` now uses a `DirectReplyToMessageListenerContainer` (by default) instead of creating a new consumer for each request.
+See <<direct-reply-to>> for more information.
+
+The `AsyncRabbitTemplate` now supports Direct reply-to; see <<async-template>> for more information.
+
+The `RabbitTemplate` and `AsyncRabbitTemplate` now have `receiveAndConvert` and `convertSendAndReceiveAsType` methods that take a `ParameterizedTypeReference<T>` argument, allowing the caller to specify the type to convert the result to.
+This is particularly useful for complex types or when type information is not conveyed in message headers.
+Requires a `SmartMessageConverter` such as the `Jackson2JsonMessageConverter`.
+See <<receiving-messages>>, <<request-reply>>, <<async-template>>, and <<json-complex>> for more information.
+
+===== Listener Adapter
+
+A convenient `FunctionalInterface` is available for using lambdas with the `MessageListenerAdapter`.
+See <<message-listener-adapter>> for more information.
+
+===== Listener Container Changes
+
+Previously, `MessageProperties.getMessageCount()` returned `0` for messages emitted by the container.
+This property only applies when using `basicGet` (e.g. from `RabbitTemplate.receive()` methods) and is now initialized to `null` for container messages.
+
+===== Connection Factory Changes
+
+The connection and channel listener interfaces now provide a mechanism to obtain information about exceptions.
+See <<connection-channel-listeners>> and <<publishing-is-async>> for more information.
+
+A new `ConnectionNameStrategy` is now provided to populate the application-specific identification of the target RabbitMQ connection from the `AbstractConnectionFactory`.
+See <<connections>> for more information.
+
+===== Retry Changes
+
+The `MissingMessageIdAdvice` is no longer provided; it's functionality is now built-in; see <<retry>> for more information.
+
+===== Anonymous Queue Naming
+
+By default, `AnonymousQueues` are now named with the default `Base64UrlNamingStrategy` instead of a simple `UUID` string.
+See <<anonymous-queue>> for more information.
+
+===== @RabbitListener Changes
+
+You can now provide simple queue declarations (only bound to the default exchange) in `@RabbitListener` annotations.
+See <<async-annotation-driven>> for more information.
+
+You can now configure `@RabbitListener` annotations so that any exceptions thrown will be returned to the sender.
+You can also configure a `RabbitListenerErrorHandler` to handle exceptions.
+See <<annotation-error-handling>> for more information.
+
+===== Container Conditional Rollback
+
+When using an external transaction manager (e.g. JDBC), rule-based rollback is now supported when providing the container with a transaction attribute.
+It is also now more flexible when using a transaction advice.
+See <<conditional-rollback>> for more information.
+
+==== Earlier Releases
+
+See <<previous-whats-new>> for changes in previous versions.

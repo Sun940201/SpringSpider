@@ -1,0 +1,46 @@
+# Spring XD options
+
+
+##########
+# Options used by both admin and container
+
+# Location of Spring XD installation
+XD_HOME=/opt/pivotal/spring-xd
+
+# How to persist analytics such as counters and gauges
+# [redis]
+#ANALYTICS=redis
+
+
+##########
+# Admin specfic options
+
+# ADMIN_LOGFILE must match log4j.appender.file.File in
+# xd-admin-logger.properties
+ADMIN_LOGFILE=${XD_HOME}/xd/logs/admin.log
+
+# Http port for the REST API server
+# [9393]
+#ADMIN_HTTP_PORT=9393
+
+# The port for the management server
+# ADMIN_MGMT_PORT=
+
+##########
+# Container specific options
+
+# CONTAINER_LOGFILE must match log4j.appender.file.File in
+# xd-container-logger.properties
+CONTAINER_LOGFILE=${XD_HOME}/xd/logs/container.log
+
+# The group memberships for this container as a quoted
+# comma delimited string
+# "VAL1, VAL2"
+#GROUP_MEM=""
+
+# The Hadoop distribution to be used for HDFS access
+# [hadoop26 | phd21 | phd30 | cdh5 | hdp22]
+#HADOOP_DISTRO=
+
+# The port for the management server
+#CONTROL_MGMT_PORT=

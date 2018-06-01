@@ -1,1024 +1,5 @@
-https://github.com/spring-projects/spring-data-keyvalue/pull/4
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-jpa/pull/262
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-jpa/pull/229
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-jpa/pull/197/files
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 292, in parseGit
-    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
-    'value': value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-jpa/pull/189
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-jpa/pull/194
 Traceback (most recent call last):
   File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-jpa/pull/210
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-jdbc/pull/29
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-jdbc/pull/22
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-jdbc/pull/9
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-gemfire/pull/79
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-solr/pull/46
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-cassandra/pull/125
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-cassandra/pull/101
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-cassandra/pull/86
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-cassandra/pull/119
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-cassandra/pull/87
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-cassandra/pull/68
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-cassandra/pull/51
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-cassandra/pull/113
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-cassandra/pull/84
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-elasticsearch/pull/196
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-elasticsearch/pull/141
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-elasticsearch/pull/130
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-elasticsearch/pull/146
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-couchbase/pull/125/
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-couchbase/pull/67
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-couchbase/pull/130
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/280
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/273
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/263
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-boot/issues/9962
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 292, in parseGit
-    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
-    'value': value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/232
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/202
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/190
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/185
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/198
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/174/files
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 292, in parseGit
-    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
-    'value': value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/141
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/177
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-data-commons/pull/95
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-batch/pull/430/files
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 292, in parseGit
-    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
-    'value': value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-batch/pull/365
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 318, in parseGit
-    text = element.text.encode('utf-8')  # 消除ascii无法编码的异常
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 68, in text
-    return self._execute(Command.GET_ELEMENT_TEXT)['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/rbutti/SpringBatch/tree/master/SpringJSR352
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 292, in parseGit
-    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
-    'value': value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-batch-extensions/pull/3
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 318, in parseGit
-    text = element.text.encode('utf-8')  # 消除ascii无法编码的异常
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 68, in text
-    return self._execute(Command.GET_ELEMENT_TEXT)['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-batch-extensions/pull/5
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 318, in parseGit
-    text = element.text.encode('utf-8')  # 消除ascii无法编码的异常
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 68, in text
-    return self._execute(Command.GET_ELEMENT_TEXT)['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/695
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/611
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/626
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/577
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 318, in parseGit
-    text = element.text.encode('utf-8')  # 消除ascii无法编码的异常
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 68, in text
-    return self._execute(Command.GET_ELEMENT_TEXT)['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/606
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/578
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/514
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/484
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/483
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/521
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/447
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 312, in parseGit
-    file_name = elements.find_element_by_xpath("./div/div[2]/a").text
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 233, in find_element_by_xpath
-    return self.find_element(by=By.XPATH, value=xpath)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 478, in find_element
-    {"using": by, "value": value})['value']
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"./div/div[2]/a"}
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/412
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 297, in parseGit
-    browser.find_element_by_xpath('//*[@class="js-expandable-line"]/td').click()  # 模拟点击的时候不要控制浏览器否则会出错
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 72, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webelement.py", line 461, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
-    raise exception_class(message, screen, stacktrace)
-StaleElementReferenceException: Message: stale element reference: element is not attached to the page document
-  (Session info: headless chrome=59.0.3071.86)
-  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
-
-
-https://github.com/spring-projects/spring-amqp/pull/309
-Traceback (most recent call last):
-  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 295, in parseGit
     while len(browser.find_elements_by_xpath('//*[@class="js-expandable-line"]/td')) != 0:  # 点击expandable扩展
   File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 305, in find_elements_by_xpath
     return self.find_elements(by=By.XPATH, value=xpath)
@@ -1039,4 +20,1572 @@ Traceback (most recent call last):
   File "/usr/lib/python2.7/socket.py", line 476, in readline
     data = self._sock.recv(self._rbufsize)
 error: [Errno 104] Connection reset by peer
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
+
+Traceback (most recent call last):
+  File "/home/sx/python/SpringSpider/SpringSpider/spiders/spider.py", line 294, in parseGit
+    "//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']").text
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 293, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python2.7/dist-packages/selenium/webdriver/remote/errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class='btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s']"}
+  (Session info: headless chrome=59.0.3071.86)
+  (Driver info: chromedriver=2.30.477691 (6ee44a7247c639c0703f291d320bdf05c1531b57),platform=Linux 4.2.0-42-generic x86_64)
+
 

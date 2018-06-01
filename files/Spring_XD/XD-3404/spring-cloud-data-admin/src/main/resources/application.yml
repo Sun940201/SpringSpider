@@ -1,0 +1,10 @@
+server:
+  port: 9393
+management:
+  contextPath: /management
+security:
+  basic:
+    enabled: false
+spring:
+  hadoop:
+    resourceManagerHost: localhost

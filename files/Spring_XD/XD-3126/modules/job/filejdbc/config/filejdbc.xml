@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+ <import resource="classpath:/META-INF/spring-xd/batch/singlestep-partition-support.xml"/>
+
+ <bean id="partitioner" class="org.springframework.batch.core.partition.support.MultiResourcePartitioner" scope="step">
+  <property name="resources" value="${resources}"/>
+ </bean>
+
+ <step id="step1" xmlns="http://www.springframework.org/schema/batch">
+  <tasklet>
+   <chunk reader="multiResourceReader" writer="itemWriter" commit-interval="${commitInterval}"/>
+  </tasklet>
+  <listeners>
+   <listener ref="fileDeletionListener"/>
+  </listeners>
+ </step>
+
+ <bean id="fileDeletionListener" class="org.springframework.xd.dirt.plugins.job.support.listener.FileDeletionStepExecutionListener">
+  <property name="resources" value="${resources}"/>
+  <property name="deleteFiles" value="${deleteFiles}"/>
+ </bean>
+
+ <bean id="multiResourceReader" class="org.springframework.batch.item.file.MultiResourceItemReader" scope="step">
+  <property name="resources" value="#{stepExecutionContext['fileName']}"/>
+  <property name="delegate" ref="itemReader"/>
+ </bean>
+
+ <bean id="itemReader" class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
+  <property name="lineMapper">
+   <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+    <property name="lineTokenizer">
+     <bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+      <property name="names" value="${names}"/>
+      <property name="delimiter" value="${delimiter}"/>
+     </bean>
+    </property>
+    <property name="fieldSetMapper">
+     <bean class="org.springframework.xd.tuple.batch.TupleFieldSetMapper"/>
+    </property>
+   </bean>
+  </property>
+ </bean>
+
+ <bean id="moduleDataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+  <property name="driverClassName" value="${driverClassName}"/>
+  <property name="url" value="${url}"/>
+  <property name="username" value="${username}"/>
+  <property name="password" value="${password}"/>
+  <property name="initialSize" value="${initialSize}" />
+  <property name="maxActive" value="${maxActive}" />
+  <property name="maxIdle" value="${maxIdle}" />
+  <property name="minIdle" value="${minIdle}"/>
+  <property name="maxWait" value="${maxWait}"/>
+  <property name="testOnBorrow" value="${testOnBorrow}"/>
+  <property name="testOnReturn" value="${testOnReturn}"/>
+  <property name="testWhileIdle" value="${testWhileIdle}"/>
+  <property name="validationQuery" value="${validationQuery:#{null}}"/>
+  <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>
+  <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}"/>
+  <property name="removeAbandoned" value="${removeAbandoned}"/>
+  <property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}"/>
+  <property name="logAbandoned" value="${logAbandoned}"/>
+  <property name="validationInterval" value="${validationInterval}"/>
+  <property name="jmxEnabled" value="${jmxEnabled}"/>
+  <property name="fairQueue" value="${fairQueue}"/>
+  <property name="abandonWhenPercentageFull" value="${abandonWhenPercentageFull}"/>
+  <property name="maxAge" value="${maxAge}"/>
+  <property name="useEquals" value="${useEquals}"/>
+  <property name="suspectTimeout" value="${suspectTimeout}"/>
+  <property name="alternateUsernameAllowed" value="${alternateUsernameAllowed}"/>
+  <property name="validatorClassName" value="${validatorClassName:#{null}}"/>
+  <property name="connectionProperties" value="${connectionProperties:#{null}}"/>
+   <property name="initSQL" value="${initSQL:#{null}}"/>
+   <property name="jdbcInterceptors" value="${jdbcInterceptors:#{null}}"/>
+ </bean>
+
+ <bean id="dataSourceInitializer" class="org.springframework.jdbc.datasource.init.DataSourceInitializer">
+  <property name="databasePopulator" ref="databasePopulator"/>
+  <property name="dataSource" ref="moduleDataSource"/>
+  <property name="enabled" value="${initializeDatabase}"/>
+ </bean>
+
+ <bean id="databasePopulator" class="org.springframework.xd.jdbc.SingleTableDatabaseInitializer">
+  <property name="scripts" value="${xd.config.home}/${initializerScript}"/>
+  <property name="ignoreFailedDrops" value="true"/>
+  <property name="tableName" value="${tableName}"/>
+  <property name="columnNames" value="${names}" />
+ </bean>
+
+ <bean id="itemWriter" class="org.springframework.xd.jdbc.NamedColumnJdbcBatchItemWriter">
+  <property name="dataSource" ref="moduleDataSource"/>
+  <property name="tableName" value="${tableName}" />
+  <property name="columnNames" value="${names}" />
+  <property name="itemSqlParameterSourceProvider">
+   <bean class="org.springframework.xd.tuple.batch.TupleSqlParameterSourceProvider" />
+  </property>
+ </bean>
+
+</beans>

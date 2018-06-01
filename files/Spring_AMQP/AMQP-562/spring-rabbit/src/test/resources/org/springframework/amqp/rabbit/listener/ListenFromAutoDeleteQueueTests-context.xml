@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+ <rabbit:connection-factory id="rabbitConnectionFactory" host="localhost" />
+
+ <rabbit:queue id="anon" />
+
+ <rabbit:queue id="anon2" />
+
+ <rabbit:direct-exchange name="testContainerWithAutoDeleteQueues" auto-delete="true">
+  <rabbit:bindings>
+   <rabbit:binding queue="anon" key="anon" />
+   <rabbit:binding queue="anon2" key="anon2" />
+  </rabbit:bindings>
+ </rabbit:direct-exchange>
+
+ <rabbit:listener-container concurrency="2">
+  <rabbit:listener id="container1" ref="foo" queues="anon" />
+ </rabbit:listener-container>
+
+ <!-- With Conditional Declarations -->
+
+ <rabbit:queue id="otherAnon" declared-by="containerAdmin" />
+
+ <rabbit:direct-exchange name="otherExchange" auto-delete="true" declared-by="containerAdmin">
+  <rabbit:bindings>
+   <rabbit:binding queue="otherAnon" key="otherAnon" />
+  </rabbit:bindings>
+ </rabbit:direct-exchange>
+
+ <rabbit:listener-container auto-startup="false">
+  <rabbit:listener id="container2" ref="foo" queues="otherAnon" admin="containerAdmin" />
+ </rabbit:listener-container>
+
+ <rabbit:queue id="xExpires" name="#{T(java.util.UUID).randomUUID().toString()}">
+  <rabbit:queue-arguments>
+   <entry key="x-expires" value="#{100}"/>
+  </rabbit:queue-arguments>
+ </rabbit:queue>
+
+ <rabbit:listener-container concurrency="2">
+  <rabbit:listener id="container3" ref="foo" queues="xExpires"/>
+ </rabbit:listener-container>
+
+ <rabbit:listener-container auto-declare="false">
+  <rabbit:listener id="container4" ref="foo" queues="anon2"/>
+ </rabbit:listener-container>
+
+ <rabbit:admin connection-factory="rabbitConnectionFactory" />
+
+ <rabbit:admin id="containerAdmin" connection-factory="rabbitConnectionFactory" auto-startup="false" />
+
+ <bean id="foo" class="org.springframework.amqp.rabbit.listener.ListenFromAutoDeleteQueueTests$Listener" />
+
+ <rabbit:template id="template" connection-factory="rabbitConnectionFactory"/>
+
+</beans>

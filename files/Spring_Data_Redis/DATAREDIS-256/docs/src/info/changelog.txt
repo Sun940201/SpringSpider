@@ -1,0 +1,529 @@
+SPRING DATA REDIS CHANGELOG
+===========================
+http://projects.spring.io/spring-data-redis/
+
+Commit changelog: http://github.com/spring-projects/spring-data-redis/tree/v[version]
+Issues changelog: http://jira.springsource.org/secure/ReleaseNote.jspa?projectId=10604
+
+Changes in version 1.2.0.RC1 (2014-02-19)
+----------------------------------------
+Fix
+  [DATAREDIS-166] - Intermittent corrupted input/output streams subscribing to both patterns and channels in RMLC
+  [DATAREDIS-170] - Canceling RMLC SubscriptionTask immediately after start can leave connection open
+  [DATAREDIS-188] - Infinite loop renaming a non-existent Collection when using Lettuce
+  [DATAREDIS-246] - RedisCacheManager‘s getCache method does not match the logical of CompositeCacheManager
+
+Improvement
+  [DATAREDIS-250] - Upgrade to Spring Framework 3.2.8.
+
+New Feature
+  [DATAREDIS-206] - Add support for time operation
+  [DATAREDIS-241] - Add a Jackson2 based RedisSerializer
+
+Task
+  [DATAREDIS-254] - Clean up codebase to match spring data conventions
+  [DATAREDIS-260] - Upgrade to latest jedis release
+  [DATAREDIS-264] - Update gradle version
+  [DATAREDIS-265] - Update Java source and target compatibility to Java 6
+  [DATAREDIS-266] - Overhaul documentation.
+
+
+Changes in version 1.1.1.RELEASE (2014-01-28)
+----------------------------------------
+
+Fix
+  [DATAREDIS-245] - Prevent excessive Thread creation in unit tests
+  [DATAREDIS-248] - Fix generics in DecoratingStringHashMapper to be Java 8 compatible
+  [DATAREDIS-257] - Shutdown the client when DefaultLettucePool is destroyed
+
+Improvement
+  [DATAREDIS-242] - Listener Container start() Returns Before Container is Really Started
+  [DATAREDIS-249] - Improve logging for tests in Gradle build
+  [DATAREDIS-251] - Fix tests to work against Redis 2.8.x
+
+Task
+  [DATAREDIS-243] - Ensure compatibility with Spring Framework 4.0
+  [DATAREDIS-247] - Testcases must be locale independent
+  [DATAREDIS-255] - Release 1.1.1
+
+
+Changes in version 1.1.0.RELEASE (2013-09-09)
+----------------------------------------
+
+No changes
+
+
+Changes in version 1.1.0.RC1 (2013-08-22)
+----------------------------------------
+
+Package o.s.d.redis.core
+* Modified RedisTemplate expire and expireAt
+to use millisecond precision when available (Redis 2.6+)
+* Added RedisTemplate getExpire(key, TimeUnit) method that uses
+millisecond precision when available (Redis 2.6+)
+
+Package o.s.d.redis.connection.jedis
+* Fixed invalid Jedis connections returning to pool after NPE
+
+Package o.s.d.redis.connection.lettuce
+* Modified LettuceConnectionFactory to lazily instantiate connections,
+allowing the AppContext to start if Redis is unavailable
+
+Package o.s.d.redis.connection.srp
+* Added password to SrpConnectionFactory
+* Fixed SrpConnection throwing native Exception from constructor on
+connection failure
+
+Package o.s.d.redis.listener
+* Fixed MessageListenerAdapter extractMessage returning the whole Message
+instead of the Message body when serializer is null
+* Added resubscribe on connection failure to RedisMessageListenerContainer
+
+Package o.s.d.redis.support.collections
+* Implemented ConcurrentMap replace and remove methods
+
+
+Changes in version 1.1.0.M2 (2013-08-06)
+----------------------------------------
+
+General
+* Modified RedisConnection and Operations classes to allow passing multiple
+elements to hdel, rpush, lpush, sadd, srem, zadd, and zrem operations
+* Added method to RedisTemplate for executing Redis Lua scripts
+* Modified RedisTemplate and opsForX classes to allow null serializers for
+working with raw data
+* Modified RedisConnection impls to convert the connector-specific results of closePipeline
+to the same data types as the individual RedisConnection operations
+* Modified RedisConnection impls to convert the connector-specific results of transaction exec
+to the same data types as the individual RedisConnection operations
+* Upgraded to Gradle 1.6
+
+Package o.s.d.redis.cache
+* Fixed IlegalMonitorStateException when get or put performed while clearing
+
+Package o.s.d.redis.core
+* Added RedisTemplate executePipelined methods for executing commands in a pipeline and
+returning deserialized results
+* Modified RedisTemplate exec to deserialize results of transaction execution
+* Fixed StringRedisConnection not being passed to RedisCallbacks executed through StringRedisTemplate
+* Fixed NPE in DefaultZSetOperations methods that return Tuple Set in tx or pipeline
+
+Package o.s.d.redis.connection
+* Added missing zRevRangeByScore methods to StringRedisConnection
+* Modified StringRedisConnection sUnionStore, sInterStore, and sDiffStore to return Long
+* Fixed DefaultStringRedisConnection not passing begin and end to bitCount method
+
+Package o.s.d.redis.connection.jedis
+* Fixed ClassCastExceptions closing a pipeline after transaction exec
+* Fixed UnsupportedOperationExceptions being wrapped in DataAccessExceptions
+* Fixed connections not returning to pool on failed select
+* Fixed NPEs on exec/closePipeline that includes move
+
+Package o.s.d.redis.connection.lettuce
+* Fixed UnsupportedOperationExceptions being wrapped in DataAccessExceptions
+* Fixed NPE calling sort with null SortParams
+* Fixed closePipeline returning individual results of ops in a transaction instead of
+a List of exec results
+* Fixed setBit and setRange executing twice when pipelined
+* Modified watch method to throw an UnsupportedOperationException if called in a transaction
+* Fixed eval and evalsha suppressing Exceptions with ReturnType Multi
+
+Package o.s.d.redis.connection.srp
+* Fixed UnsupportedOperationExceptions being wrapped in DataAccessExceptions
+* Fixed NPE calling sort with null SortParams
+* Fixed closePipeline returning individual results of ops in a transaction instead of
+a List of exec results
+* Fixed Exception calling select in a transaction
+* Fixed NPE in sort when SortParameters.isAlphabetic() returns null
+
+Package o.s.d.redis.listener
+* Removed 5 second wait starting RedisMesssageListenerContainer with no listeners
+
+Package o.s.d.redis.support.atomic
+* Added RedisAtomicDouble
+
+
+Changes in version 1.0.6.RELEASE (2013-08-06)
+----------------------------------------
+
+General
+* Upgraded to Gradle 1.6
+
+Package o.s.d.redis.cache
+* Fixed IlegalMonitorStateException when get or put performed while clearing
+
+Package o.s.d.redis.core
+* Fixed StringRedisConnection not being passed to RedisCallbacks executed through StringRedisTemplate
+* Fixed NPE in DefaultZSetOperations methods that return Tuple Set in tx or pipeline
+
+Package o.s.d.redis.connection.jedis
+* Fixed connections not returning to pool on failed select
+* Fixed NPEs on exec/closePipeline that includes move
+
+Package o.s.d.redis.connection.lettuce
+* Fixed NPE calling sort with null SortParams
+* Fixed setBit and setRange executing twice when pipelined
+
+Package o.s.d.redis.connection.srp
+* Fixed NPE calling sort with null SortParams
+* Fixed Exception calling select in a transaction
+* Fixed NPE in sort when SortParameters.isAlphabetic() returns null
+
+Package o.s.d.redis.listener
+* Removed 5 second wait starting RedisMesssageListenerContainer with no listeners
+
+Changes in version 1.1.0.M1 (2013-07-02)
+----------------------------------------
+
+General
+* Added Redis 2.6 millisecond expiration commands (pexpire, pttl, etc)
+* Added Redis 2.6 bit commands (bitop, bitcount)
+* Added support for Redis 2.6 scripting
+* Added Redis 2.6 incrbyfloat and hincrbyfloat commands
+* Added Redis 2.6 dump and restore commands
+* Added Redis 2.6 info by section
+* Added Redis 2.6 srandmember with count
+* Removed RJC due to lack of Redis 2.6 support
+* Upgraded JRedis from older fork (https://github.com/anthonylauzon/jredis) to
+latest original master (https://github.com/alphazero/jredis)
+* Made Jedis dependency optional in the build
+
+Package o.s.d.redis.core
+* Changed ValueOperations.multiSetIfAbsent return type from void to Boolean
+
+Package o.s.d.redis.connection
+* Changed StringRedisCommands.mSetNX return type from void to Boolean
+
+Package o.s.d.redis.connection.jredis
+* Removed base64 key encoding, since binary keys are supported in JRedis upgrade.
+Fixes issue where keys method with patterns was not working due to encoding.
+* Added JredisPool, since pool impl was removed from JRedis. Also fixes
+issue with previous pool where failed connections were not removed.
+
+Package o.s.d.redis.connection.lettuce
+* Added LettucePool for optional pooling of blocking/tx Lettuce connections
+* Added optional Redis password to LettuceConnectionFactory
+* Modified LettuceConnectionFactory to throw RedisConnectionFailureExceptions instead
+of native Exceptions
+
+
+Changes in version 1.0.5.RELEASE (2013-07-02)
+---------------------------------------------
+
+General
+* Upgraded to SRP 0.7
+* Upgraded to Lettuce 2.3.3
+
+Package o.s.d.redis.core
+* Fixed left/right pop timeouts converting to 0 seconds (blocking indefinitely)
+
+Package o.s.d.redis.connection.lettuce
+* Fixed exec returning empty list instead of null if watched variable modified
+
+Package o.s.d.redis.connection.srp
+* Fixed exec throwing TransactionFailedException instead of returning null if watched
+variable modified
+
+Package o.s.d.redis.listener.adapter
+* Added MessageListenerAdapter constructor with delegate and listener method
+
+
+Changes in version 1.0.4.RELEASE (2013-04-18)
+---------------------------------------------
+
+General
+* Introduced Lettuce connection sharing to greatly reduce number of connections used
+* Upgraded to SRP 0.5
+* Improved reference documentation
+* Added several integration tests of each RedisConnection implementation
+
+Package o.s.d.redis.core
+* Reverted binary backwards incompatibility introduced by fix in 1.0.3.RELEASE to RedisTemplate
+convertAndSend() method to return the number of targeted channels
+
+Package o.s.d.redis.connection
+* Fixed NPE in DefaultStringRedisConnection deserializing a null Map
+
+Package o.s.d.redis.connection.jedis
+* Removed unnecessary cast of Long to Int in increment/decrement ops
+* Fixed incorrect transaction discard
+* Fixed dbSize/flush ops executing synchronously while pipelining
+* Fixed execute method returning incorrect results
+* Fixed brPop executing twice when called in a transaction
+* Fixed persist method not executing as part of a transaction
+* Fixed incorrect closing of pipeline
+
+Package o.s.d.redis.connection.jredis
+* Fixed sort not storing results under given key
+
+Package o.s.d.redis.connection.lettuce
+* Fixed NPE on LettuceConnection blpop/brpop timeout
+* Fixed exec returning a non-null value while pipelining
+* Fixed zCount/zInterStore methods executing synchronously when pipelining
+* Fixed NPEs or incorrect results in several ops within a transaction
+* Fixed zRevRangeByScore methods failing due to incorrect parameter ordering
+
+Package o.s.d.redis.connection.rjc
+* Fixed zRevRangeWithScores returning incorrect results
+* Fixed incorrect closing of pipeline
+* Fixed zRevRangeByScore methods failing due to incorrect parameter ordering
+
+Package o.s.d.redis.connection.srp
+* Fixed exec not returning the results of the commands executed in the tx
+* Fixed brpop/blpop fails with "ERR wrong number of arguments"
+* Fixed sort not working due to NPE/syntax errors
+* Fixed zCount/zInterStore methods executing synchronously when pipelining
+* Fixed syntax error in zRangeByScore/zRevRangeByScore methods when using offset and count
+* Fixed incorrect closing of pipeline
+* Fixed zRevRangeByScore methods failing due to incorrect parameter ordering
+
+Package o.s.d.redis.listener
+* Fixed SubscriptionTask not closing connections
+* Fixed messages not received after adding a message listener to both channel and pattern
+before container start
+
+
+Changes in version 1.0.3.RELEASE (2013-02-13)
+---------------------------------------------
+
+General
+* Introduced support for Lettuce Redis driver
+* Upgraded to Spring Framework 3.1.4
+* Log4J dependency removed
+* Improved reference documentation
+
+Package o.s.d.redis.cache
+* Clarified default of 'useprefix' for RedisCacheManager
+
+Package o.s.d.redis.core
+* Improved RedisTemplate initialization to prevent exceptions caused by invalid serializers
+* Refined RedisTemplate#delete call when dealign with empty collection
+* Refined convertAndSend() method to return the number of targeted channels
+
+Package o.s.d.redis.connection
+* Fixed unimplemented method (hGetAll) in StringRedisConnection
+
+Package o.s.d.redis.connection.jedis
+* Improved handling of socket exceptions uncaught by the driver at connection time
+
+Package o.s.d.redis.connection.srp
+* Fixed incorrect handling BulkReply affecting hash operations
+* Improved pipelined usage of various operations
+
+Package o.s.d.redis.listener
+* Added proper hash/equals/toString method to ChannelTopic and PatternTopic
+* Improved MessageListenerContainer to support dynamic removal of listeners
+
+Package o.s.d.redis.support
+* Added RedisTemplate-based constructor to AtomicInteger/Long for connection/resource reuse
+
+
+Changes in version 1.0.2.RELEASE (2012-10-10)
+---------------------------------------------
+
+General
+* Upgraded to Spring Framework 3.1.2
+* Upgraded to SLF4J 1.6.6
+* Upgraded to Log4J 1.2.17
+* Upgraded to Jackson 1.8.8
+* Upgraded build system to Gradle 1.2
+
+Package o.s.d.redis.cache
+* Fixed bug causing constructor to ignore cache name prefix
+* Introduced expiration time for cache zones
+
+Package o.s.d.redis.core
+* Fixed incorrect return value (from primitive to Object) on BoundHashOperations#hasKey
+* Added overloaded ZSet methods with offset/count parameters
+
+Package o.s.d.redis.connection
+* Refined RedisConnectionCommands, RedisKeyCommands interface signature
+
+Package o.s.d.redis.listener
+* Fixed bug causing the message channel to not be passed to the listener
+
+Package o.s.d.redis.support.collection
+* Added checks for incorrect pipeline/multi-exec access for better reporting
+
+
+Changes in version 1.0.1.RELEASE (2012-06-27)
+---------------------------------------------
+
+General
+* Introduced support for SRP (Sam's Redis Protocol)
+* Introduced native execution through RedisConnection#execute
+* Upgraded to Spring Framework 3.1.1
+* Upgraded to Jedis 2.1.0
+* Upgraded build system to Gradle 1.0
+
+Package o.s.d.redis.connection
+* Expanded set *store operations to return the resulting set size
+* Refined RedisConnection#closePipeline contract by adding RedisPipelineException 
+
+Package o.s.d.redis.connection.jedis
+* Improved exception translation of Jedis exceptions
+* Fixed value bug in #setBit
+* Added support for zRev* operations (new in Jedis 2.1)
+* Added pipeline support for #zCount
+
+Package o.s.d.redis.connection.jredis
+* Fixed value bug in #setBit
+
+Package o.s.d.redis.core
+* Fixed bug in SetOperations#randomMember
+* Fixed switched arguments in ZSetOperations#intersectAndStore
+* Corrected handling of negative values in ValueOperations#increment
+* Refined internal caching of serializers to cope with template configuration updates
+* Expanded set *store operations to return the resulting set size
+* Expanded ZSetOperations#removeRange* to return the number of elements removed
+* Improved binding of Redis connections to thread
+* Refined handling of pipelined connections to allow potential exceptions to properly propagate
+* Expanded HashOperations#multiGet and #values to return List instead of Collection
+
+Package o.s.d.redis.listener
+* Improved lifecycle of RedisMessageListenerContainer
+* Fixed bug causing double invocation of custom listeners also implementing MessageListener
+
+
+Changes in version 1.0.0.RELEASE (2011-12-14)
+---------------------------------------------
+
+General
+* Upgraded to Spring Framework 3.1 GA
+
+
+Changes in version 1.0.0.RC1 (2011-10-19)
+-----------------------------------------
+
+General
+* Upgraded to Spring Framework 3.1 RC1
+* Upgraded slfj, Jackson libraries
+* Changed compile source/target compatibility to JDK 1.5
+
+Package o.s.d.redis.connection
+* Added equals/hashCode/compareTo methods to TypedTuple
+
+Package o.s.d.redis.core
+* Fixed potential bug in RedisTemplate#sort
+* Added equals/hashCode/compareTo methods to TypedTuple
+
+Package o.s.d.redis.support
+* Fixed potential bug in RedisProperties
+* Improved Redis cache implementation under heavy concurrent access
+
+
+Changes in version 1.0.0.M4 (2011-07-18)
+----------------------------------------
+
+General
+* Split Spring Data Key Value project into separate projects for Redis and Riak
+* Changed build system to Gradle
+* Changed root package from org.springframework.data.keyvalue.redis to org.springframework.data.redis
+* Introduced Redis implementation for Spring 3.1 cache abstraction
+* Upgraded to Spring Framework 3.1 M2
+* Upgraded to Jedis 2.0.0
+
+Package o.s.d.redis.connection
+* Added awarness of the selected Redis DB
+
+Package o.s.d.redis.core
+* Added missing zRange* operations
+* Fixed incorrect cast in RedisTemplate#keys()
+* Removed ConnectionFactory constructor
+
+Package o.s.d.redis.listener
+* Simplified namespace declaration for Redis pubsub
+
+Package o.s.d.redis.support
+* Improved compatibility of atomic counters with M2 release
+* Added Properties implementation on top of Redis
+
+
+Changes in version 1.0.0.M3 (2011-04-06)
+----------------------------------------
+
+Redis
+-----
+
+General
+* Added support for RJC (new Redis client)
+* Added dedicated SORT and SORT/GET support
+* Introduced HashMapper feature for mapping objects to and from maps
+* Improved exception hierarchy to be more consistent with Spring DAO
+* Made several Redis dependencies optional to eliminate unnecessary jars from the classpath
+
+Package o.s.d.k.redis.connection
+* Added support for indexes to RedisConnectionFactories
+* Added new key operations to KeyOperations (formerly KeyBound)
+* Improved handling of Jedis exceptions
+
+Package o.s.d.k.redis.core
+* Serializers are exposed to RedisCallback
+* Added missing operations (move, select) to RedisTemplate
+* Fixed the signature of various method
+
+Package o.s.d.k.redis.support.atomic
+* Fixed incorrect serialization leading to error for RedisAtomicInteger & RedisAtomicLong
+
+
+Changes in version 1.0.0.M2 (2011-02-10)
+----------------------------------------
+
+Redis
+-----
+
+General
+* Added PubSub support (message listener container and namespace)
+* Added JSON and Object/XML Mapping serializers
+* Completed support for Redis (2.2) commands
+* Improved documentation
+* Upgraded to Redis 2.2
+* Updraded to Jedis 1.5.2
+
+Package o.s.d.k.redis.connection
+* Added sort support
+* Added pipelining support
+* Added StringRedisConnection for String-focused operations
+* Renamed JedisConnectionFactory pooling to usePool
+* Renamed JredisConnectionFactory pooling to usePool
+
+Package o.s.d.k.redis.connection.jedis
+* Added support for Jedis rich exceptions
+* Added support for broken pooled connection
+
+Package o.s.d.k.redis.core
+* Fix serializationg bug for hash value inside RedisTemplate
+* Added injection for Redis operations ("views")
+
+Package o.s.d.k.redis.support
+* Refined AtomicInteger and AtomicLong constructors to use the backing store value as initial counter
+
+
+Riak
+----
+
+General
+* Important bug fixes
+* Fully asynchronous AsyncRiakTemplate object
+* Groovy DSL for Riak access using async template underneath
+
+
+Changes in version Riak 1.0.0.M1 (2010-12-15)
+---------------------------------------------
+General
+* Generified RiakTemplate for exception translation, serialization, and data access
+* Built-in HTTP REST client based on Spring 3.0 RestTemplate
+* java.io and Spring IO resource abstractions for reading/writing streams
+* java.io.File subclass that represents a Riak resource
+
+
+Changes in version Redis 1.0.0.M1 (2010-12-13)
+----------------------------------------------
+General
+* Configuration support for Redis Jedis and JRedis drivers/connectors
+* Connection package as low-level abstraction across multiple drivers
+* Exception translation
+* Generified RedisTemplate for exception translation and serialization support
+* Various serialization strategies
+* Atomic counter support classes
+* JDK Collection implementations on top of Redis

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:beans="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+ xmlns:util="http://www.springframework.org/schema/util"
+ xsi:schemaLocation="http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+ <rabbit:direct-exchange name="direct" auto-declare="false" declared-by="admin1, admin2">
+  <rabbit:bindings>
+   <rabbit:binding key="foo" queue="bar">
+    <rabbit:binding-arguments>
+     <entry key="x-match" value="any"/>
+    </rabbit:binding-arguments>
+   </rabbit:binding>
+  </rabbit:bindings>
+ </rabbit:direct-exchange>
+
+ <rabbit:queue id="bar" />
+
+ <rabbit:direct-exchange id="alias" name="direct-alias" />
+
+ <rabbit:direct-exchange name="direct-override" auto-delete="true" durable="false"/>
+
+ <direct-exchange name="direct-arguments" xmlns="http://www.springframework.org/schema/rabbit">
+  <exchange-arguments>
+   <beans:entry key="foo" value="bar" />
+  </exchange-arguments>
+ </direct-exchange>
+
+ <util:map id="myRefArguments">
+  <beans:entry key="foo" value="bar" />
+ </util:map>
+
+ <direct-exchange name="direct-ref-arguments" xmlns="http://www.springframework.org/schema/rabbit">
+  <rabbit:exchange-arguments ref="myRefArguments"/>
+ </direct-exchange>
+
+ <rabbit:topic-exchange name="topic" declared-by="admin1" delayed="true" />
+
+ <rabbit:fanout-exchange name="fanout" declared-by="admin2" />
+
+ <rabbit:headers-exchange name="headers" xmlns="http://www.springframework.org/schema/rabbit"
+  declared-by="admin2" />
+
+ <rabbit:admin id="admin1" auto-startup="false" connection-factory="mockCF" />
+
+ <rabbit:admin id="admin2" auto-startup="false" connection-factory="mockCF" />
+
+ <bean id="mockCF" class="org.mockito.Mockito" factory-method="mock">
+  <constructor-arg value="org.springframework.amqp.rabbit.connection.ConnectionFactory" />
+ </bean>
+
+</beans>

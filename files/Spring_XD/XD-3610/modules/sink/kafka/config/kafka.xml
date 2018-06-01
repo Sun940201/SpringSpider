@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+ xmlns:int-kafka="http://www.springframework.org/schema/integration/kafka"
+ xsi:schemaLocation="http://www.springframework.org/schema/integration/kafka http://www.springframework.org/schema/integration/kafka/spring-integration-kafka.xsd
+  http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ <int:channel id="input" />
+
+ <int-kafka:outbound-channel-adapter
+  kafka-producer-context-ref="kafkaProducerContext" topic="${topic}" auto-startup="false" channel="input">
+ </int-kafka:outbound-channel-adapter>
+
+ <bean id="producerProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+  <property name="properties">
+    <props>
+     <prop key="acks">${requestRequiredAck}</prop>
+     <prop key="buffer.memory">${bufferMemory}</prop>
+     <prop key="retries">${maxSendRetries}</prop>
+     <prop key="linger.ms">${maxBufferTime}</prop>
+     <prop key="max.request.size">${maxRequestSize}</prop>
+     <prop key="receive.buffer.bytes">${receiveBufferBytes}</prop>
+     <prop key="send.buffer.bytes">${sendBufferBytes}</prop>
+     <prop key="timeout.ms">${ackTimeoutOnServer}</prop>
+     <prop key="block.on.buffer.full">${blockOnBufferFull}</prop>
+     <prop key="metadata.fetch.timeout.ms">${topicMetadataFetchTimeout}</prop>
+     <prop key="metadata.max.age.ms">${topicMetadataRefreshInterval}</prop>
+     <prop key="reconnect.backoff.ms">${reconnectBackoff}</prop>
+     <prop key="retry.backoff.ms">${retryBackoff}</prop>
+    </props>
+  </property>
+ </bean>
+
+ <bean id="serializer" class="org.apache.kafka.common.serialization.ByteArraySerializer"/>
+
+ <int-kafka:producer-context id="kafkaProducerContext" producer-properties="producerProperties">
+  <int-kafka:producer-configurations>
+   <int-kafka:producer-configuration
+    broker-list="${brokerList}" key-class-type="[B"
+    value-class-type="[B" topic="${topic}" value-serializer="serializer"
+    key-serializer="serializer"
+    batch-bytes="${batchBytes}"
+    compression-type="${compressionCodec}"/>
+  </int-kafka:producer-configurations>
+ </int-kafka:producer-context>
+</beans>

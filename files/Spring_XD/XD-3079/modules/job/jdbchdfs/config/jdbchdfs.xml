@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:hdp="http://www.springframework.org/schema/hadoop"
+  xmlns:batch="http://www.springframework.org/schema/batch"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd
+  http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+ <import resource="classpath:/META-INF/spring-xd/batch/singlestep-partition-support.xml"/>
+
+ <!-- This should override the job configured in the singlestep-partition-support.xml configuration -->
+ <job id="job" restartable="${restartable}" xmlns="http://www.springframework.org/schema/batch">
+  <step id="step1-master">
+   <partition handler="partitionHandler" partitioner="partitioner" />
+   <listeners>
+    <listener ref="partitioner"/>
+    <listener ref="promotionListener"/>
+   </listeners>
+  </step>
+ </job>
+ 
+ <bean id="promotionListener" class="org.springframework.batch.core.listener.ExecutionContextPromotionListener">
+  <property name="keys" value="batch.incremental.maxId"/>
+ </bean>
+
+ <bean id="partitionHandler" class="org.springframework.batch.integration.partition.MessageChannelPartitionHandler">
+  <property name="messagingOperations">
+   <bean class="org.springframework.integration.core.MessagingTemplate">
+    <property name="defaultChannel" ref="setHeaderReplyChannelChannel" />
+    <property name="receiveTimeout" value="${partitionResultsTimeout:3600000}" />
+   </bean>
+  </property>
+  <property name="stepName" value="step1" />
+ </bean>
+
+ <bean id="partitioner" class="org.springframework.batch.integration.x.IncrementalColumnRangePartitioner" scope="step">
+  <property name="dataSource" ref="moduleDataSource"/>
+  <property name="table" value="${tableName}"/>
+  <property name="column" value="${partitionColumn}"/>
+  <property name="partitions" value="${partitions}"/>
+  <property name="jobExplorer" ref="jobExplorer"/>
+  <property name="checkColumn" value="${checkColumn}"/>
+  <property name="overrideValue" value="#{jobParameters['overrideCheckColumnValue']}"/>
+ </bean>
+
+ <batch:step id="step1">
+  <batch:tasklet>
+   <batch:chunk reader="itemReader" writer="itemWriter" commit-interval="${commitInterval}"/>
+  </batch:tasklet>
+ </batch:step>
+
+ <bean id="moduleDataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+  <property name="driverClassName" value="${driverClassName}"/>
+  <property name="url" value="${url}"/>
+  <property name="username" value="${username}"/>
+  <property name="password" value="${password}"/>
+  <property name="initialSize" value="${initialSize}" />
+  <property name="maxActive" value="${maxActive}" />
+  <property name="maxIdle" value="${maxIdle}" />
+  <property name="minIdle" value="${minIdle}"/>
+  <property name="maxWait" value="${maxWait}"/>
+  <property name="testOnBorrow" value="${testOnBorrow}"/>
+  <property name="testOnReturn" value="${testOnReturn}"/>
+  <property name="testWhileIdle" value="${testWhileIdle}"/>
+  <property name="validationQuery" value="${validationQuery:#{null}}"/>
+  <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>
+  <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}"/>
+  <property name="removeAbandoned" value="${removeAbandoned}"/>
+  <property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}"/>
+  <property name="logAbandoned" value="${logAbandoned}"/>
+  <property name="validationInterval" value="${validationInterval}"/>
+  <property name="jmxEnabled" value="${jmxEnabled}"/>
+  <property name="fairQueue" value="${fairQueue}"/>
+  <property name="abandonWhenPercentageFull" value="${abandonWhenPercentageFull}"/>
+  <property name="maxAge" value="${maxAge}"/>
+  <property name="useEquals" value="${useEquals}"/>
+  <property name="suspectTimeout" value="${suspectTimeout}"/>
+  <property name="alternateUsernameAllowed" value="${alternateUsernameAllowed}"/>
+  <property name="validatorClassName" value="${validatorClassName:#{null}}"/>
+  <property name="connectionProperties" value="${connectionProperties:#{null}}"/>
+   <property name="initSQL" value="${initSQL:#{null}}"/>
+   <property name="jdbcInterceptors" value="${jdbcInterceptors:#{null}}"/>
+ </bean>
+
+ <bean id="itemReader" class="org.springframework.xd.jdbc.NamedColumnJdbcItemReaderFactory" scope="step">
+  <property name="dataSource" ref="moduleDataSource" />
+  <property name="tableName" value="${tableName}" />
+  <property name="columnNames" value="${columns}" />
+  <property name="partitionClause" value="#{stepExecutionContext['partClause']}" />
+  <property name="sql" value="${sql}"/>
+  <property name="fetchSize" value="${commitInterval}"/>
+  <property name="delimiter" value="${delimiter}"/>
+ </bean>
+
+ <bean id="itemWriter" class="org.springframework.xd.batch.item.hadoop.HdfsTextItemWriter" scope="step">
+  <constructor-arg ref="hadoopFs"/>
+  <property name="lineAggregator">
+   <bean class="org.springframework.batch.item.file.transform.PassThroughLineAggregator"/>
+  </property>
+  <property name="baseFilename" value="${fileName}#{stepExecutionContext['partSuffix']}"/>
+  <property name="rolloverThresholdInBytes" value="${rollover}"/>
+  <property name="basePath" value="${directory}/"/>
+  <property name="fileSuffix" value="${fileExtension}"/>
+ </bean>
+
+ <bean id="hadoopFs" class="org.springframework.data.hadoop.fs.FileSystemFactoryBean">
+  <property name="configuration" ref="hadoopConfiguration"/>
+ </bean>
+
+ <hdp:configuration register-url-handler="false" properties-location="${xd.config.home}/hadoop.properties">
+  fs.defaultFS=${fsUri}
+ </hdp:configuration>
+
+ <hdp:resource-loader id="hadoopResourceLoader"/>
+
+</beans>

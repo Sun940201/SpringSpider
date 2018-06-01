@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+ xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ <int:channel id="output" />
+
+ <int:inbound-channel-adapter channel="output"
+  auto-startup="false" expression="'${payload}'">
+  <int:poller trigger="trigger" />
+ </int:inbound-channel-adapter>
+
+ <beans profile="use-date">
+        <bean id="df" class="java.text.SimpleDateFormat">
+            <constructor-arg value="${dateFormat}" />
+        </bean>
+        <bean id="trigger" class="org.springframework.xd.module.support.DateTrigger">
+            <constructor-arg>
+                <bean factory-bean="df" factory-method="parse">
+                    <constructor-arg value="${date}" />
+                </bean>
+            </constructor-arg>
+  </bean>
+ </beans>
+
+ <beans profile="use-cron">
+  <bean id="trigger" class="org.springframework.scheduling.support.CronTrigger">
+   <constructor-arg value="${cron}" />
+  </bean>
+ </beans>
+
+ <beans profile="use-delay">
+  <bean id="trigger" class="org.springframework.scheduling.support.PeriodicTrigger">
+   <constructor-arg value="${fixedDelay}" />
+   <constructor-arg value="${timeUnit}" />
+   <property name="initialDelay" value="${initialDelay} "/>
+  </bean>
+ </beans>
+
+</beans>

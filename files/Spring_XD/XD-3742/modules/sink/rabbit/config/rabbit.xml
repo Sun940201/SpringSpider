@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+ xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+ xsi:schemaLocation="http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+  http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+  http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+ <int-amqp:outbound-channel-adapter
+  id="input"
+  default-delivery-mode="${deliveryMode}"
+  amqp-template="rabbitTemplate"
+  exchange-name="${exchange}"
+  routing-key-expression="${routingKey}" 
+  mapped-request-headers="${mappedRequestHeaders}"/>
+
+ <rabbit:template id="rabbitTemplate"
+  connection-factory="rabbitConnectionFactory"
+  message-converter="messageConverter" />
+
+ <rabbit:connection-factory id="rabbitConnectionFactory"
+  connection-factory="connectionFactory"
+  addresses="${addresses}"
+  virtual-host="${vhost}"
+  username="${username}" password="${password}" />
+
+ <bean id="messageConverter" class="${converterClass}" />
+
+ <bean id="connectionFactory" class="org.springframework.amqp.rabbit.connection.RabbitConnectionFactoryBean">
+  <property name="useSSL" value="${useSSL}" />
+  <property name="sslPropertiesLocation" value="${sslPropertiesLocation}"/>
+ </bean>
+
+</beans>

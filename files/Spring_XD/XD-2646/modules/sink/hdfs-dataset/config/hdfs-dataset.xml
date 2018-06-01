@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:int="http://www.springframework.org/schema/integration"
+ xmlns:int-hadoop="http://www.springframework.org/schema/integration/hadoop"
+ xmlns:task="http://www.springframework.org/schema/task"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:hdp="http://www.springframework.org/schema/hadoop"
+ xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+  http://www.springframework.org/schema/integration/hadoop http://www.springframework.org/schema/integration/hadoop/spring-integration-hadoop.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+  http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd">
+
+ <int:channel id="input"/>
+
+ <int:aggregator
+   input-channel="input"
+   correlation-strategy-expression="payload.getClass().name"
+   release-strategy-expression="size() == ${batchSize}"
+   expire-groups-upon-completion="true"
+   send-partial-result-on-expiry="true"
+   message-store="messageStore"
+   output-channel="objects"/>
+
+ <bean id="reaper" class="org.springframework.integration.store.MessageGroupStoreReaper">
+  <property name="messageGroupStore" ref="messageStore"/>
+  <property name="timeout" value="${idleTimeout}"/>
+  <property name="expireOnDestroy" value="true"/>
+ </bean>
+
+ <task:scheduled-tasks>
+  <task:scheduled ref="reaper" method="run" fixed-rate="1000"/>
+ </task:scheduled-tasks>
+
+ <bean id="messageStore" class="org.springframework.integration.store.SimpleMessageStore">
+  <property name="timeoutOnIdle" value="true"/>
+  <!-- TODO: The following property will default to "false" in Spring Integration 4.1 -->
+  <property name="copyOnGet" value="false"/>
+ </bean>
+
+ <int-hadoop:dataset-outbound-channel-adapter id="objects" dataset-operations="datasetOperations"/>
+
+    <bean id="datasetOperations" class="org.springframework.data.hadoop.store.dataset.DatasetTemplate">
+  <property name="datasetRepositoryFactory" ref="datasetRepositoryFactory"/>
+  <property name="defaultDatasetDefinition" ref="defaultDatasetDefinition"/>
+ </bean>
+
+ <bean id="datasetRepositoryFactory" class="org.springframework.data.hadoop.store.dataset.DatasetRepositoryFactory">
+  <property name="conf" ref="hadoopConfiguration"/>
+  <property name="basePath" value="${basePath}"/>
+  <property name="namespace" value="${namespace}"/>
+ </bean>
+
+ <bean id="defaultDatasetDefinition" class="org.springframework.xd.hadoop.fs.DatasetDefinitionFactoryBean">
+  <property name="allowNullValues" value="${allowNullValues}"/>
+  <property name="format" value="${format}"/>
+  <property name="partitionPath" value="${partitionPath}"/>
+  <property name="writerCacheSize" value="${writerCacheSize:null}"/>
+  <property name="compressionType" value="${compressionType:null}"/>
+ </bean>
+
+ <context:property-placeholder location="${xd.config.home}/hadoop.properties"/>
+
+ <hdp:configuration
+  register-url-handler="false"
+  properties-location="${xd.config.home}/hadoop.properties"
+  security-method="${hadoop.security.authentication:}"
+  user-keytab="${spring.hadoop.userKeytab:}"
+  user-principal="${spring.hadoop.userPrincipal:}"
+  namenode-principal="${dfs.namenode.kerberos.principal:}"
+  rm-manager-principal="${yarn.resourcemanager.principal:}">
+  fs.defaultFS=${fsUri}
+ </hdp:configuration>
+
+
+</beans>

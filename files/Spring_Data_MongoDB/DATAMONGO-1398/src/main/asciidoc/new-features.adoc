@@ -1,0 +1,28 @@
+[[new-features]]
+= New & Noteworthy
+
+[[new-features.1-9-0]]
+== What's new in Spring Data MongoDB 1.9
+* The following annotations have been enabled to build own, composed annotations: `@Document`, `@Id`, `@Field`, `@Indexed`, `@CompoundIndex`, `@GeoSpatialIndexed`, `@TextIndexed`, `@Query`, `@Meta`. 
+
+
+[[new-features.1-8-0]]
+== What's new in Spring Data MongoDB 1.8
+
+* `Criteria` offers support for creating `$geoIntersects`.
+* Support http://docs.spring.io/spring/docs/current/spring-framework-reference/html/expressions.html[SpEL expressions] in `@Query`.
+* `MongoMappingEvents` expose the collection name they are issued for.
+* Improved support for `<mongo:mongo-client credentials="..." />`.
+* Improved index creation failure error message.
+
+[[new-features.1-7-0]]
+== What's new in Spring Data MongoDB 1.7
+
+* Assert compatibility with MongoDB 3.0 and MongoDB Java Driver 3-beta3 (see: <<mongo.mongo-3>>).
+* Support JSR-310 and ThreeTen back-port date/time types.
+* Allow `Stream` as query method return type (see: <<mongodb.repositories.queries>>).
+* Added http://geojson.org/[GeoJSON] support in both domain types and queries (see: <<mongo.geo-json>>).
+* `QueryDslPredicateExcecutor` now supports `findAll(OrderSpecifier<?>… orders)`.
+* Support calling JavaScript functions via <<mongo.server-side-scripts>>.
+* Improve support for `CONTAINS` keyword on collection like properties.
+* Support for `$bit`, `$mul` and `$position` operators to `Update`.

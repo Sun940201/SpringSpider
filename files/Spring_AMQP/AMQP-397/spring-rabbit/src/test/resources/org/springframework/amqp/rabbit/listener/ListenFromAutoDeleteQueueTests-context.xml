@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+ <rabbit:connection-factory id="rabbitConnectionFactory" />
+
+ <rabbit:queue id="anon" />
+
+ <rabbit:direct-exchange name="testContainerWithAutoDeleteQueues" auto-delete="true">
+  <rabbit:bindings>
+   <rabbit:binding queue="anon" key="anon" />
+  </rabbit:bindings>
+ </rabbit:direct-exchange>
+
+ <rabbit:listener-container id="container1" concurrency="2">
+  <rabbit:listener id="listener1" ref="foo" queues="anon" />
+ </rabbit:listener-container>
+
+ <!-- With Conditional Declarations -->
+
+ <rabbit:queue id="otherAnon" declared-by="containerAdmin" />
+
+ <rabbit:direct-exchange name="otherExchange" auto-delete="true" declared-by="containerAdmin">
+  <rabbit:bindings>
+   <rabbit:binding queue="otherAnon" key="otherAnon" />
+  </rabbit:bindings>
+ </rabbit:direct-exchange>
+
+ <rabbit:listener-container id="container2" auto-startup="false">
+  <rabbit:listener id="listener2" ref="foo" queues="otherAnon" admin="containerAdmin" />
+ </rabbit:listener-container>
+
+ <rabbit:admin connection-factory="rabbitConnectionFactory" />
+
+ <rabbit:admin id="containerAdmin" connection-factory="rabbitConnectionFactory" auto-startup="false" />
+
+ <bean id="foo" class="org.springframework.amqp.rabbit.listener.ListenFromAutoDeleteQueueTests$Listener" />
+
+ <rabbit:template id="template" connection-factory="rabbitConnectionFactory"/>
+
+</beans>

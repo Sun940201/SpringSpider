@@ -1,0 +1,40 @@
+[[new-features]]
+= New & Noteworthy
+
+This chapter summarizes changes and new features for each release.
+
+[[new-features.2-1-0]]
+== What's new in Spring Data for Apache Cassandra 2.1
+* New annotations for `@CountQuery` and `@ExistsQuery`.
+* Template API extended with `count(…)` and `exists(…)` methods accepting `Query`.
+
+[[new-features.2-0-0]]
+== What's new in Spring Data for Apache Cassandra 2.0
+
+* Upgraded to Java 8.
+* <<cassandra.reactive,Reactive Apache Cassandra support>>.
+* Merged `spring-cql` and `spring-data-cassandra` modules into a single module and re-packaged `org.springframework.cql`
+to `org.springframework.data.cassandra`.
+* Revised `CqlTemplate`, `AsyncCqlTemplate`, `CassandraTemplate` and `AsyncCassandraTemplate` implementations.
+* Added routing capabilities via `SessionFactory` and `AbstractRoutingSessionFactory`.
+* Introduced `Update` and `Query` objects.
+* Renamed CRUD _Repository_ interface: `CassandraRepository` using `MapId` is now renamed to `MapIdCassandraRepository`.
+`TypedIdCassandraRepository` is renamed to `CassandraRepository`.
+* <<cassandra.repositories.queries,Pagination>> via `PagingState` and `CassandraPageRequest`.
+* Interface and DTO projections in Repository query methods.
+* Lightweight transaction support via `InsertOptions` and `UpdateOptions` using the Template API.
+* <<cassandra.repositories.queries.options,Query options>> for Repository query methods.
+* Introduced new annotation for `@AllowFiltering`.
+* Index creation on application startup via `@Indexed` and `@SASI`.
+* Tooling support for null-safety via Spring's `@NonNullApi` and `@Nullable` annotations.
+
+[[new-features.1-5-0]]
+== What's new in Spring Data for Apache Cassandra 1.5
+
+* Assert compatibility with Cassandra 3.0 and Cassandra Java Driver 3.0.
+* Added configurable `ProtocolVersion` and `QueryOptions` on `Cluster` level.
+* Support for `Optional` as query method result and argument.
+* Declarative query methods using query derivation
+* Support for User-Defined types and mapped User-Defined types using `@UserDefinedType`.
+* The following annotations enable building custom, composed annotations:  `@Table`, `@UserDefinedType`, `@PrimaryKey`,
+`@PrimaryKeyClass`, `@PrimaryKeyColumn`, `@Column`, `@Query`, `@CassandraType`.

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+ <import resource="classpath:/META-INF/spring-xd/batch/singlestep-partition-support.xml"/>
+
+ <bean id="partitioner" class="org.springframework.xd.shell.command.SimpleTwoPartitionsPartitioner" scope="step" />
+
+ <step id="step1" xmlns="http://www.springframework.org/schema/batch">
+  <tasklet ref="tasklet"/>
+ </step>
+
+ <bean id="tasklet" class="org.springframework.xd.shell.command.SimpleTasklet" />
+
+</beans>

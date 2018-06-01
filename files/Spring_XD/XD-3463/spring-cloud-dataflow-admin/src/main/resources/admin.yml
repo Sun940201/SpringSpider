@@ -1,0 +1,44 @@
+server:
+  port: 9393
+management:
+  contextPath: /management
+#cloudfoundry:
+#  apiEndpoint: https://api.run.pez.pivotal.io
+#  organization: org
+#  space: development
+#  domain: cfapps.pez.pivotal.io
+#  services: redis
+
+security:
+  basic:
+    enabled: false
+#  oauth2:
+#    client:
+#      access-token-uri: https://login.run.pez.pivotal.io/oauth/token
+#      grantType: password
+#      client-id: cf
+#      password: user-password
+#      user-authorization-uri: https://login.run.pez.pivotal.io/oauth/authorize
+#      username: username
+#    resource:
+#      userInfoUri: https://uaa.run.pez.pivotal.io/userinfo
+spring:
+  application:
+    name: spring-cloud-dataflow-admin
+  cloud:
+    config:
+      uri: http://localhost:8888
+#
+# If you prefer to use Eureka to locate the Config Server, you can do that by setting
+# spring.cloud.config.discovery.enabled=true (default "false"). The net result of that is 
+# that client apps all need a bootstrap.yml (or an environment variable) with the Eureka 
+# server address, e.g. in eureka.client.serviceUrl.defaultZone
+#
+#  cloud:
+#     config:
+#        discovery:
+#           enabled: true
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/

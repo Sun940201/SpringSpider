@@ -1,0 +1,14 @@
+[[whats-new]]
+=== What's New
+
+==== Changes in 2.0 Since 1.6
+
+===== Log4j Appender
+
+This appender is no longer available due to the end-of-life of log4j.
+See <<logging>> for information about the available log appenders.
+
+
+==== Earlier Releases
+
+See <<previous-whats-new>> for changes in previous versions.

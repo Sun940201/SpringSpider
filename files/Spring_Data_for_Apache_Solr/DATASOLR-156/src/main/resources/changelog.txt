@@ -1,0 +1,149 @@
+Release Notes - Spring Data Solr - Version 1.1.1 GA (Codd)
+---------------------------------------------------------
+
+** No issues filed for 1.1.1 GA (Codd)
+
+
+Release Notes - Spring Data Solr - Version 1.1 GA (Codd)
+---------------------------------------------------------
+** Fix
+    * [DATASOLR-139] - Combination of OR | AND are not fully captured within SolrQueryCrator.
+    * [DATASOLR-140] - SolrServer should not be a mandatory bean reference in non multicore scenario.
+    * [DATASOLR-138] - CloudSolrServer not correctly created using MulticoreSolrServerFactory.
+
+Release Notes - Spring Data Solr - Version 1.1 RC1 (Codd)
+---------------------------------------------------------
+** New Feature
+    * [DATASOLR-132] - Add support for Solr functions
+
+** Fix
+    * [DATASOLR-104] - SolrTemplate uses wrong URL when there are multiple templates configured for different Solr cores
+    * [DATASOLR-128] - Assertations of Parameters to add PivotFields to FacetOptions aren't Being Executed Correctly
+    * [DATASOLR-129] - NullPointerException is thrown when using not managed entity for SolrCrudRepository
+    * [DATASOLR-130] - geodist() cannot be used in projection
+    * [DATASOLR-133] - PartialUpdate not working when try to save an empty Collection in a multivalue field
+
+** Improvement
+    * [DATASOLR-122] - Ability to return distance with the returned Solr documents
+
+Release Notes - Spring Data Solr - Version 1.1 M1 (Codd)
+--------------------------------------------------------
+** Fix
+    * [DATASOLR-116] - MappingSolrConverter doesn't honor Solr wildcard rules on read
+
+** Improvement
+    * [DATASOLR-99] - Allow defining Solr field name via @Indexed
+
+** New Feature
+    * [DATASOLR-113] - Add support for Pivot fields
+
+** Task
+    * [DATASOLR-123] - Ensure compatibility with Spring Framework 4.0.0.X
+    * [DATASOLR-126] - Release 1.1 M1
+
+Release Notes - Spring Data Solr - Version 1.0 GA - 2013-09-11
+--------------------------------------------------------------
+** Fix
+    * [DATASOLR-62] - Sort parameter passed to a query method is ignored when annotated query is used
+    * [DATASOLR-63] - Sort parameter passed to a query method is ignored when query method uses named query
+    * [DATASOLR-69] - Registering custom converters via XML
+    * [DATASOLR-75] - Criteria.is(Arrays.asList(......)) calls toString() instead of traversing list
+    * [DATASOLR-81] - Cannot index Geospatial with solr4
+    * [DATASOLR-94] - Joda-Time registered with no check
+    * [DATASOLR-98] - MappingSolrConverter does not retain element order when reading property
+    * [DATASOLR-109] - set custom requestHandler does not work for SimpleFacetQuery and SimpleHighlightQuery
+
+** Improvement
+    * [DATASOLR-43] - Add support Query Parameter for time allowed
+    * [DATASOLR-48] - Add support for numeric document ids
+    * [DATASOLR-49] - Add support Query Parameter for default type
+    * [DATASOLR-52] - Add support for 'IsNull' and 'IsNotNull' keywords
+    * [DATASOLR-53] - Add support for _version_ 
+    * [DATASOLR-55] - Allow usage of collections for 'startsWith', 'endsWith', 'contains'
+    * [DATASOLR-58] - Support for 'boost' in derived queries via annotation
+    * [DATASOLR-59] - Add support for LBHttpSolrServer
+    * [DATASOLR-61] - Build depends on Restlet which cannot be found in declared repositories
+    * [DATASOLR-68] - Add support for facet.prefix
+    * [DATASOLR-80] - Multiple Facets with prefix 
+    * [DATASOLR-82] - Add MulticoreSolrServerFactory
+    * [DATASOLR-90] - Add custom converter for reading/wirting joda time
+    * [DATASOLR-100] - Support proximity or sloppy searches
+    * [DATASOLR-107] - Add support for commitWithin to SolrTemplate
+
+** New Feature
+    * [DATASOLR-35] - Add support for non default constructors when mapping beans
+    * [DATASOLR-42] - Add support for {!join
+    * [DATASOLR-45] - Add placeholder support for 'filters' in @Query
+    * [DATASOLR-46] - Add placeholder support for 'queries' in @Facet
+    * [DATASOLR-60] - Support highlighting via annotation
+    * [DATASOLR-65] - Add support for non-default request handlers
+    * [DATASOLR-93] - Solr softCommit support
+
+** Task
+    * [DATASOLR-54] - Extract QueryParser Interface
+    * [DATASOLR-56] - Register jodatime converters only if jodatime is in classpath
+    * [DATASOLR-57] - Upgrade to solr 4.2
+    * [DATASOLR-66] - Upgrade to solr 4.2.1
+    * [DATASOLR-73] - Upgrade to Solr 4.3.0
+    * [DATASOLR-76] - Switch to commons-lang3
+    * [DATASOLR-79] - SolrOperations of SolrRepositoryFactoryBean cannot be accessed
+    * [DATASOLR-87] - Create custom Mapping for SolrDocument and SolrInputDocument
+    * [DATASOLR-91] - Upgrade to solr 4.3.1
+    * [DATASOLR-92] - Upgrade to data-commons 1.6.0
+    * [DATASOLR-101] - Clean up $fuzzy / $sloppy by providing concrete class instead of substring
+    * [DATASOLR-103] - SolrTemplate#queryForPage should return a solr specific page
+    * [DATASOLR-110] - Refactor SolrParameters to match DATACMNS-350
+    * [DATASOLR-111] - Release 1.0 GA
+
+Release Notes - Spring Data Solr - Version 1.0.0.RC1 - 2013-02-08
+-----------------------------------------------------------------
+
+** Improvement
+    * [DATASOLR-31] - Add unit to distance for spatial search
+
+** New Feature
+    * [DATASOLR-7]  - Add support for parameter 'facet.query' within FacetQuery
+    * [DATASOLR-18] - Participate in Transaction
+    * [DATASOLR-27] - Allow Facet Query definition via annotation
+    * [DATASOLR-28] - Allow definition of fields included in result (CommonParams.FL) via @Query
+    * [DATASOLR-29] - Update Partial Document
+    * [DATASOLR-32] - Enable FilterQuery definition via annotation
+    * [DATASOLR-34] - Allow definition of facet.query in @Facet annotation
+    * [DATASOLR-37] - Support q.op Parameter in SolrQuery
+    * [DATASOLR-39] - Support Bounding Box
+
+** Task
+    * [DATASOLR-30] - Upgrade to Solr 4.0
+    * [DATASOLR-33] - Upgrade to spring-data-commons 1.5
+    * [DATASOLR-36] - Add missing support for keyword NotLike
+    * [DATASOLR-38] - Use curly brackets for lessThan and greaterThan
+    * [DATASOLR-40] - Upgrade to new build infrastructure
+    * [DATASOLR-41] - Upgrade to solr 4.1
+    * [DATASOLR-47] - Release 1.0.0 RC1
+
+Release Notes - Spring Data Solr - Version 1.0.0.M1 - 2012-10-31
+----------------------------------------------------------------
+
+** New Feature
+    * [DATASOLR-8]  - Add sorting support for queries
+    * [DATASOLR-10] - Add support for Geospatial Queries
+    * [DATASOLR-13] - Add solr-server namespace element
+    * [DATASOLR-15] - Add support for NamedQueries
+    * [DATASOLR-20] - Add support for keywords: BEFORE and AFTER
+    * [DATASOLR-22] - Support namedQueryName in @Query Annotation
+    * [DATASOLR-23] - Add support for solr 4.0.x
+
+** Task
+    * [DATASOLR-5]  - Upgrade to Spring Data Commons 1.4 branch
+    * [DATASOLR-6]  - Add XML namespace and JavaCofig support
+    * [DATASOLR-9]  - Translate execptions during query execution to the according DataAccessException
+    * [DATASOLR-11] - Clean up TypeAliasAccessor in SimpleSolrTypeMapper
+    * [DATASOLR-12] - Add embedded-solr-server namespace element
+    * [DATASOLR-14] - Remove system scope dependency to spring-data-solr artifact in example project
+    * [DATASOLR-16] - Clean up Tests
+    * [DATASOLR-17] - Update documentation
+    * [DATASOLR-19] - Set up sonar analysis
+    * [DATASOLR-24] - Swith to data-commons 1.4.0.RELEASE
+    * [DATASOLR-25] - Release 1.0.0.M1
+    * [DATASOLR-26] - Align SolrOperations with other implementations
+    

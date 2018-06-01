@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:beans="http://www.springframework.org/schema/beans"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/integration
+  http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+ <beans:bean class="org.springframework.integration.x.http.NettyHttpInboundChannelAdapter">
+  <beans:constructor-arg value="${port}"/>
+  <beans:constructor-arg value="${https}"/>
+  <beans:property name="autoStartup" value="false"/>
+  <beans:property name="outputChannel" ref="output"/>
+  <beans:property name="sslPropertiesLocation" value="${sslPropertiesLocation}"/>
+  <beans:property name="maxContentLength" value="${maxContentLength}"/>
+  <beans:property name="messageConverter" ref="converter"/>
+ </beans:bean>
+
+ <channel id="output"/>
+
+ <beans:bean id="converter" class="${messageConverterClass}">
+  <beans:constructor-arg ref="#{T(org.springframework.integration.support.utils.IntegrationUtils).INTEGRATION_MESSAGE_BUILDER_FACTORY_BEAN_NAME}"/>
+ </beans:bean>
+
+</beans:beans>

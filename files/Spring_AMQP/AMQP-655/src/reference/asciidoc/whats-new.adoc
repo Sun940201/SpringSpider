@@ -1,0 +1,54 @@
+[[whats-new]]
+=== What's New
+
+==== Changes in 2.0 Since 1.6
+
+===== Log4j Appender
+
+This appender is no longer available due to the end-of-life of log4j.
+See <<logging>> for information about the available log appenders.
+
+
+===== RabbitTemplate Changes
+
+IMPORTANT: Previously, a non-transactional `RabbitTemplate` participated in an existing transaction if it ran on a transactional listener container thread.
+This was a serious bug; however, users might have relied on this behavior.
+Starting with _version 1.6.2_, you must set the `channelTransacted` boolean on the template for it to participate in the container transaction.
+
+The `AsyncRabbitTemplate` now supports Direct reply-to; see <<async-template>> for more information.
+
+===== Listener Adapter
+
+A convenient `FunctionalInterface` is available for using lambdas with the `MessageListenerAdapter`.
+See <<message-listener-adapter>> for more information.
+
+===== Listener Container Changes
+
+Previously, `MessageProperties.getMessageCount()` returned `0` for messages emitted by the container.
+This property only applies when using `basicGet` (e.g. from `RabbitTemplate.receive()` methods) and is now initialized to `null` for container messages.
+
+===== Connection Factory Changes
+
+The connection and channel listener interfaces now provide a mechanism to obtain information about exceptions.
+See <<connection-channel-listeners>> and <<publishing-is-async>> for more information.
+
+A new `ConnectionNameStrategy` is now provided to populate the application-specific identification of the target RabbitMQ connection from the `AbstractConnectionFactory`.
+See <<connections>> for more information.
+
+===== Retry Changes
+
+The `MissingMessageIdAdvice` is no longer provided; it's functionality is now built-in; see <<retry>> for more information.
+
+===== Anonymous Queue Naming
+
+By default, `AnonymousQueues` are now named with the default `Base64UrlNamingStrategy` instead of a simple `UUID` string.
+See <<anonymous-queue>> for more information.
+
+===== @RabbitListener Changes
+
+You can now provide simple queue declarations (only bound to the default exchange) in `@RabbitListener` annotations.
+See <<async-annotation-driven>> for more information.
+
+==== Earlier Releases
+
+See <<previous-whats-new>> for changes in previous versions.

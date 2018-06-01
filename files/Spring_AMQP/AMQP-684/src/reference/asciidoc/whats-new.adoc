@@ -1,0 +1,40 @@
+[[whats-new]]
+=== What's New
+
+==== Changes in 1.7 Since 1.6
+
+===== AMQP Client library
+
+Spring AMQP now uses the new 4.0.x version of the `amqp-client` library provided by the RabbitMQ team.
+This client has auto recovery configured by default; see <<auto-recovery>>.
+
+===== Log4j2 upgrade
+
+The minimum Log4j2 version (for the `AmqpAppender`) is now `2.7`.
+The framework is no longer compatible with previous versions.
+See <<logging>> for more information.
+
+===== Spring Retry upgrade
+
+The minimum Spring Retry version is now `1.2`.
+The framework is no longer compatible with previous versions.
+
+===== FasterXML Jackson upgrade
+
+The minimum Jackson version is now `2.8`.
+The framework is no longer compatible with previous versions.
+
+===== JUnit @Rules
+
+Rules that have up until now been used internally by the framework have now been made available in a separate jar `spring-rabbit-junit`.
+See <<junit-rules>> for more information.
+
+===== Container Conditional Rollback
+
+When using an external transaction manager (e.g. JDBC), rule-based rollback is now supported when providing the container with a transaction attribute.
+It is also now more flexible when using a transaction advice.
+See <<conditional-rollback>> for more information.
+
+==== Earlier Releases
+
+See <<previous-whats-new>> for changes in previous versions.

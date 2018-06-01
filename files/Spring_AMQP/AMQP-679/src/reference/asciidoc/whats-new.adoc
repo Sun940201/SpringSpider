@@ -1,0 +1,24 @@
+[[whats-new]]
+=== What's New
+
+==== Changes in 1.7 Since 1.6
+
+===== Log4j2 upgrade
+
+The minimum Log4j2 version (for the `AmqpAppender`) is now `2.7`.
+The framework is no longer compatible with previous versions.
+See <<logging>> for more information.
+
+===== Spring Retry upgrade
+
+The minimum Spring Retry version is now `1.2`.
+The framework is no longer compatible with previous versions.
+
+===== FasterXML Jackson upgrade
+
+The minimum Jackson version is now `2.8`.
+The framework is no longer compatible with previous versions.
+
+==== Earlier Releases
+
+See <<previous-whats-new>> for changes in previous versions.

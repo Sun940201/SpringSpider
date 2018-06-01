@@ -1,0 +1,239 @@
+/*
+ * Spring XD Extension projects, supporting module definitions.
+ */
+
+project('spring-xd-extension-mail') {
+    description = 'Spring XD Mail'
+    dependencies {
+        compile "org.springframework.integration:spring-integration-mail"
+        compile project(":spring-xd-module-spi")
+    }
+}
+
+project('spring-xd-extension-redis') {
+    description = 'Spring XD Redis'
+    dependencies {
+        compile("org.springframework.data:spring-data-redis")
+        compile("redis.clients:jedis")
+    }
+}
+
+project('spring-xd-extension-http') {
+    description = 'Spring XD HTTP'
+    dependencies {
+        compile "org.springframework.integration:spring-integration-core"
+        compile "io.netty:netty:${nettyVersion}"
+        compile "org.springframework:spring-web"
+        compile project(":spring-xd-module-spi")
+        testCompile project(":spring-xd-test")
+    }
+}
+
+project('spring-xd-extension-gemfire') {
+    description = 'Spring XD Gemfire'
+    dependencies {
+        compile "org.springframework.integration:spring-integration-gemfire"
+        compile project(':spring-xd-module-spi')
+        compile "javax.validation:validation-api"
+    }
+}
+
+project('spring-xd-extension-kafka') {
+    description = 'Spring XD Kafka'
+    dependencies {
+        compile("org.springframework.integration:spring-integration-kafka:$springIntegrationKafkaVersion") {
+            exclude module: "zookeeper"
+        }
+        provided("org.apache.curator:curator-recipes:$curatorVersion") {
+            exclude module: 'zookeeper'
+            exclude module: 'netty'
+        }
+        provided( "com.fasterxml.jackson.core:jackson-databind")
+        provided("org.apache.zookeeper:zookeeper:$zookeeperVersion")
+        compile project(':spring-xd-module-spi')
+        testCompile project(':spring-xd-test')
+        compile "javax.validation:validation-api"
+    }
+}
+
+project('spring-xd-extension-batch') {
+    description = 'Spring XD batch support'
+
+    configurations.all {
+        resolutionStrategy {
+            eachDependency { DependencyResolveDetails details ->
+                //Force version of Guava
+                if (details.requested.group == 'com.google.guava') {
+                    details.useVersion "$hadoopGuavaVersion"
+                }
+            }
+        }
+    }
+
+    dependencies {
+        compile "org.springframework.integration:spring-integration-file"
+        runtime "org.springframework.integration:spring-integration-ftp"
+        runtime "org.projectreactor:reactor-core"
+        provided "org.springframework.batch:spring-batch-core"
+        provided "org.springframework.data:spring-data-hadoop-store:${springDataHadoopBase}"
+        testCompile project(':spring-xd-test')
+        testCompile project(':spring-xd-dirt')
+        testCompile project(':spring-xd-messagebus-local')
+    }
+}
+
+project('spring-xd-extension-encoder-support') {
+ description = "Common encoder support for modules"
+ dependencies {
+  compile project(':spring-xd-module-spi')
+  compile "javax.validation:validation-api"
+ }
+}
+
+project('spring-xd-extension-process') {
+ description = 'Spring XD support for executing an external process'
+ dependencies {
+  compile project(':spring-xd-extension-encoder-support')
+  compile "org.springframework.integration:spring-integration-ip"
+  testCompile project(':spring-xd-test')
+  testRuntime "org.slf4j:jcl-over-slf4j",
+    "org.slf4j:slf4j-log4j12",
+    "log4j:log4j"
+ }
+}
+
+project('spring-xd-extension-syslog') {
+    description = 'Spring XD SYSLOG'
+    dependencies {
+        compile "org.springframework.integration:spring-integration-syslog"
+        compile project(':spring-xd-module-spi')
+        compile "javax.validation:validation-api"
+    }
+}
+
+project('spring-xd-extension-tcp') {
+    description = 'Spring XD TCP'
+    dependencies {
+  compile project(':spring-xd-extension-encoder-support')
+        compile "org.springframework.integration:spring-integration-ip"
+        compile project(':spring-xd-module-spi')
+        compile "javax.validation:validation-api"
+    }
+}
+
+project('spring-xd-extension-twitter') {
+    description = 'Spring XD Twitter'
+    dependencies {
+        compile project(':spring-xd-module-spi')
+        compile "javax.validation:validation-api"
+        runtime "com.fasterxml.jackson.core:jackson-databind"
+        compile "org.springframework.social:spring-social-twitter"
+        compile "org.springframework.integration:spring-integration-core"
+        compile "org.codehaus.groovy:groovy-all"
+        testCompile "org.springframework.integration:spring-integration-test"
+    }
+}
+
+project('spring-xd-extension-splunk') {
+    description = 'Spring XD Splunk'
+    dependencies {
+        compile "org.springframework.integration:spring-integration-splunk:$springIntegrationSplunkVersion"
+        compile "org.springframework.integration:spring-integration-core"
+        runtime "com.splunk:splunk:$splunkVersion"
+        compile project(':spring-xd-module-spi')
+    }
+}
+
+project('spring-xd-extension-mongodb') {
+    description = 'Spring XD Mongodb'
+    dependencies {
+        compile project(':spring-xd-tuple')
+        compile "org.springframework.batch:spring-batch-core"
+        compile ("org.springframework.data:spring-data-mongodb") { exclude group: 'org.slf4j' }
+    }
+}
+
+project('spring-xd-extension-jdbc') {
+    description = 'Spring XD JDBC'
+    dependencies {
+        compile project(':spring-xd-tuple')
+        compile "org.springframework:spring-jdbc"
+        compile "org.springframework:spring-tx"
+        compile "org.springframework.batch:spring-batch-infrastructure"
+        compile "org.springframework.integration:spring-integration-core"
+        runtime "org.springframework.integration:spring-integration-jdbc"
+        runtime "com.fasterxml.jackson.core:jackson-databind"
+        compile "org.hsqldb:hsqldb"
+        runtime "mysql:mysql-connector-java"
+        runtime "org.postgresql:postgresql:$postgresqlVersion"
+        compile project(':spring-xd-module-spi')
+        compile "javax.validation:validation-api"
+    }
+}
+
+project('spring-xd-extension-reactor') {
+    description = 'Spring XD Reactor'
+    dependencies {
+        compile project(':spring-xd-module-spi'),
+                "org.projectreactor.spring:reactor-spring-messaging",
+                "org.springframework.integration:spring-integration-core",
+                "javax.validation:validation-api"
+
+        testCompile project(":spring-xd-test"),
+                project(':spring-xd-module'),
+                "com.jayway.jsonpath:json-path"
+        "com.esotericsoftware.kryo:kryo"
+        testRuntime "org.slf4j:jcl-over-slf4j",
+                "org.slf4j:slf4j-log4j12",
+                "log4j:log4j"
+    }
+}
+
+project('spring-xd-extension-throughput') {
+    description = 'Spring XD Throughput testing'
+    dependencies {
+        compile project(':spring-xd-module-spi'),
+                "org.slf4j:slf4j-api",
+                "org.springframework.integration:spring-integration-core"
+
+        testCompile project(":spring-xd-test"),
+                project(':spring-xd-module')
+        testRuntime "org.slf4j:jcl-over-slf4j",
+                "org.slf4j:slf4j-log4j12",
+                "log4j:log4j"
+    }
+}
+
+project('spring-xd-extension-script') {
+ description = 'Support for Spring XD modules that execute scripts'
+ dependencies {
+  compile project(':spring-xd-module-spi')
+  compile 'org.slf4j:slf4j-api'
+  compile 'org.springframework.integration:spring-integration-groovy'
+ }
+}
+
+project('spring-xd-extension-spark') {
+ description = 'Spring XD spark extensions'
+ dependencies {
+  compile ("org.apache.spark:spark-streaming_$sparkScalaVersion:$sparkVersion") {
+   exclude group: 'hsqldb'
+  }
+  provided "org.springframework.batch:spring-batch-core"
+  compile project(":spring-xd-module")
+  compile project(":spring-xd-module-spi")
+ }
+}
+
+project('spring-xd-extension-sqoop') {
+    description = 'Spring XD Sqoop extensions'
+    dependencies {
+        compile project(':spring-xd-module-spi')
+        compile project(':spring-xd-extension-batch')
+        compile project(':spring-xd-extension-jdbc')
+        compile "org.apache.sqoop:sqoop:${sqoopVersion}:hadoop200"
+        provided "org.springframework.batch:spring-batch-core"
+        provided "org.springframework.data:spring-data-hadoop-core:${springDataHadoopBase}"
+        provided "org.springframework.data:spring-data-hadoop-batch:${springDataHadoopBase}"
+    }
+}

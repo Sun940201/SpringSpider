@@ -1,0 +1,1353 @@
+[[cassandra.core]]
+= Cassandra support
+
+The Cassandra support contains a wide range of features which are summarized below.
+
+* Spring configuration support using Java-based `@Configuration` classes or the XML namespace to create
+a Cassandra instance with replica sets using the driver.
+* CassandraTemplate helper class that increases productivity by handling common Cassandra operations properly.
+Includes integrated object mapping between CQL Tables and POJOs.
+* Exception translation into Spring's portable http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#dao-exceptions[Data Access Exception Hierarchy].
+* Feature rich object mapping integrated with Spring's http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#core-convert[Conversion Service].
+* Annotation-based mapping metadata but extensible to support other metadata formats.
+* Persistence and mapping lifecycle events.
+* Java-based Query, Criteria, and Update DSLs.
+* Automatic implementation of `Repository` interfaces including support for custom finder methods.
+
+For most data oriented tasks you will use the `CassandraTemplate` or the `Repository` support, which leverage the
+rich mapping functionality. `CassandraTemplate` is commonly used to increment counters or perform ad-hoc CRUD
+operations. `CassandraTemplate` also provides callback methods making it easy to get a hold of low-level API objects
+such as `com.datastax.driver.core.Session` allowing you to communicate directly with Cassandra. Spring Data for Apache Cassandra
+uses consistent naming conventions on objects in various APIs to those found in the DataStax Java Driver so that they
+are familiar and so you can  map your existing knowledge onto the Spring APIs.
+
+
+[[cassandra.modules]]
+== Spring CQL and Spring Data for Apache Cassandra modules
+
+Spring Data for Apache Cassandra comes with two modules: Spring CQL and Spring Data Cassandra.
+
+The value-add provided by the Spring Data Cassandra abstraction is perhaps best shown by the sequence of actions
+outlined in the table below. The table shows what actions Spring will take care of and which actions are
+the responsibility of you, the application developer.
+
+[[cassandra.modules.who-does-what]]
+.Spring CQL - who does what?
+|===
+| Action| Spring| You
+
+| Define connection parameters.
+|
+| X
+
+| Open the connection.
+| X
+|
+
+| Specify the CQL statement.
+|
+| X
+
+| Declare parameters and provide parameter values
+|
+| X
+
+| Prepare and execute the statement.
+| X
+|
+
+| Set up the loop to iterate through the results (if any).
+| X
+|
+
+| Do the work for each iteration.
+|
+| X
+
+| Process any exception.
+| X
+|
+
+| Close the Session.
+| X
+|
+|===
+
+Spring CQL takes care of all the low-level details that can make Cassandra and CQL such a tedious API to develop with.
+Spring Data Cassandra adds schema generation, object mapping and Repository support.
+
+
+[[cassandra.choose-style]]
+=== Choosing an approach for Cassandra database access
+You can choose among several approaches to form the basis for your Cassandra database access. Spring's support
+for Apache Cassandra comes in different flavors. Once you start using one of these approaches, you can still mix
+and match to include a feature from a different approach.
+
+* __CqlTemplate__ is the classic Spring CQL approach and the most popular. This is the "lowest level" approach
+and all others use a `CqlTemplate` under the covers.
+* __CassandraTemplate__ wraps a `CqlTemplate` to provide query result to object mapping and the use of SELECT, INSERT,
+UPDATE and DELETE methods instead of writing CQL statements. This approach provides better documentation and ease of use.
+* __Repository Abstraction__  allows you to create Repository declarations in your data access layer. The goal of
+Spring Data's Repository abstraction is to significantly reduce the amount of boilerplate code required to implement
+data access layers for various persistence stores.
+
+
+[[cassandra.getting-started]]
+== Getting Started
+
+Spring Apache Cassandra support requires Apache Cassandra 2.1 or higher, Datastax Java Driver 3.0 or higher
+and Java SE 6 or higher. An easy way to bootstrap setting up a working environment is to create a Spring-based project
+in http://spring.io/tools/sts[STS].
+
+First you need to set up a running Apache Cassandra server. Refer to
+the http://cassandra.apache.org/doc/latest/getting_started/index.html[Apache Cassandra Quick Start guide]
+for an explanation on how to startup Apache Cassandra. Once installed starting Cassandra is typically a matter of
+executing the following command: `CASSANDRA_HOME/bin/cassandra -f`
+
+To create a Spring project in STS go to File -> New -> Spring Template Project -> Simple Spring Utility Project ->
+press Yes when prompted. Then enter a project and a package name such as org.spring.cassandra.example.
+
+Then add the following to pom.xml dependencies section.
+[source,xml,subs="verbatim,attributes"]
+----
+<dependencies>
+
+  <!-- other dependencies omitted -->
+
+  <dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-cassandra</artifactId>
+    <version>{version}</version>
+  </dependency>
+
+</dependencies>
+----
+
+Also change the version of Spring in the pom.xml to be
+
+[source,xml,subs="verbatim,attributes"]
+----
+<spring.framework.version>{springVersion}</spring.framework.version>
+----
+
+If using a milestone release instead of a GA release, you will also need to add the location of the Spring Milestone
+repository for Maven to your `pom.xml` which is at the same level of your <dependencies/> element.
+
+[source,xml]
+----
+<repositories>
+  <repository>
+    <id>spring-milestone</id>
+    <name>Spring Maven MILESTONE Repository</name>
+    <url>http://repo.spring.io/libs-milestone</url>
+  </repository>
+</repositories>
+----
+
+The repository is also http://repo.spring.io/milestone/org/springframework/data/[browseable here].
+
+You can also browse the Spring repositories https://repo.spring.io/webapp/#/home[here].
+
+Now we will create a simple Java application that stores and reads a domain object to/from Cassandra.
+
+First, create a simple domain object class to persist.
+
+[source,java]
+----
+package org.spring.data.cassandra.example;
+
+import org.springframework.data.cassandra.mapping.PrimaryKey;
+import org.springframework.data.cassandra.mapping.Table;
+
+@Table
+public class Person {
+
+  @PrimaryKey
+  private final String id;
+
+  private final String name;
+  private final int age;
+
+  public Person(String id, String name, int age) {
+    this.id = id;
+    this.name = name;
+    this.age = age;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public int getAge() {
+    return age;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("{ @type = %1$s, id = %2$s, name = %3$s, age = %4$d }",
+      getClass().getName(), getId(), getName(), getAge());
+  }
+}
+----
+
+Next, create the main application to run.
+
+[source,java]
+----
+package org.spring.data.cassandra.example;
+
+import java.io.Closeable;
+import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.cassandra.core.CassandraOperations;
+import org.springframework.data.cassandra.core.CassandraTemplate;
+
+import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.Session;
+import com.datastax.driver.core.querybuilder.QueryBuilder;
+import com.datastax.driver.core.querybuilder.Select;
+
+public class CassandraApplication {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(CassandraApplication.class);
+
+  protected static Person newPerson(String name, int age) {
+    return newPerson(UUID.randomUUID().toString(), name, age);
+  }
+
+  protected static Person newPerson(String id, String name, int age) {
+    return new Person(id, name, age);
+  }
+
+  public static void main(String[] args) {
+
+    Cluster cluster = Cluster.builder().addContactPoints("localhost").build();
+    Session session = cluster.connect("mykeyspace");
+
+    CassandraOperations template = new CassandraTemplate(session);
+
+    Person jonDoe = template.insert(newPerson("Jon Doe", 40));
+
+    Select selectStatement = QueryBuilder.select().from("person");
+    selectStatement.where(QueryBuilder.eq("id", jonDoe.getId()));
+
+    LOGGER.info(template.queryForObject(selectStatement, Person.class).getId());
+
+    template.truncate("person");
+    session.close();
+    cluster.close();
+  }
+}
+----
+
+Even in this simple example, there are a few things to observe.
+
+* You can create an instance of `CassandraTemplate` with a Cassandra `Session`, derived from a `Cluster`.
+* You must annotate your POJO as a Cassandra `@Table` and also annotate the `@PrimaryKey`. Optionally, you can
+override these mapping names to match your Cassandra database table and column names.
+* You can either use a CQL String or the DataStax `QueryBuilder` API to construct you queries.
+
+[[cassandra.examples-repo]]
+== Examples Repository
+
+There is a https://github.com/spring-projects/spring-data-examples[Github repository with several examples] that you
+can download and play around with to get a feel for how the library works.
+
+[[cassandra.connectors]]
+== Connecting to Cassandra with Spring
+
+One of the first tasks when using Apache Cassandra and Spring is to create a `com.datastax.driver.core.Session` object
+using the Spring IoC container. There are two main ways to do this, either using Java-based bean metadata or XML-based
+bean metadata. These are discussed in the following sections.
+
+NOTE: For those not familiar with how to configure the Spring container using Java-based bean metadata instead of
+XML-based metadata, see the high-level introduction in the reference docs
+http://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/new-in-3.0.html#new-java-configuration[here]
+as well as the detailed documentation http://docs.spring.io/spring/docs/{springVersion}/spring-framework-reference/html/beans.html#beans-java-instantiating-container[here].
+
+[[cassandra.cassandra-java-config]]
+=== Registering a Session instance using Java based metadata
+
+An example of using Java-based bean metadata to register an instance of a `com.datastax.driver.core.Session`
+is shown below.
+
+.Registering a com.datastax.driver.core.Session object using Java based bean metadata
+====
+[source,java]
+----
+@Configuration
+public class AppConfig {
+
+  /*
+   * Use the standard Cassandra driver API to create a com.datastax.driver.core.Session instance.
+   */
+  public @Bean Session session() {
+    Cluster cluster = Cluster.builder().addContactPoints("localhost").build();
+    return cluster.connect("mykeyspace");
+  }
+}
+----
+====
+
+This approach allows you to use the standard `com.datastax.driver.core.Session` API that you may already be used
+to using.
+
+An alternative is to register an instance of `com.datastax.driver.core.Session` instance with the container
+using Spring's `CassandraCqlSessionFactoryBean` and `CassandraCqlClusterFactoryBean`. As compared to instantiating
+a `com.datastax.driver.core.Session` instance directly, the `FactoryBean` approach has the added advantage of also
+providing the container with an `ExceptionTranslator` implementation that translates Cassandra exceptions to exceptions
+in Spring's portable `DataAccessException` hierarchy for data access classes annotated. This hierarchy and use of
+`@Repository` is described in http://docs.spring.io/spring/docs/{springVersion}/spring-framework-reference/html/dao.html[Spring's DAO support features].
+
+An example of a Java-based bean metadata that supports exception translation on `@Repository` annotated classes
+is shown below:
+
+.Registering a com.datastax.driver.core.Session object using Spring's CassandraCqlSessionFactoryBean and enabling Spring's exception translation support
+====
+[source,java]
+----
+@Configuration
+public class AppConfig {
+
+  /*
+   * Factory bean that creates the com.datastax.driver.core.Session instance
+   */
+  public @Bean CassandraCqlClusterFactoryBean cluster() {
+
+    CassandraCqlClusterFactoryBean cluster = new CassandraCqlClusterFactoryBean();
+    cluster.setContactPoints("localhost");
+
+    return cluster;
+  }
+
+  /*
+   * Factory bean that creates the com.datastax.driver.core.Session instance
+   */
+   public @Bean CassandraCqlSessionFactoryBean session() {
+
+    CassandraCqlSessionFactoryBean session = new CassandraCqlSessionFactoryBean();
+    session.setCluster(cluster().getObject());
+    session.setKeyspaceName("mykeyspace");
+
+    return session;
+  }
+}
+----
+====
+
+Using `CassandraTemplate` with object mapping and Repository support requires a `CassandraTemplate`,
+`CassandraMappingContext`, `CassandraConverter` and enabling Repository support.
+
+.Registering components to configure object mapping and repository support
+====
+[source,java]
+----
+@Configuration
+@EnableCassandraRepositories(basePackages = { "org.spring.cassandra.example.repo" })
+public class CassandraConfig {
+
+  @Bean
+  public CassandraClusterFactoryBean cluster() {
+
+    CassandraClusterFactoryBean cluster = new CassandraClusterFactoryBean();
+    cluster.setContactPoints("localhost");
+
+    return cluster;
+  }
+
+  @Bean
+  public CassandraMappingContext mappingContext() {
+
+    BasicCassandraMappingContext mappingContext =  new BasicCassandraMappingContext();
+    mappingContext.setUserTypeResolver(new SimpleUserTypeResolver(cluster().getObject(), "mykeyspace"));
+
+    return mappingContext;
+  }
+
+  @Bean
+  public CassandraConverter converter() {
+    return new MappingCassandraConverter(mappingContext());
+  }
+
+  @Bean
+  public CassandraSessionFactoryBean session() throws Exception {
+
+    CassandraSessionFactoryBean session = new CassandraSessionFactoryBean();
+    session.setCluster(cluster().getObject());
+    session.setKeyspaceName("mykeyspace");
+    session.setConverter(converter());
+    session.setSchemaAction(SchemaAction.NONE);
+
+    return session;
+  }
+
+  @Bean
+  public CassandraOperations cassandraTemplate() throws Exception {
+    return new CassandraTemplate(session().getObject());
+  }
+}
+----
+====
+
+Creating configuration classes registering Spring Data for Apache Cassandra components can be an exhausting challenge
+so Spring Data for Apache Cassandra comes with a prebuilt configuration support class. Classes extending from
+`AbstractCassandraConfiguration` will register beans for Spring Data for Apache Cassandra use.
+`AbstractCassandraConfiguration` lets you provide various configuration options such as initial entities,
+default query options, pooling options, socket options and much more. `AbstractCassandraConfiguration` will support
+you also with schema generation based on initial entities, if any are provided. Extending from
+`AbstractCassandraConfiguration` requires you to at least provide the Keyspace name by implementing
+the `getKeyspaceName` method.
+
+.Registering Spring Data for Apache Cassandra beans using AbstractCassandraConfiguration
+====
+[source,java]
+----
+@Configuration
+public class AppConfig extends AbstractCassandraConfiguration {
+
+  /*
+   * Provide a contact point to the configuration.
+   */
+  public String getContactPoints() {
+    return "localhost";
+  }
+
+  /*
+   * Provide a keyspace name to the configuration.
+   */
+  public getKeyspaceName() {
+    return "mykeyspace";
+  }
+}
+----
+====
+
+[[cassandra-connectors.xmlconfig]]
+=== XML Configuration
+
+[[cassandra-connectors.xmlconfig.ext_properties]]
+==== Externalize Connection Properties
+
+Create a properties file containing the information needed to connect to Cassandra. `contactpoints` and `keyspace`
+are required fields; `port` has been added for clarity.
+
+We will call this properties file, `cassandra.properties`.
+
+[source]
+----
+cassandra.contactpoints=10.1.55.80,10.1.55.81
+cassandra.port=9042
+cassandra.keyspace=showcase
+----
+
+We will use Spring to load these properties into the Spring context in the next two examples.
+
+==== Registering a Session instance using XML based metadata
+
+While you can use Spring's traditional `<beans/>` XML namespace to register an instance of
+`com.datastax.driver.core.Session` with the container, the XML can be quite verbose as it is general purpose.
+XML namespaces are a better alternative to configuring commonly used objects such as the Session instance.
+The `cql` and `cassandra` namespaces allow you to create a Session instance.
+
+To use the Cassandra namespace elements you will need to reference the Cassandra schema:
+
+.XML schema to configure Cassandra using the `cql` namespace
+====
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:cql="http://www.springframework.org/schema/data/cql"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/cql
+    http://www.springframework.org/schema/cql/spring-cql.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- Default bean name is 'cassandraCluster' -->
+  <cql:cluster contact-points="localhost" port="9042">
+    <cql:keyspace action="CREATE_DROP" name="mykeyspace" />
+  </cql:cluster>
+
+  <!-- Default bean name is 'cassandraSession' -->
+  <cql:session keyspace-name="mykeyspace" />
+
+</beans>
+----
+====
+
+.XML schema to configure Cassandra using the `cassandra` namespace
+====
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:cassandra="http://www.springframework.org/schema/data/cassandra"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/data/cassandra
+    http://www.springframework.org/schema/data/cassandra/spring-cassandra.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- Default bean name is 'cassandraCluster' -->
+  <cassandra:cluster contact-points="localhost" port="9042">
+    <cassandra:keyspace action="CREATE_DROP" name="mykeyspace" />
+  </cassandra:cluster>
+
+  <!-- Default bean name is 'cassandraSession' -->
+  <cassandra:session keyspace-name="${cassandra.keyspace}" schema-action="NONE" />
+
+</beans>
+----
+====
+
+NOTE: You may have noticed the slight difference between namespaces: `cql` and `cassandra`. Using the `cql` namespace
+is limited to low-level CQL support while `cassandra` extends the `cql` namespace with object mapping
+and schema generation support.
+
+The XML configuration elements for more advanced Cassandra configuration are shown below. These elements all use
+default bean names to keep the configuration code clean and readable.
+
+While this example shows how easy it is to configure Spring to connect to Cassandra, there are many other options.
+Basically, any option available with the DataStax Java Driver is also available in the Spring Data for Apache Cassandra
+configuration. This is including, but not limited to Authentication, Load Balancing Policies, Retry Policies
+and Pooling Options. All of the Spring Data for Apache Cassandra method names and XML elements are named exactly
+(or as close as possible) like the configuration options on the driver so mapping any existing driver configuration
+should be straight forward.
+
+.Configuring Spring Data Components via XML
+====
+[source,xml]
+----
+
+<!-- Loads the properties into the Spring Context and uses them to fill
+in placeholders in the bean definitions -->
+<context:property-placeholder location="classpath:cassandra.properties" />
+
+<!-- REQUIRED: The Cassandra Cluster -->
+<cassandra:cluster contact-points="${cassandra.contactpoints}"
+port="${cassandra.port}" />
+
+<!-- REQUIRED: The Cassandra Session, built from the Cluster, and attaching
+to a keyspace -->
+<cassandra:session keyspace-name="${cassandra.keyspace}" />
+
+<!-- REQUIRED: The Default Cassandra Mapping Context used by CassandraConverter -->
+<cassandra:mapping>
+  <cassandra:user-type-resolver keyspace-name="${cassandra.keyspace}" />
+</cassandra:mapping>
+
+<!-- REQUIRED: The Default Cassandra Converter used by CassandraTemplate -->
+<cassandra:converter />
+
+<!-- REQUIRED: The Cassandra Template is the building block of all Spring
+Data Cassandra -->
+<cassandra:template id="cassandraTemplate" />
+
+<!-- OPTIONAL: If you are using Spring Data for Apache Cassandra Repositories, add
+your base packages to scan here -->
+<cassandra:repositories base-package="org.spring.cassandra.example.repo" />
+
+----
+====
+
+[[cassandra-schema-management]]
+== Schema Management
+
+Apache Cassandra is a data store that requires a schema definition prior to any data interaction.
+Spring Data for Apache Cassandra can support you with this task.
+
+=== Keyspaces and Lifecycle scripts
+
+The very first thing to start with is a Cassandra Keyspace. A Keyspace is a logical grouping of tables that share
+the same replication factor and replication strategy. Keyspace management is located in the `Cluster` configuration,
+which has the notion of `KeyspaceSpecification` and startup/shutdown CQL script execution.
+
+Declaring a Keyspace with a specification allows creating/dropping of the Keyspace. It will derive CQL from
+the specification so you're not required to write CQL yourself.
+
+.Specifying a Cassandra Keyspace via XML
+====
+[source,xml]
+----
+<cql:cluster>
+
+    <cql:keyspace action="CREATE_DROP" durable-writes="true" name="my_keyspace">
+
+    <cql:replication class="NETWORK_TOPOLOGY_STRATEGY">
+      <cql:data-center name="foo" replication-factor="1" />
+      <cql:data-center name="bar" replication-factor="2" />
+    </cql:replication>
+  </cql:keyspace>
+
+</cql:cluster>
+----
+====
+
+.Specifying a Cassandra Keyspace via JavaConfig
+====
+[source,java]
+----
+@Configuration
+public abstract class AbstractCassandraConfiguration extends AbstractClusterConfiguration
+  implements BeanClassLoaderAware {
+
+  @Override
+  protected List<CreateKeyspaceSpecification> getKeyspaceCreations() {
+
+    CreateKeyspaceSpecification specification = CreateKeyspaceSpecification.createKeyspace("my_keyspace")
+      .with(KeyspaceOption.DURABLE_WRITES, true)
+      .withNetworkReplication(DataCenterReplication.dcr("foo", 1), DataCenterReplication.dcr("bar", 2));
+
+    return Arrays.asList(specification);
+  }
+
+  @Override
+  protected List<DropKeyspaceSpecification> getKeyspaceDrops() {
+    return Arrays.asList(DropKeyspaceSpecification.dropKeyspace("my_keyspace"));
+  }
+
+  // ...
+}
+----
+====
+
+Startup/shutdown CQL execution follows a slightly different approach that is bound to the `Cluster` lifecycle. You can provide arbitrary CQL that is executed on `Cluster` initialization and shutdown in the `SYSTEM` keyspace.
+
+.Specifying Startup/Shutdown scripts via XML
+====
+[source,xml]
+----
+<cql:cluster>
+  <cql:startup-cql><![CDATA[
+CREATE KEYSPACE IF NOT EXISTS my_other_keyspace WITH durable_writes = true AND replication = { 'replication_factor' : 1, 'class' : 'SimpleStrategy' };
+    ]]></cql:startup-cql>
+  <cql:shutdown-cql><![CDATA[
+DROP KEYSPACE my_other_keyspace;
+    ]]></cql:shutdown-cql>
+</cql:cluster>
+----
+====
+
+.Specifying a Startup/Shutdown scripts via JavaConfig
+====
+[source,java]
+----
+@Configuration
+public class CassandraConfiguration extends AbstractCassandraConfiguration {
+
+  @Override
+  protected List<String> getStartupScripts() {
+
+    String script = "CREATE KEYSPACE IF NOT EXISTS my_other_keyspace "
+      + "WITH durable_writes = true "
+      + "AND replication = { 'replication_factor' : 1, 'class' : 'SimpleStrategy' };";
+
+    return Arrays.asList(script);
+  }
+
+  @Override
+  protected List<String> getShutdownScripts() {
+    return Arrays.asList("DROP KEYSPACE my_other_keyspace;");
+  }
+
+  // ...
+}
+----
+====
+
+NOTE: `KeyspaceSpecifications` and lifecycle CQL scripts are available with the `cql` and `cassandra` namespaces.
+
+NOTE: Keyspace creation allows rapid bootstrapping without the need of external Keyspace management. This can be useful
+for certain scenarios but should be used with care. Dropping a Keyspace on application shutdown will remove the Keyspace
+and all data stored inside the tables.
+
+=== Tables and User-defined types
+
+Spring Data for Apache Cassandra's approaches data access with mapped entity classes that fit your data model.
+These entity classes can be used to create Cassandra table specifications and user type definitions.
+
+Schema creation is tied to `Session` initialization with `SchemaAction`. Following actions are supported:
+
+* `SchemaAction.NONE`: No tables/types will be created or dropped. This is the default setting.
+* `SchemaAction.CREATE`: Create tables and user-defined types from entities annotated with `@Table` and types annotated with `@UserDefinedType`. Existing tables/types will cause an error if the type is attempted to be created.
+* `SchemaAction.CREATE_IF_NOT_EXISTS`: Like `SchemaAction.CREATE` but with `IF NOT EXISTS` applied. Existing tables/types won't cause any errors but may remain stale.
+* `SchemaAction.RECREATE`: Drops and recreate existing tables and types that are known to be used. Tables and types that are not configured in the application are not dropped.
+* `SchemaAction.RECREATE_DROP_UNUSED`: Drop all tables and types and recreate only known tables and types.
+
+NOTE: `SchemaAction.RECREATE`/`SchemaAction.RECREATE_DROP_UNUSED` will drop your tables and you will experience data loss. `RECREATE_DROP_UNUSED` also drops tables and types that are not know to the application.
+
+==== Enabling Tables and User-Defined Types for Schema Management
+
+<<mapping.usage>> explains object mapping using conventions and annotations. Schema management is only active for entities annotated with `@Table` and user-defined types annotated with `@UserDefinedType` to prevent unwanted classes from being created as table/type. Entities are discovered by scanning the class path. Entity scanning requires one or more base packages.
+
+.Specifying Entity Base Packages via XML
+====
+[source,xml]
+----
+
+<cassandra:mapping entity-base-packages="com.foo,com.bar"/>
+
+----
+====
+
+.Specifying Entity Base Packages via JavaConfig
+====
+[source,java]
+----
+@Configuration
+public class CassandraConfiguration extends AbstractCassandraConfiguration {
+
+ @Override
+ public String[] getEntityBasePackages() {
+  return new String[] { "com.foo", "com.bar" };
+ }
+
+ // ...
+}
+----
+====
+
+
+[[cassandra-template]]
+== Introduction to CassandraTemplate
+
+The `CassandraTemplate` class, located in the package `org.springframework.data.cassandra`, is the central class
+in Spring's Cassandra support providing a rich feature set to interact with the database. The template offers
+convenience operations to create, update, delete and query Cassandra and provides a mapping between your domain objects
+and Cassandra rows.
+
+NOTE: Once configured, `CassandraTemplate` is Thread-safe and can be reused across multiple instances.
+
+The mapping between Cassandra rows and domain classes is done by delegating to an implementation
+of the `CassandraConverter` interface. Spring provides a default implementation, `MappingCassandraConverter`,
+but you can also write your own converter. Please refer to the section on <<mapping-chapter,Cassandra conversion>>
+for more detailed information.
+
+The `CassandraTemplate` class implements the interface `CassandraOperations`. In as much as possible, the methods
+on `CassandraOperations` are named after methods available with Cassandra to make the API familiar to
+existing Cassandra developers who are familiar with Cassandra. For example, you will find methods such as "select",
+"insert", "delete", and "update". The design goal was to make it as easy as possible to transition between the use
+of the base Cassandra driver and `CassandraOperations`. A major difference in between the two APIs is that
+`CassandraOperations` can be passed domain objects instead of CQL and query objects.
+
+NOTE: The preferred way to reference operations on a `CassandraTemplate` instance is via its interface,
+`CassandraOperations`.
+
+The default converter implementation used by `CassandraTemplate` is `MappingCassandraConverter`.
+While the `MappingCassandraConverter` can make use of additional metadata to specify the mapping of objects
+to rows it is also capable of converting objects that contain no additional metadata by using some conventions
+for the mapping of fields and table names. These conventions as well as the use of mapping annotations is explained
+in the <<mapping.chapter,Mapping chapter>>.
+
+Another central feature of `CassandraTemplate` is exception translation of exceptions thrown in the Cassandra
+Java driver into Spring's portable Data Access Exception hierarchy. Refer to the section on
+<<cassandra.exception,exception translation>> for more information.
+
+Now let's look at a examples of how to work with the `CassandraTemplate` in the context of the Spring container.
+
+[[cassandra-template.instantiating]]
+=== Instantiating CassandraTemplate
+
+`CassandraTemplate` should always be configured as a Spring Bean, although we show an example above where you can instantiate it directly. But for the purposes of this being a Spring module, lets assume we are using the Spring Container.
+
+`CassandraTemplate` is an implementation of `CassandraOperations`. You should always assign your `CassandraTemplate` to its interface definition, `CassandraOperations`.
+
+There are 2 easy ways to get a `CassandraTemplate`, depending on how you load you Spring Application Context.
+
+[float]
+==== AutoWiring
+
+[source,java]
+----
+@Autowired
+private CassandraOperations cassandraOperations;
+----
+
+Like all Spring Autowiring, this assumes there is only one bean of type `CassandraOperations` in the `ApplicationContext`.
+If you have multiple `CassandraTemplate` beans (which will be the case if you are working with multiple keyspaces
+in the same project), then use the `@Qualifier`annotation to designate which bean you want to Autowire.
+
+[source,java]
+----
+@Autowired
+@Qualifier("myTemplateBeanId")
+private CassandraOperations cassandraOperations;
+----
+
+[float]
+==== Bean Lookup with ApplicationContext
+
+You can also just lookup the `CassandraTemplate` bean from the `ApplicationContext`.
+
+[source,java]
+----
+CassandraOperations cassandraOperations = applicationContext.getBean("cassandraTemplate", CassandraOperations.class);
+----
+
+[[cassandra-template.save-update-remove]]
+== Saving, Updating, and Removing Rows
+
+`CassandraTemplate` provides a simple way for you to save, update, and delete your domain objects, and map those objects
+to tables managed in Cassandra.
+
+[[cassandra-template.id-handling]]
+=== Working with Primary Keys
+
+Cassandra requires at least one partition key field for a CQL Table. A table can declare additionally one or more
+clustering key fields. When your CQL Table has a composite primary key, you must create a `@PrimaryKeyClass` to define
+the structure of the composite primary key. In this context, composite primary key means one or more partition columns
+optionally combined with one or more clustering columns.
+
+Primary keys can make use of any singular simple Cassandra type or mapped User-Defined Type.
+Collection-typed primary keys are not supported.
+
+==== Simple Primary Key
+
+A simple primary key consists of one partition key field within an entity class. Since it's one field only,
+we safely can assume it's a partition key.
+
+.CQL Table defined in Cassandra
+====
+[source]
+----
+CREATE TABLE user (
+  user_id text,
+  firstname text,
+  lastname text,
+  PRIMARY KEY (user_id))
+;
+----
+====
+
+.Annotated Entity
+====
+[source,java]
+----
+@Table(value = "login_event")
+public class LoginEvent {
+
+  @PrimaryKey("user_id")
+  private String userId;
+
+  private String firstname;
+  private String lastname;
+
+  // getters and setters omitted for brevity
+
+}
+----
+====
+
+==== Composite Key
+
+Composite primary keys (or compound keys) consist of more than one primary key fields. That said, a composite primary key
+can consist of multiple partition keys, a partition key and a clustering key, or a multitude of primary key fields.
+
+Composite keys can be represented in two ways with Spring Data for Apache Cassandra:
+
+1. Embedded in an entity.
+2. By using `@PrimaryKeyClass`.
+
+The simplest form of a composite key is a key with one partition key and one clustering key.
+
+Here is an example of a CQL Table, and the corresponding POJOs that represent the table and it's composite key.
+
+.CQL Table with a Composite Primary Key
+====
+[source]
+----
+CREATE TABLE login_event(
+  person_id text,
+  event_code int,
+  event_time timestamp,
+  ip_address text,
+  PRIMARY KEY (person_id, event_code, event_time))
+  WITH CLUSTERING ORDER BY (event_time DESC)
+;
+----
+====
+
+==== Flat Composite Primary Key
+
+Flat composite primary keys are embedded inside the entity as flat fields. Primary key fields are annotated with
+`@PrimaryKeyColumn` along with other fields in the entity. Selection requires either a query to contain predicates
+for the individual fields or the use of `MapId`.
+
+.Using a flat Composite Primary Key
+====
+[source,java]
+----
+@Table(value = "login_event")
+public class LoginEvent {
+
+  @PrimaryKeyColumn(name = "person_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
+  private String personId;
+
+  @PrimaryKeyColumn(name = "event_code", ordinal = 1, type = PrimaryKeyType.PARTITIONED)
+  private int eventCode;
+
+  @PrimaryKeyColumn(name = "event_time", ordinal = 2, type = PrimaryKeyType.CLUSTERED, ordering = Ordering.DESCENDING)
+  private Date eventTime;
+
+  @Column("ip_address)
+  private String ipAddress;
+
+  // getters and setters omitted for brevity
+}
+----
+====
+
+==== Primary Key Class
+
+A primary key class is a composite primary key class that is mapped to multiple fields or properties of the entity.
+It's annotated with `@PrimaryKeyClass` and defines `equals` and `hashCode` methods. The semantics of value equality
+for these methods should be consistent with the database equality for the database types to which the key is mapped.
+Primary key classes can be used with Repositories (as the Id type) and to represent an entities' identity
+in a single complex object.
+
+.Composite Primary Key Class
+====
+[source,java]
+----
+@PrimaryKeyClass
+public class LoginEventKey implements Serializable {
+
+  @PrimaryKeyColumn(name = "person_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
+  private String personId;
+
+  @PrimaryKeyColumn(name = "event_code", ordinal = 1, type = PrimaryKeyType.PARTITIONED)
+  private int eventCode;
+
+  @PrimaryKeyColumn(name = "event_time", ordinal = 2, type = PrimaryKeyType.CLUSTERED, ordering = Ordering.DESCENDING)
+  private Date eventTime;
+
+  // other methods omitted for brevity
+}
+----
+====
+
+.Using a Composite Primary Key
+====
+[source,java]
+----
+@Table(value = "login_event")
+public class LoginEvent {
+
+  @PrimaryKey
+  private LoginEventKey key;
+
+  @Column("ip_address)
+  private String ipAddress;
+
+  // getters and setters omitted for brevity
+}
+----
+====
+
+NOTE: `PrimaryKeyClass` must implement `Serializable` and should provide implementations of `hashCode()` and `equals()`.
+
+[[cassandra-template.type-mapping]]
+=== Type mapping
+
+Spring Data for Apache Cassandra relies on the DataStax Java Driver's `CodecRegistry` to ensure type support. As types
+are added or changed, the Spring Data for Apache Cassandra module will continue to function without requiring changes.
+See https://docs.datastax.com/en/cql/3.3/cql/cql_reference/cql_data_types_c.html[CQL data types]
+and <<mapping-conversion>> for the current type mapping matrix.
+
+[[cassandra-template.save-insert]]
+=== Methods for saving and inserting rows
+
+==== Single records inserts
+
+To insert one row at a time, there are many options. At this point you should already have a `cassandraTemplate`
+available to you so we will just how the relevant code for each section, omitting the template setup.
+
+Insert a record with an annotated POJO.
+
+[source,java]
+----
+cassandraOperations.insert(new Person("123123123", "Alison", 39));
+----
+
+Insert a row using the `QueryBuilder.Insert` object that is part of the DataStax Java Driver.
+
+[source,java]
+----
+Insert insert = QueryBuilder.insertInto("person");
+insert.setConsistencyLevel(ConsistencyLevel.ONE);
+insert.value("id", "123123123");
+insert.value("name", "Alison");
+insert.value("age", 39);
+
+cassandraOperations.execute(insert);
+----
+
+Then, there is always the old fashioned way. You can write your own CQL statements.
+
+[source,java]
+----
+String cql = "insert into person (id, name, age) values ('123123123', 'Alison', 39)";
+
+cassandraOperations.execute(cql);
+----
+
+==== Multiple inserts for high speed ingestion
+
+`CqlOperations`, which is extended by `CassandraOperations` is a low-level Template that you can use
+for just about anything you need to accomplish with Cassandra. `CqlOperations` includes several overloaded methods
+named `ingest()`.
+
+Use these methods to pass a CQL String with Bind Markers, and your preferred flavor of data set
+(`Object[][]` and `List<List<T>>`).
+
+The `ingest` method takes advantage of static `PreparedStatements` that are only prepared once for performance.
+Each record in your data set is bound to the same `PreparedStatement`, then executed asynchronously for high performance.
+
+[source,java]
+----
+String cqlIngest = "insert into person (id, name, age) values (?, ?, ?)";
+
+List<Object> person1 = new ArrayList<Object>();
+person1.add("10000");
+person1.add("David");
+person1.add(40);
+
+List<Object> person2 = new ArrayList<Object>();
+person2.add("10001");
+person2.add("Roger");
+person2.add(65);
+
+List<List<?>> people = new ArrayList<List<?>>();
+people.add(person1);
+people.add(person2);
+
+cassandraOperations.ingest(cqlIngest, people);
+----
+
+[[cassandra-template-update]]
+=== Updating rows in a CQL table
+
+Much like inserting, there are several flavors of update from which you can choose.
+
+Update a record with an annotated POJO.
+
+[source,java]
+----
+cassandraOperations.update(new Person("123123123", "Alison", 35));
+----
+
+Update a row using the `QueryBuilder.Update` object that is part of the DataStax Java Driver.
+
+[source,java]
+----
+Update update = QueryBuilder.update("person");
+update.setConsistencyLevel(ConsistencyLevel.ONE);
+update.with(QueryBuilder.set("age", 35));
+update.where(QueryBuilder.eq("id", "123123123"));
+
+cassandraOperations.execute(update);
+----
+
+Then, there is always the old fashioned way. You can write your own CQL statements.
+
+[source,java]
+----
+String cql = "update person set age = 35 where id = '123123123'";
+
+cassandraOperations.execute(cql);
+----
+
+[[cassandra-template.delete]]
+=== Methods for removing rows
+
+Much like inserting, there are several flavors of delete from which you can choose.
+
+Delete a record with an annotated POJO.
+
+[source,java]
+----
+cassandraOperations.delete(new Person("123123123", null, 0));
+----
+
+Delete a row using the `QueryBuilder.Delete` object that is part of the DataStax Java Driver.
+
+[source,java]
+----
+Delete delete = QueryBuilder.delete().from("person");
+delete.where(QueryBuilder.eq("id", "123123123"));
+
+cassandraOperations.execute(delete);
+----
+
+Then, there is always the old fashioned way. You can write your own CQL statements.
+
+[source,java]
+----
+String cql = "delete from person where id = '123123123'";
+
+cassandraOperations.execute(cql);
+----
+
+=== Methods for truncating tables
+
+Much like inserting, there are several flavors of truncate from which you can choose.
+
+Truncate a table using the `truncate()` method.
+
+[source,java]
+----
+cassandraOperations.truncate("person");
+----
+
+Truncate a table using the `QueryBuilder.Truncate` object that is part of the DataStax Java Driver.
+
+[source,java]
+----
+Truncate truncate = QueryBuilder.truncate("person");
+
+cassandraOperations.execute(truncate);
+----
+
+Then, there is always the old fashioned way. You can write your own CQL statements.
+
+[source,java]
+----
+String cql = "truncate person";
+
+cassandraOperations.execute(cql);
+----
+
+[[cassandra.query]]
+== Querying CQL Tables
+
+There are several flavors of select and query from which you can choose. Please see the `CassandraTemplate` API
+documentation for all overloads available.
+
+Query a table for multiple rows and map the results to a POJO.
+
+[source,java]
+----
+String cqlAll = "select * from person";
+
+List<Person> results = cassandraOperations.select(cqlAll, Person.class);
+for (Person p : results) {
+  LOG.info(String.format("Found People with Name [%s] for id [%s]", p.getName(), p.getId()));
+}
+----
+
+Query a table for a single row and map the result to a POJO.
+
+[source,java]
+----
+String cqlOne = "select * from person where id = '123123123'";
+
+Person p = cassandraOperations.selectOne(cqlOne, Person.class);
+LOG.info(String.format("Found Person with Name [%s] for id [%s]", p.getName(), p.getId()));
+----
+
+Query a table using the `QueryBuilder.Select` object that is part of the DataStax Java Driver.
+
+[source,java]
+----
+Select select = QueryBuilder.select().from("person");
+select.where(QueryBuilder.eq("id", "123123123"));
+
+Person p = cassandraOperations.selectOne(select, Person.class);
+LOG.info(String.format("Found Person with Name [%s] for id [%s]", p.getName(), p.getId()));
+----
+
+Then, there is always the old fashioned way. You can write your own CQL statements, and there are several
+callback handlers for mapping the results. The example uses the `RowMapper` interface.
+
+[source,java]
+----
+String cqlAll = "select * from person";
+List<Person> results = cassandraOperations.query(cqlAll, new RowMapper<Person>() {
+
+ public Person mapRow(Row row, int rowNum) throws DriverException {
+  Person p = new Person(row.getString("id"), row.getString("name"), row.getInt("age"));
+  return p;
+ }
+});
+
+for (Person p : results) {
+ LOG.info(String.format("Found People with Name [%s] for id [%s]", p.getName(), p.getId()));
+}
+----
+
+[[cassandra.custom-converters]]
+== Overriding default mapping with custom converters
+
+In order to have more fine grained control over the mapping process you can register Spring converters with
+the `CassandraConverter` implementations such as the `MappingCassandraConverter`.
+
+The `MappingCassandraConverter` checks to see if there are any Spring converters that can handle a specific class
+before attempting to map the object itself. To 'hijack' the normal mapping strategies of the `MappingCassandraConverter`,
+perhaps for increased performance or other custom mapping needs, you first need to create an implementation of
+the Spring `Converter` interface and then register it with the `MappingCassandraConverter`.
+
+NOTE: For more information on the Spring type conversion service see the reference docs
+http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html#core-convert[here].
+
+[[cassandra.custom-converters.writer]]
+=== Saving using a registered Spring Converter
+
+An example implementation of the `Converter` that converts a `Person` object to a `java.lang.String`
+using Jackson 2 is shown below:
+
+[source,java]
+----
+import org.springframework.core.convert.converter.Converter;
+
+import org.springframework.util.StringUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+static class PersonWriteConverter implements Converter<Person, String> {
+
+  public String convert(Person source) {
+
+    try {
+      return new ObjectMapper().writeValueAsString(source);
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
+  }
+}
+----
+
+[[cassandra.custom-converters.reader]]
+=== Reading using a Spring Converter
+
+An example implementation of the `Converter` that converts a `java.lang.String` into a `Person` object
+using Jackson 2 is shown below:
+
+[source,java]
+----
+import org.springframework.core.convert.converter.Converter;
+
+import org.springframework.util.StringUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+static class PersonReadConverter implements Converter<String, Person> {
+
+  public Person convert(String source) {
+
+   if (StringUtils.hasText(source)) {
+     try {
+       return new ObjectMapper().readValue(source, Person.class);
+     } catch (IOException e) {
+       throw new IllegalStateException(e);
+     }
+    }
+
+    return null;
+  }
+}
+----
+
+[[cassandra.custom-converters.java]]
+=== Registering Spring Converters with the CassandraConverter
+
+The Spring Data for Apache Cassandra Java Config provides a convenient way to register Spring `Converter`s with
+the `MappingCassandraConverter`. The configuration snippet below shows how to manually register converters as well as
+configuring the `CustomConversions`.
+
+[source,java]
+----
+@Configuration
+public static class Config extends AbstractCassandraConfiguration {
+
+  @Override
+  public CustomConversions customConversions() {
+
+    List<Converter<?, ?>> converters = new ArrayList<Converter<?, ?>>();
+    converters.add(new PersonReadConverter());
+    converters.add(new PersonWriteConverter());
+
+    return new CustomConversions(converters);
+  }
+
+  // other methods omitted...
+}
+----
+
+[[cassandra.converter-disambiguation]]
+=== Converter disambiguation
+
+Generally, we inspect the `Converter` implementations for both source and target types they convert from and to.
+Depending on whether one of those is a type Cassandra can handle natively, Spring Data will register the `Converter`
+instance as a reading or writing one. Have a look at the following samples:
+
+[source,java]
+----
+// Write converter as only the target type is one cassandra can handle natively
+class MyConverter implements Converter<Person, String> { … }
+
+// Read converter as only the source type is one cassandra can handle natively
+class MyConverter implements Converter<String, Person> { … }
+----
+
+In case you write a `Converter` whose source and target type are native Cassandra types there's no way for Spring Data
+to determine whether we should consider it as reading or writing `Converter`. Registering the `Converter` instance
+as both might lead to unwanted results.
+
+E.g. a `Converter<String, Long>` is ambiguous although it probably does not make sense to try to convert all `String`
+instances into `Long` instances when writing. To be generally able to force the infrastructure to register a `Converter`
+for one way only we provide `@ReadingConverter` as well as `@WritingConverter` to be used as the appropriate
+`Converter` implementation.
+
+[[cassandra-template.commands]]
+== Executing Commands
+
+[[cassandra-template.commands.execution]]
+=== Methods for executing commands
+
+The `CassandraTemplate` has many overloads for `execute()` and `executeAsync()`. Pass in the CQL command you wish to
+execute and handle the appropriate response.
+
+This example uses the basic `AsynchronousQueryListener` that comes with Spring Data for Apache Cassandra. Please see
+the API documentation for all the options. There should be nothing you cannot perform in Cassandra with
+the `execute()` and `executeAsync()` methods.
+
+[source,java]
+----
+cassandraOperations.executeAsynchronously("delete from person where id = '123123123'",
+  new AsynchronousQueryListener() {
+
+   public void onQueryComplete(ResultSetFuture rsf) {
+    LOG.info("Async Query Completed");
+   }
+  });
+----
+
+This example shows how to create and drop a table, using different API objects, all passed to the `execute()` methods.
+
+[source]
+----
+cassandraOperations.execute("CREATE TABLE test_table (id uuid primary key, event text)");
+
+DropTableSpecification dropper = DropTableSpecification.dropTable("test_table");
+cassandraOperations.execute(dropper);
+----
+
+[[cassandra.exception]]
+== Exception Translation
+
+The Spring Framework provides exception translation for a wide variety of database and mapping technologies.
+This has traditionally been for JDBC and JPA. The Spring support for Apache Cassandra extends this feature
+to Apache Cassandra by providing an implementation of the `org.springframework.dao.support.PersistenceExceptionTranslator`
+interface.
+
+The motivation behind mapping to Spring's http://docs.spring.io/spring/docs/current/spring-framework-reference/html/dao.html#dao-exceptions[consistent data access exception hierarchy]
+is that you are then able to write portable and descriptive exception handling code without resorting to coding
+against Cassandra Exceptions. All of Spring's data access exceptions are inherited from the root, `DataAccessException`
+class so you can be sure that you will be able to catch all database related exception within a single try-catch block.

@@ -1,0 +1,5 @@
+  public void configureJmsListeners(JmsListenerEndpointRegistrar registrar) {
+   SimpleJmsListenerEndpoint endpoint = new SimpleJmsListenerEndpoint();
+   endpoint.setDestination("anotherQueue");
+   endpoint.setMessageListener(message -> {
+    // processing

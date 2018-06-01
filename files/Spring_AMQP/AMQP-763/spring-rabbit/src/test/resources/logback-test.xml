@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+ <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+  <encoder>
+   <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+  </encoder>
+ </appender>
+
+ <appender name="AMQP" class="org.springframework.amqp.rabbit.logback.AmqpAppenderIntegrationTests$EnhancedAppender">
+  <layout>
+   <pattern><![CDATA[ %d %p %t [%c] - <%m>%n ]]></pattern>
+  </layout>
+  <addresses>localhost:5672</addresses>
+  <abbreviation>36</abbreviation>
+  <includeCallerData>true</includeCallerData>
+  <applicationId>AmqpAppenderTest</applicationId>
+  <routingKeyPattern>%property{applicationId}.%c.%p</routingKeyPattern>
+  <generateId>true</generateId>
+  <charset>UTF-8</charset>
+  <durable>false</durable>
+  <deliveryMode>NON_PERSISTENT</deliveryMode>
+  <declareExchange>true</declareExchange>
+  <clientConnectionProperties>foo:bar,baz:qux</clientConnectionProperties>
+  <foo>bar</foo>
+ </appender>
+
+ <appender name="AMQPWithEncoder" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
+  <encoder>
+   <pattern><![CDATA[ %d %p %t [%c] - <%m>%n ]]></pattern>
+   <outputPatternAsHeader>true</outputPatternAsHeader>
+  </encoder>
+  <addresses>localhost:5672</addresses>
+  <abbreviation>36</abbreviation>
+  <includeCallerData>true</includeCallerData>
+  <applicationId>AmqpAppenderTest</applicationId>
+  <routingKeyPattern>encoded-%property{applicationId}.%c.%p</routingKeyPattern>
+  <generateId>true</generateId>
+  <charset>UTF-8</charset>
+  <durable>false</durable>
+  <deliveryMode>NON_PERSISTENT</deliveryMode>
+  <declareExchange>false</declareExchange>
+  <senderPoolSize>1</senderPoolSize>
+ </appender>
+
+ <logger name="org.springframework.amqp.rabbit.logback" level="DEBUG" additivity="false">
+  <appender-ref ref="AMQP"/>
+ </logger>
+
+ <logger name="encoded" level="DEBUG" additivity="false">
+  <appender-ref ref="AMQPWithEncoder"/>
+ </logger>
+
+ <root level="INFO">
+  <appender-ref ref="CONSOLE"/>
+ </root>
+
+</configuration>

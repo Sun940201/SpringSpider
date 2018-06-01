@@ -1,0 +1,24 @@
+---
+spring:
+  profiles: admin
+
+management:
+  security:
+    enabled: true
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: admin
+    password: whosThere
+
+xd:
+ security:
+   authentication:
+     file:
+       enabled: true
+       users:
+         bob: bobspassword, ROLE_VIEW
+         alice: alicepwd, ROLE_ADMIN
+---

@@ -1,0 +1,347 @@
+spring:
+  profiles:
+    active: default
+  main:
+    show_banner: false
+  freemarker:
+    checkTemplateLocation: false
+# Redis properties
+  redis:
+   port: 6379
+   host: localhost
+   pool.maxIdle: 8
+   pool.minIdle: 0
+   pool.maxActive: 8
+   pool.maxWait: -1
+
+# RabbitMQ properties
+  rabbitmq:
+   addresses: localhost:5672
+   adminAddresses: localhost:15672
+   nodes: rabbit@localhost
+   username: guest
+   password: guest
+   virtual_host: /
+   useSSL: false
+   sslProperties:
+# HSQL database configuration
+  datasource:
+    url: jdbc:hsqldb:hsql://${hsql.server.host:localhost}:${hsql.server.port:9101}/${hsql.server.dbname:xdjob}
+    username: sa
+    password:
+    driverClassName: org.hsqldb.jdbc.JDBCDriver
+#ConnectionPoolSettings
+    testOnBorrow: true
+    validationQuery: select 1 from INFORMATION_SCHEMA.SYSTEM_USERS
+    validationInterval: 30000
+    maxActive: 100
+    maxIdle: 100
+    minIdle: 10
+    initialSize: 0
+    maxWait: 30000
+    testOnReturn: false
+    testWhileIdle: false
+    timeBetweenEvictionRunsMillis: 5000
+    minEvictableIdleTimeMillis: 60000
+    removeAbandoned: false
+    removeAbandonedTimeout: 60
+    logAbandoned: false
+#Tomcat JDBC Enhanced Attributes
+    jmxEnabled: true
+    fairQueue: true
+    abandonWhenPercentageFull: 0
+    maxAge: 0
+    useEquals: true
+    suspectTimeout: 0
+    alternateUsernameAllowed: false
+# Hadoop properties
+  hadoop:
+    fsUri: hdfs://localhost:8020
+    resourceManagerHost: localhost
+    resourceManagerPort: 8032
+    yarnApplicationClasspath:
+
+endpoints:
+  jolokia:
+    enabled: ${XD_JMX_ENABLED:true}
+  jmx:
+    enabled: ${XD_JMX_ENABLED:true}
+    uniqueNames: true
+
+XD_ANALYTICS: ${analytics:redis}
+XD_TRANSPORT: ${xd.transport:${transport:redis}}
+XD_HOME: ${xdHomeDir:..}
+XD_JMX_ENABLED: true
+
+xd:
+  data:
+    home: file:${XD_HOME}/data
+  config:
+    home: file:${XD_HOME}/config
+  module:
+    home: file:${XD_HOME}/modules
+  customModule:
+    home: file:${XD_HOME}/custom-modules
+  ui:
+    home: file:${XD_HOME}/spring-xd-ui/dist/
+    allow_origin: http://localhost:9889
+  extensions:
+       basepackages:
+       locations: META-INF/spring-xd/ext
+  container:
+    groups: ${XD_CONTAINER_GROUPS:}
+    host: ${XD_CONTAINER_HOSTNAME:}
+    ip: ${XD_CONTAINER_IP:}
+  messageRateMonitoring:
+    enabled: false
+  messagebus:
+    local:
+      polling:                     1000
+      executor:
+        corePoolSize:              0
+        maxPoolSize:               200
+#       queueSize:                 # defaults to Integer.MAX_VALUE
+        keepAliveSeconds:          60
+    rabbit:
+      compressionLevel:            1
+            # bus-level property, applies only when 'compress=true' for a stream module
+            # See java.util.zip.Deflater; 1=BEST_SPEED, 9=BEST_COMPRESSION, ...
+      default:
+        ackMode:                   AUTO
+            # Valid: AUTO (container acks), NONE (broker acks), MANUAL (consumer acks).
+            # Upper case only.
+            # Note: MANUAL requires specialized code in the consuming module and is unlikely to be
+            # used in an XD application. For more information, see
+            # http://docs.spring.io/spring-integration/reference/html/amqp.html#amqp-inbound-ack
+        autoBindDLQ:               false
+        backOffInitialInterval:    1000
+        backOffMaxInterval:        10000
+        backOffMultiplier:         2.0
+        batchBufferLimit:          10000
+        batchingEnabled:           false
+        batchSize:                 100
+        batchTimeout:              5000
+        compress:                  false
+        concurrency:               1
+        deliveryMode:              PERSISTENT
+        durableSubscription:       false
+        maxAttempts:               3
+        maxConcurrency:            1
+        prefix:                    xdbus.
+            # prefix for queue/exchange names so policies (ha, dle etc.) can be applied
+        prefetch:                  1
+        replyHeaderPatterns:       STANDARD_REPLY_HEADERS,*
+        republishToDLQ:            false
+            # When false, normal rabbitmq dlq processing; when true, republish to the DLQ with stack trace
+        requestHeaderPatterns:     STANDARD_REQUEST_HEADERS,*
+        requeue:                   true
+        transacted:                false
+        txSize:                    1
+    redis:
+      headers:
+            # comman-delimited list of additional (string-valued) header names to transport
+      default:
+            # default bus properties, if not specified at the module level
+        backOffInitialInterval:    1000
+        backOffMaxInterval:        10000
+        backOffMultiplier:         2.0
+        concurrency:               1
+        maxAttempts:               3
+    kafka:
+      brokers:                                 localhost:9092
+      zkAddress:                               localhost:2181
+      numOfKafkaPartitionsForCountEqualsZero:  10
+      socketBufferSize:                        2097152
+      offsetStoreTopic:                        SpringXdOffsets
+      offsetStoreSegmentSize:                  25000000
+      offsetStoreRetentionTime:                60000
+      offsetStoreRequiredAcks:                 1
+      offsetStoreMaxFetchSize:                 1048576
+      offsetStoreBatchBytes:                   16384
+      offsetStoreBatchTime:                    1000
+      offsetUpdateTimeWindow:                  10000
+      offsetUpdateCount:                       0
+      offsetUpdateShutdownTimeout:             2000
+      default:
+        batchSize:                 16384
+        batchTimeout:              0
+        replicationFactor:         1
+        concurrency:               1
+        requiredAcks:              1
+        compressionCodec:          none
+        autoCommitEnabled:         true
+        queueSize:                 1000
+        fetchSize:                 1048576
+        minPartitionCount:         1
+  security:
+    authorization:
+      rules:
+        # Streams
+        - GET    /streams/definitions            => hasRole('ROLE_VIEW')
+        - GET    /streams/definitions.*          => hasRole('ROLE_VIEW')
+        - DELETE /streams/definitions            => hasRole('ROLE_CREATE')
+        - DELETE /streams/definitions.*          => hasRole('ROLE_CREATE')
+        - GET    /streams/definitions/*          => hasRole('ROLE_VIEW')
+        - POST   /streams/definitions            => hasRole('ROLE_CREATE')
+        - POST   /streams/definitions.*          => hasRole('ROLE_CREATE')
+        - DELETE /streams/definitions/*          => hasRole('ROLE_CREATE')
+        # Stream Deployments
+        - GET    /streams/deployments/           => hasRole('ROLE_VIEW')
+        - DELETE /streams/deployments/           => hasRole('ROLE_CREATE')
+        - GET    /streams/deployments/*          => hasRole('ROLE_VIEW')
+        - POST   /streams/deployments/*          => hasRole('ROLE_CREATE')
+        - DELETE /streams/deployments/*          => hasRole('ROLE_CREATE')
+        # Job Definitions
+        - GET    /jobs/definitions               => hasRole('ROLE_VIEW')
+        - DELETE /jobs/definitions               => hasRole('ROLE_CREATE')
+        - GET    /jobs/definitions/*             => hasRole('ROLE_VIEW')
+        - POST   /jobs/definitions               => hasRole('ROLE_CREATE')
+        - DELETE /jobs/definitions/*             => hasRole('ROLE_CREATE')
+        # Job Deployments
+        - GET    /jobs/deployments/              => hasRole('ROLE_VIEW')
+        - DELETE /jobs/deployments/              => hasRole('ROLE_CREATE')
+        - GET    /jobs/deployments/*             => hasRole('ROLE_VIEW')
+        - POST   /jobs/deployments/*             => hasRole('ROLE_CREATE')
+        - DELETE /jobs/deployments/*             => hasRole('ROLE_CREATE')
+        # Batch Job Configurations
+        - GET    /jobs/configurations            => hasRole('ROLE_VIEW')
+        - GET    /jobs/configurations/*          => hasRole('ROLE_VIEW')
+        # Batch Job Executions
+        - GET    /jobs/executions                => hasRole('ROLE_VIEW')
+        - PUT    /jobs/executions?stop=true      => hasRole('ROLE_CREATE')
+        - GET    /jobs/executions?jobname=*      => hasRole('ROLE_VIEW')
+        - POST   /jobs/executions?jobname=*      => hasRole('ROLE_CREATE')
+        - GET    /jobs/executions/*              => hasRole('ROLE_VIEW')
+        - PUT    /jobs/executions/*?restart=true => hasRole('ROLE_CREATE')
+        - PUT    /jobs/executions/*?stop=true    => hasRole('ROLE_CREATE')
+        - GET    /jobs/executions/*/steps        => hasRole('ROLE_VIEW')
+        - GET    /jobs/executions/*/steps/*      => hasRole('ROLE_VIEW')
+        - GET    /jobs/executions/*/steps/*/progress => hasRole('ROLE_VIEW')
+        # Batch Job Instances
+        - GET    /jobs/instances*                => hasRole('ROLE_VIEW')
+        - GET    /jobs/instances/*               => hasRole('ROLE_VIEW')
+        # Module Definitions
+        - GET    /modules                        => hasRole('ROLE_VIEW')
+        - GET    /modules.*                      => hasRole('ROLE_VIEW')
+        - POST   /modules                        => hasRole('ROLE_CREATE')
+        - POST   /modules.*                      => hasRole('ROLE_CREATE')
+        - GET    /modules/*/*                    => hasRole('ROLE_VIEW')
+        - DELETE /modules/*/*                    => hasRole('ROLE_CREATE')
+        # Deployed Modules
+        - GET    /runtime/modules                => hasRole('ROLE_VIEW')
+        - GET    /runtime/modules.*              => hasRole('ROLE_VIEW')
+        # Containers
+        - GET    /runtime/containers             => hasRole('ROLE_VIEW')
+        - GET    /runtime/containers.*           => hasRole('ROLE_VIEW')
+        # Counters
+        - GET    /metrics/counters               => hasRole('ROLE_VIEW')
+        - GET    /metrics/counters.*             => hasRole('ROLE_VIEW')
+        - GET    /metrics/counters/*             => hasRole('ROLE_VIEW')
+        - DELETE /metrics/counters/*             => hasRole('ROLE_CREATE')
+        # Field Value Counters
+        - GET    /metrics/field-value-counters   => hasRole('ROLE_VIEW')
+        - GET    /metrics/field-value-counters.* => hasRole('ROLE_VIEW')
+        - GET    /metrics/field-value-counters/* => hasRole('ROLE_VIEW')
+        - DELETE /metrics/field-value-counters/* => hasRole('ROLE_CREATE')
+        # Aggregate Counters
+        - GET    /metrics/aggregate-counters     => hasRole('ROLE_VIEW')
+        - GET    /metrics/aggregate-counters.*   => hasRole('ROLE_VIEW')
+        - GET    /metrics/aggregate-counters/*   => hasRole('ROLE_VIEW')
+        - DELETE /metrics/aggregate-counters/*   => hasRole('ROLE_CREATE')
+        # Gauges
+        - GET    /metrics/gauges                 => hasRole('ROLE_VIEW')
+        - GET    /metrics/gauges.*               => hasRole('ROLE_VIEW')
+        - GET    /metrics/gauges/*               => hasRole('ROLE_VIEW')
+        - DELETE /metrics/gauges/*               => hasRole('ROLE_CREATE')
+        # Rich Gauges
+        - GET    /metrics/rich-gauges            => hasRole('ROLE_VIEW')
+        - GET    /metrics/rich-gauges.*          => hasRole('ROLE_VIEW')
+        - GET    /metrics/rich-gauges/*          => hasRole('ROLE_VIEW')
+        - DELETE /metrics/rich-gauges/*          => hasRole('ROLE_CREATE')
+        # Tab Completions
+        - GET    /completions/stream?start=*     => hasRole('ROLE_VIEW')
+        - GET    /completions/job?start=*        => hasRole('ROLE_VIEW')
+        - GET    /completions/module?start=*     => hasRole('ROLE_VIEW')
+        # Boot Endpoints
+        - GET    /management/**                  => hasRole('ROLE_ADMIN')
+        # Version info
+        - GET    /meta/version                   => hasRole('ROLE_VIEW')
+
+server:
+  port: ${PORT:9393}
+management:
+  port: ${XD_MGMT_PORT:${PORT:9393}}
+  contextPath: /management
+  security:
+    enabled: false
+
+---
+# Spark Streaming Configuration
+spark:
+  master: spark://localhost:7077
+  storageLevel: MEMORY_ONLY
+  streaming:
+    batchInterval: 2000
+
+---
+
+info:
+  build:
+    name: ~gradle_project_name~
+    version: ~gradle_project_version~
+
+zk:
+  namespace: xd
+  client:
+    connect: ${ZK_CLIENT_CONNECT:}
+
+# Security default settings
+security:
+  basic:
+    enabled: false
+    realm:   SpringXD
+
+
+# Profile specific documents below
+--- 
+spring:
+  profiles: rabbit
+transport: rabbit
+---
+
+# XD admin profile
+spring:
+  profiles: admin
+---
+
+# XD container profile
+spring:
+  profiles: container
+server:
+  port: ${PORT:0}
+management:
+  port: ${XD_MGMT_PORT:${PORT:}}
+endpoints:
+  shutdown:
+    enabled: true
+
+---
+
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://localhost/test
+    username: root
+    password:
+    driverClassName: com.mysql.jdbc.Driver
+    validationQuery: select 1
+
+---
+
+spring:
+  profiles: singlenode
+transport: local
+analytics: memory
+embeddedHsql: true
+
+---

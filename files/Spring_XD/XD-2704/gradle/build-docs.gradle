@@ -1,0 +1,243 @@
+/*
+ * Tasks related to building the Spring XD documentation
+*/
+buildscript {
+ repositories {
+  maven { url "http://repo.spring.io/plugins-snapshot" }
+  jcenter()
+ }
+ dependencies {
+  classpath 'io.spring.gradle:docbook-reference-plugin:0.3.0'
+  classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.0'
+  classpath 'org.ajoberstar:gradle-git:0.8.0'
+ }
+
+}
+
+import org.ajoberstar.grgit.*
+import org.ajoberstar.grgit.auth.AuthConfig
+import org.apache.tools.ant.filters.TokenFilter
+import org.asciidoctor.gradle.*
+
+task(pullDocs) {
+ if (project.gradle.startParameter.offline) {
+  enabled = false
+ }
+ ext.cloneDestination = file("$buildDir/asciidoc-raw")
+}
+
+pullDocs << {
+
+ def xdGit = Grgit.open(rootProject.projectDir)
+ def springXdBranchName = xdGit.branch.getCurrent().name
+
+ println "Spring XD Branch: $springXdBranchName"
+ println "Spring XD Version: $version"
+
+ if (rootProject.hasProperty('wikiBranch')) {
+  ext.wikiBranch = rootProject.getProperty('wikiBranch')
+  println "Using custom wiki branch: ${ext.wikiBranch}"
+ }
+ else {
+  ext.wikiBranch = 'origin/' + springXdBranchName;
+  println "Using default wiki branch: ${ext.wikiBranch}"
+ }
+
+ def uri = "https://github.com/spring-projects/spring-xd.wiki.git"
+
+ if (cloneDestination.exists()) {
+  cloneDestination.deleteDir()
+  file("$buildDir/asciidoc").deleteDir()
+ }
+
+ println "Cloning docs: $uri to ${ext.cloneDestination}"
+ def repo = Grgit.clone(dir: cloneDestination, uri: uri)
+ println "Switching to wiki branch: ${ext.wikiBranch}"
+
+ try {
+  repo.checkout(branch: ext.wikiBranch, createBranch: false)
+ }
+ catch (org.ajoberstar.grgit.exception.GrgitException e) {
+  throw new GradleException("Error while switching to branch: ${ext.wikiBranch}. Cause: "
+   + e.getCause().getMessage(), e)
+ }
+}
+
+task moduleOptionsReferenceDoc(type: JavaExec, dependsOn: [":spring-xd-dirt:build", ":spring-xd-shell:compileTestJava", pullDocs]) {
+ classpath = project(':spring-xd-shell').sourceSets.test.runtimeClasspath
+ main = 'org.springframework.xd.shell.util.ModuleOptionsReferenceDoc'
+ args = [
+  "${pullDocs.cloneDestination}/guide/Sources.asciidoc",
+  "${pullDocs.cloneDestination}/guide/Processors.asciidoc",
+  "${pullDocs.cloneDestination}/guide/Sinks.asciidoc",
+  "${pullDocs.cloneDestination}/guide/Batch-Jobs.asciidoc",
+  "${pullDocs.cloneDestination}/guide/Analytics.asciidoc",
+ ]
+}
+
+task shellReferenceDoc(type: JavaExec, dependsOn: [":spring-xd-shell:compileTestJava", pullDocs]) {
+ classpath = project(':spring-xd-shell').sourceSets.test.runtimeClasspath
+ main = 'org.springframework.xd.shell.util.ReferenceDoc'
+ args = [
+  "$rootDir/build/asciidoc-raw/guide/ShellReference.asciidoc"
+ ]
+}
+
+task pushGeneratedDocs(dependsOn: [moduleOptionsReferenceDoc, shellReferenceDoc]) << {
+ def docsRepo = Grgit.open(pullDocs.cloneDestination)
+
+ try {
+  docsRepo.checkout(branch: pullDocs.wikiBranch, createBranch: false)
+ }
+ catch (org.ajoberstar.grgit.exception.GrgitException e) {
+  throw new GradleException("Error while switching to branch: ${pullDocs.wikiBranch}. Cause: "
+   + e.getCause().getMessage(), e)
+ }
+
+ println("Pushing docs to ${pullDocs.cloneDestination}, Branch: ${pullDocs.wikiBranch}")
+
+ def xdRepo = Grgit.open(file("$rootDir"))
+ docsRepo.add(patterns: ['.'])
+ docsRepo.commit(message: "Automated doc generation in synch with XD ${xdRepo.head().id}")
+
+ try {
+  docsRepo.push()
+ }
+ catch (org.ajoberstar.grgit.exception.GrgitException e) {
+  throw new GradleException("Error while pushing to branch: ${pullDocs.wikiBranch}. Cause: "
+   + e.getCause().getMessage(), e)
+ }
+
+ println("Pushed docs to ${pullDocs.cloneDestination}, Branch: ${pullDocs.wikiBranch}")
+}
+
+task transformDocs(type: Copy, dependsOn: [pullDocs, shellReferenceDoc, moduleOptionsReferenceDoc]) {
+ from(pullDocs.cloneDestination) {
+  include  "**/*.asciidoc"
+  filter { line ->
+   // TODO: refine regex to only match local documents
+   def match = (line =~ /link:(.*?)#(.*?)\[(.*?)\]/)
+   if (match) match.replaceAll('xref:$2[$3]') else line
+  }
+ }
+ from(pullDocs.cloneDestination) { exclude "**/*.asciidoc" }
+ into("$buildDir/asciidoc")
+
+ doLast {
+  new File("$buildDir/asciidoc/guide/FullGuide.adoc")
+   .renameTo(new File("$buildDir/asciidoc/guide/index.adoc"))
+  new File("$buildDir/asciidoc/guide/FullGuide-docinfo.xml")
+   .renameTo(new File("$buildDir/asciidoc/guide/index-docinfo.xml"))
+
+ }
+}
+
+task checkDocsLinks(type: JavaExec, dependsOn: [":documentation-toolchain:compileJava", pullDocs, shellReferenceDoc, moduleOptionsReferenceDoc]) {
+ classpath = project(':documentation-toolchain').sourceSets.main.runtimeClasspath
+ main = 'org.springframework.xd.documentation.AsciidocLinkChecker'
+ args = [
+  "file:${pullDocs.cloneDestination}/guide/*.asciidoc"
+ ]
+}
+
+apply plugin: org.asciidoctor.gradle.AsciidoctorPlugin
+
+task asciidoctorDocbook(type: AsciidoctorTask, dependsOn: [ transformDocs, shellReferenceDoc, moduleOptionsReferenceDoc] ) {
+ classpath = project.configurations.asciidoctor
+ sourceDocumentName = file("$buildDir/asciidoc/guide/index.adoc")
+ sourceDir = file("$buildDir/asciidoc/guide")
+ baseDir = sourceDir
+ outputDir = file("$buildDir/docbook")
+ backend = "docbook"
+ options = [
+  attributes: [
+   docinfo: '',
+   'compat-mode': '',
+   appversion: "$version"
+  ]
+ ]
+
+ doLast {
+  copy {
+   from "$buildDir/asciidoc/images"
+   into "$buildDir/docbook/images"
+  }
+ }
+}
+
+task asciidoctorHtml(type: AsciidoctorTask, dependsOn: [transformDocs, shellReferenceDoc, moduleOptionsReferenceDoc ]) {
+ group = 'Documentation'
+ description = 'Generate the HTML documentation using Asciidoctor'
+
+ classpath = project.configurations.asciidoctor
+ sourceDocumentName = file("$buildDir/asciidoc/guide/index.adoc")
+ sourceDir = file("$buildDir/asciidoc/guide")
+ baseDir = sourceDir
+ outputDir = file("$buildDir/html")
+ backend = "html5"
+ options = [
+  attributes: [
+   docinfo: '',
+   toc2: '',
+   'compat-mode': '',
+   imagesdir: 'images/',
+   stylesdir: "$baseDir/stylesheets/",
+   stylesheet: 'golo.css',
+   appversion: "$version",
+   'source-highlighter': 'highlightjs'
+  ]
+ ]
+
+ doFirst {
+  copy {
+   from "$buildDir/asciidoc/guide/images"
+   into "$buildDir/html/images"
+  }
+  copy {
+   from "$buildDir/asciidoc/images"
+   into "$buildDir/html/images/images"
+  }
+  copy {
+   from "$buildDir/asciidoc/guide/stylesheets"
+   into "$buildDir/html/stylesheets"
+  }
+ }
+}
+
+apply plugin: DocbookReferencePlugin
+
+reference {
+ sourceFileName = 'index.xml'
+ sourceDir = file("$buildDir/docbook")
+ pdfFilename = 'spring-xd-reference.pdf'
+ expandPlaceholders = ''
+}
+
+reference.dependsOn asciidoctorDocbook
+
+task api(type: Javadoc) {
+ group = 'Documentation'
+ description = 'Generates aggregated Javadoc API documentation.'
+ title = "${rootProject.description} ${version} API"
+ options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
+ options.author = true
+ options.header = rootProject.description
+ options.links(javadocLinks)
+ options.overview = 'src/api/overview.html'
+
+ source rootProject.javaProjects.collect { project ->
+  project.sourceSets.main.allJava
+ }
+ destinationDir = new File(buildDir, "api")
+ classpath = files(rootProject.javaProjects.collect { project ->
+  project.sourceSets.main.compileClasspath
+ })
+
+ if (JavaVersion.current().isJava8Compatible()) {
+  allprojects {
+   tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+   }
+  }
+ }
+}

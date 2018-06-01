@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:task="http://www.springframework.org/schema/task"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:int="http://www.springframework.org/schema/integration"
+ xmlns:int-hadoop="http://www.springframework.org/schema/integration/hadoop"
+ xmlns:hdp="http://www.springframework.org/schema/hadoop"
+ xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+  http://www.springframework.org/schema/integration/hadoop http://www.springframework.org/schema/integration/hadoop/spring-integration-hadoop.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+  http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd">
+
+ <!-- TODO: these should be defined globally -->
+ <task:executor id="taskExecutor" pool-size="1"/>
+ <task:scheduler id="taskScheduler" pool-size="1"/>
+
+ <context:property-placeholder location="${xd.config.home}/hadoop.properties"/>
+
+ <hdp:configuration
+  register-url-handler="false"
+  properties-location="${xd.config.home}/hadoop.properties"
+  security-method="${spring.hadoop.security.authMethod:}"
+  user-keytab="${spring.hadoop.security.userKeytab:}"
+  user-principal="${spring.hadoop.security.userPrincipal:}"
+  namenode-principal="${spring.hadoop.security.namenodePrincipal:}"
+  rm-manager-principal="${spring.hadoop.security.rmManagerPrincipal:}">
+  fs.defaultFS=${fsUri}
+ </hdp:configuration>
+
+ <int:channel id="input"/>
+
+ <int-hadoop:rollover-strategy>
+  <int-hadoop:size size="${rollover}" />
+ </int-hadoop:rollover-strategy>
+
+ <!--
+ Order attributes needed because xml parsers don't yet support
+ ordering in a way it exists in this file.
+ -->
+ <int-hadoop:naming-strategy>
+  <int-hadoop:static order="1" name="${fileName:${xd.stream.name}}" />
+  <int-hadoop:uuid order="2" enabled="${fileUuid}"/>
+  <int-hadoop:rolling order="3" />
+  <int-hadoop:static order="4" prefix="." name="${fileExtension}" />
+  <int-hadoop:codec />
+ </int-hadoop:naming-strategy>
+
+ <!-- default option for directory set here due to variable -->
+ <int-hadoop:store-writer
+  base-path="${directory}"
+  codec="${codec}"
+  overwrite="${overwrite}"
+  idle-timeout="${idleTimeout}"
+  close-timeout="${closeTimeout}"
+  in-use-suffix="${inUseSuffix}"
+  in-use-prefix="${inUsePrefix}"
+  rollover-strategy="fileRolloverStrategy"
+  naming-strategy="fileNamingStrategy"
+  partition-expression="${partitionPath}"
+  file-open-attempts="${fileOpenAttempts}" />
+
+ <int-hadoop:hdfs-outbound-channel-adapter channel="input"
+  writer="storeWriter" />
+
+</beans>
