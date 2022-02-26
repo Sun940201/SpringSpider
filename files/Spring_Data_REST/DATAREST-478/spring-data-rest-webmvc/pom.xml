@@ -17,7 +17,7 @@
 
  <properties>
   <jsonpath>0.9.1</jsonpath>
-  <cassandra.version>2.0.9</cassandra.version>
+  <cassandra.version>3.0.26</cassandra.version>
   <cassandraunit.version>2.0.2.1</cassandraunit.version>
  </properties>
 
