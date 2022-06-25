@@ -29,7 +29,7 @@
 
   <springdata.commons>1.10.0.BUILD-SNAPSHOT</springdata.commons>
   <springdata.jpa>1.8.0.BUILD-SNAPSHOT</springdata.jpa>
-  <springdata.mongodb>1.7.0.BUILD-SNAPSHOT</springdata.mongodb>
+  <springdata.mongodb>3.3.5</springdata.mongodb>
   <springdata.neo4j>3.3.0.BUILD-SNAPSHOT</springdata.neo4j>
   <springdata.gemfire>1.6.0.BUILD-SNAPSHOT</springdata.gemfire>
 
