@@ -22,7 +22,7 @@
     <dist.key>DATACOUCH</dist.key>
 
     <couchbase>1.4.4</couchbase>
-    <jackson>2.3.2</jackson>
+    <jackson>2.12.7.1</jackson>
     <springdata.commons>1.9.1.BUILD-SNAPSHOT</springdata.commons>
     <validation>1.0.0.GA</validation>
   </properties>
